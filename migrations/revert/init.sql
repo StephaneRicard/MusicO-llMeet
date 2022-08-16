@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP TABLE "user", "event", "musical_type", "momer_type", "candidate_status", "candidate_per_event", "musical_type_per_user";
 
 COMMIT;
