@@ -1,10 +1,10 @@
 {
-    "name": "",
+    "name": "musicalomeet",
     "version": "1.0.0",
     "description": "",
     "scripts": {
         "start": "node .",
-        "dev": "npx nodemon"
+        "dev": "DEBUG=*,-express:*,-nodemon*,-send*,-body-parser* npx nodemon"
     },
     "author": "",
     "license": "ISC",

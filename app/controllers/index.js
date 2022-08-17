@@ -1,1 +1,3 @@
-module.exports = { };
+const momerController = require('./momer');
+
+module.exports = { momerController };

@@ -5,3 +5,15 @@
 ################################################################################
 @endpoint = http://localhost:{{$dotenv PORT}}/
 
+####  MOMERS ####
+
+### Liste des momers
+
+GET {{endpoint}}momers
+
+### Liste pour 1 momer
+
+GET {{endpoint}}momers/1
+
+
+
