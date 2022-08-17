@@ -1,11 +1,17 @@
 const express = require('express');
 
-const { errorHandler } = require('../helpers/errorHandler');
+const { momerController: controller } = require('../controllers');
+const controllerHandler = require('../helpers/controllerHandler');
 
 const router = express.Router();
 
-// Mettre les routes ici
+router
+    .route('/momers')
+    .get(controllerHandler(controller.getAll));
 
-router.use(errorHandler);
+router
+    .route('/momers/:id')
+    .get(controllerHandler(controller.getOne))
+    .delete(controllerHandler(controller.delete));
 
 module.exports = router;

@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // On lève la restriction CORS
-app.use(cors(process.env.CORS_DOMAINS ?? '*'));
+app.use(cors(process.env.CORS_DOMAINS || '*'));
 
 app.use(router);
 

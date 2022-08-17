@@ -3,21 +3,21 @@
 BEGIN;
 
 CREATE TABLE "momer_type"(
-    "id" INT UNIQUE PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(50) NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "candidate_status"(
-    "id" INT UNIQUE PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(50) NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "user" (
-    "id" INT UNIQUE PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(100) NOT NULL,
     "picture_url" TEXT,
     "city" VARCHAR(50) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE "event"(
-    "id" INT UNIQUE PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(100) NOT NULL,
     "description" TEXT,
     "picture_url" TEXT,
@@ -49,21 +49,21 @@ CREATE TABLE "event"(
     "is_archived" BOOLEAN NOT NULL,
     "event_date" TIMESTAMPTZ NOT NULL,
     "external_link" TEXT,
-    "event_type" INT NOT NULL,
+    "event_type" TEXT NOT NULL,
     "type_of_music_needed" VARCHAR(100) NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "musical_type"(
-    "id" INT UNIQUE PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(100) NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "candidate_per_event"(
-    "id" INT UNIQUE PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "event_id" INT NOT NULL REFERENCES "event" ("id"),
     "user_id" INT NOT NULL REFERENCES "user" ("id"),
     "candidate_status_id" INT NOT NULL REFERENCES "candidate_status" ("id"),
@@ -72,7 +72,7 @@ CREATE TABLE "candidate_per_event"(
 );
 
 CREATE TABLE "musical_type_per_user"(
-    "id" INT UNIQUE PRIMARY KEY,
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "musical_type_id" INT NOT NULL REFERENCES "musical_type" ("id"),
     "user_id" INT NOT NULL REFERENCES "user" ("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),

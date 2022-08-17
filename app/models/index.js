@@ -1,2 +1,3 @@
-// eslint-disable-next-line no-multi-spaces
-module.exports = {  };
+const momerDatamapper = require('./momer');
+
+module.exports = { momerDatamapper };

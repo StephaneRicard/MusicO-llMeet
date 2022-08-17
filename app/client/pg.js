@@ -1,6 +1,6 @@
-const { Pool } = require('pg');
+const { Client } = require('pg');
 
-const client = new Pool(process.env.PG_URL);
+const client = new Client(process.env.DATABASE_URL);
 
 client.connect();
 
