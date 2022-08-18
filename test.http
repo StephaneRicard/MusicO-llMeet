@@ -28,8 +28,21 @@ content-type: application/json
 ### liste des musicos
 GET {{endpoint}}musicos
 
-### miste d'un musicos
+### liste pour 1 musicos
 GET {{endpoint}}musicos/2
+
+### Modifier un musicos
+
+PATCH {{ endpoint }}musicos/2
+content-type: application/json
+
+{
+    "name": "test4",
+    "musical_type": [1, 2, 3]
+    
+}
+
+
 
 
 
