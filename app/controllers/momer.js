@@ -1,4 +1,4 @@
-const { momerDatamapper } = require('../models');
+const { momerDatamapper } = require('../models/user');
 const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {

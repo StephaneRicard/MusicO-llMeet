@@ -10,4 +10,6 @@ router.use('/momers', momerRouter);
 
 router.post('/api/login', controllerHandler(authentification.apiLogin));
 
+router.post('/api/registration', controllerHandler(authentification.apiRegistration));
+
 module.exports = router;
