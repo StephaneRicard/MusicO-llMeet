@@ -1,3 +1,4 @@
 const momerDatamapper = require('./momer');
+const musicosDatamapper = require('./musicos');
 
-module.exports = { momerDatamapper };
+module.exports = { momerDatamapper, musicosDatamapper };

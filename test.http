@@ -15,5 +15,21 @@ GET {{endpoint}}momers
 
 GET {{endpoint}}momers/1
 
+### Modifier un momer
+PATCH {{ endpoint }}momers/1
+content-type: application/json
+
+{
+    "name": "test3"
+}
+
+#### MUSICOS ####
+
+### liste des musicos
+GET {{endpoint}}musicos
+
+### miste d'un musicos
+GET {{endpoint}}musicos/2
+
 
 

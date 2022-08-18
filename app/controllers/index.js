@@ -1,3 +1,4 @@
 const momerController = require('./momer');
+const musicosController = require('./musicos');
 
-module.exports = { momerController };
+module.exports = { momerController, musicosController };

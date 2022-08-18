@@ -37,12 +37,12 @@ VALUES
 ('Acceptée');
 
 --Insertition momer
-INSERT INTO "user" ("name", "picture_url","city","email","password","phone","address","county","role","description","external_url","momer_to_contact","momer_type_id")
+INSERT INTO "users" ("name", "picture_url","city","email","password","phone","address","county","role","description","external_url","momer_to_contact","momer_type_id")
 VALUES
 ('mon restaurant','image momer','toulouse','momer@momer.fr','1234','0606060606','2 rue des pommes','haute-garonne','momer','description momer','lien externe momer', 'roger', 3);
 
 --Insertition musicos
-INSERT INTO "user" ("name", "picture_url","city","email","password","phone","address","county","role","description","musicians_number","group_leader","external_url")
+INSERT INTO "users" ("name", "picture_url","city","email","password","phone","address","county","role","description","musicians_number","group_leader","external_url")
 VALUES
 ('mon groupe de rock','image musicos','toulouse','musicos@musicos.fr','1234','0707070707','2 rue des poires','haute-garonne','musicos','description musicos',3,'Michel','musicos lien externe');
 
@@ -53,14 +53,14 @@ VALUES
 
 
 --Insertition canditature pour un event
-INSERT INTO "candidate_per_event" ("event_id","user_id","candidate_status_id")
+INSERT INTO "candidate_per_event" ("event_id","users_id","candidate_status_id")
 VALUES
 (1,1,1);
 
 --Insertition genre musical pour un musicos
-INSERT INTO "musical_type_per_user"("musical_type_id","user_id")
+INSERT INTO "musical_type_per_users"("musical_type_id","users_id")
 VALUES
-(1,1),
+(1,2),
 (2,2);
 
 COMMIT;

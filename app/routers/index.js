@@ -1,17 +1,11 @@
 const express = require('express');
 
-const { momerController: controller } = require('../controllers');
-const controllerHandler = require('../helpers/controllerHandler');
+const momerRouter = require('./momer');
+const musicosRouter = require('./musicos');
 
 const router = express.Router();
 
-router
-    .route('/momers')
-    .get(controllerHandler(controller.getAll));
-
-router
-    .route('/momers/:id')
-    .get(controllerHandler(controller.getOne))
-    .delete(controllerHandler(controller.delete));
+router.use('/momers', momerRouter);
+router.use('/musicos', musicosRouter);
 
 module.exports = router;
