@@ -80,23 +80,27 @@ function generateRefreshToken(userTest) {
 
 const authentification = {
 
-    // Generate Token
+    // login
     apiLogin(req, res) {
-        // check email in database
+        // check email
         if (req.body.email !== user.email) {
             res.status(401).send('invalid credentials');
             return;
         }
+        // check password
         if (req.body.password !== 'cuillere') {
             res.status(401).send('invalid credentials');
             return;
         }
+        // if success -> generate Token
         const accessToken = generateAccessToken(user);
         const refreshToken = generateRefreshToken(user);
         res.send({
             accessToken,
             refreshToken,
         });
+        // eslint-disable-next-line no-console
+        console.log('accessToken', accessToken);
     },
 
     // apiRefresh(req, res) {
