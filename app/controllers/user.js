@@ -1,14 +1,21 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const asyncHandler = require('express-async-handler');
+// const bcrypt = require('bcryptjs');
+// const asyncHandler = require('express-async-handler');
 
-const User = {
+const user = {
     id: 3,
     name: 'Jean',
     email: 'jeanmusicos@gmail.com',
     admin: true,
 };
 
+function generateAccessToken(userTest) {
+    return jwt.sign(userTest, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1000s' });
+}
+
+function generateRefreshToken(userTest) {
+    return jwt.sign(userTest, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1y' });
+}
 // // Check if User exists
 // const userExists = await User.findOne({
 //     email,
@@ -89,28 +96,30 @@ const authentification = {
         res.send({
             accessToken,
             refreshToken,
-        })
-}
-
-apiRefresh(req, res) {
-        const authHeader = req.headers['authorization'];
-        const token = authHeader && authHeader.split(' ')[1];
-        if (!token) {
-            return res.sendStatus(401);
-        }
-        jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-            if (err) {
-                return res.sendStatus(401);
-            }
-            // check in database to see if user still has the rights to be logged-in
-            delete user.iat;
-            delete user.exp;
-            const refreshedToken = generateAccessToken(user);
-            res.send({
-                accessToken: refreshedToken,
-            });
         });
-    }
-}
+    },
 
-module.exports = { authentification };
+    // apiRefresh(req, res) {
+    //     const authHeader = req.headers['authorization'];
+    //     const token = authHeader && authHeader.split(' ')[1];
+    //     if (!token) {
+    //         return res.sendStatus(401);
+    //     }
+    //     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    //         if (err) {
+    //             return res.sendStatus(401);
+    //         }
+    //         // check in database to see if user still has the rights to be logged-in
+    //         delete user.iat;
+    //         delete user.exp;
+    //         const refreshedToken = generateAccessToken(user);
+    //         res.send({
+    //             accessToken: refreshedToken,
+    //         });
+    //     });
+    // },
+};
+
+module.exports = {
+    authentification,
+};

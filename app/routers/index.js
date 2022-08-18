@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { momerController: controller } = require('../controllers');
+const { momerController: controller } = require('../controllers/momer');
 const controllerHandler = require('../helpers/controllerHandler');
 
 const router = express.Router();
@@ -28,5 +28,4 @@ router
 
 router.route('/').get(protect, getIndex).post(protect, setIndex);
 router.route('/:id').delete(protect, deleteIndex).put(protect, updateIndex);
-    
 module.exports = router;

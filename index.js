@@ -1,7 +1,10 @@
 const http = require('http');
 require('dotenv').config();
+const express = require('express');
+
+const app = express();
 const debug = require('debug')('app:server');
-const app = require('./app');
+
 const { errorHandler } = require('./app/errors/apiError');
 
 app.use(express.json());
@@ -9,9 +12,11 @@ app.use(express.urlencoded({
     extended: true,
 }));
 
-app.use('/api/index', require('./app/routers/index'));
-app.use('/api/users', require('./app/routers/userRoutes'));
-const port = process.env.PORT || 3000;
+app.use('/api/login', require('./app/routers/user'));
+
+app.use('/api/refreshToken', require('./app/routers/user'));
+
+const port = process.env.PORT || 3005;
 
 app.use(errorHandler);
 
