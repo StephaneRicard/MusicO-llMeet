@@ -27,4 +27,14 @@ module.exports = {
         }
         return res.json();
     },
+
+    async update(req, res) {
+        const momerId = req.params.id;
+        const momer = await momerDatamapper.findOne(momerId);
+        if (!momer) {
+            throw new ApiError('Momer does not exists', { statusCode: 404 });
+        }
+        const savedUser = await momerDatamapper.update(momerId, req.body);
+        return res.json(savedUser);
+    },
 };

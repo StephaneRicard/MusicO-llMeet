@@ -12,6 +12,7 @@ router
 router
     .route('/:id')
     .get(controllerHandler(controller.getOne))
-    .delete(controllerHandler(controller.delete));
+    .delete(controllerHandler(controller.delete))
+    .patch(controllerHandler(controller.update));
 
 module.exports = router;

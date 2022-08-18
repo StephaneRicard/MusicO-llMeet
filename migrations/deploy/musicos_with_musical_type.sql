@@ -3,10 +3,10 @@
 BEGIN;
 
 CREATE VIEW "musicos_with_musical_type" AS
-SELECT "user".*, json_agg("musical_type"."name") FROM "user"
-JOIN "musical_type_per_user" ON "user_id" = "user"."id"
-JOIN "musical_type" ON "musical_type"."id" = "musical_type_per_user"."musical_type_id"
+SELECT "users".*, json_agg("musical_type"."name") FROM "users"
+JOIN "musical_type_per_users" ON "users_id" = "users"."id"
+JOIN "musical_type" ON "musical_type"."id" = "musical_type_per_users"."musical_type_id"
 WHERE "role" = 'musicos'
-GROUP BY "user"."id";
+GROUP BY "users"."id";
 
 COMMIT
