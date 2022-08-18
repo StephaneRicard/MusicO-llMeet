@@ -60,7 +60,7 @@ VALUES
 --Insertition genre musical pour un musicos
 INSERT INTO "musical_type_per_user"("musical_type_id","user_id")
 VALUES
-(1,1),
+(1,2),
 (2,2);
 
 COMMIT;

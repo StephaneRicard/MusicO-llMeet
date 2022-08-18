@@ -15,5 +15,13 @@ GET {{endpoint}}momers
 
 GET {{endpoint}}momers/1
 
+#### MUSICOS ####
+
+### liste des musicos
+GET {{endpoint}}musicos
+
+### miste d'un musicos
+GET {{endpoint}}musicos/2
+
 
 

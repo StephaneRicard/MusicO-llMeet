@@ -5,9 +5,10 @@ BEGIN;
 CREATE VIEW "momer_with_type" AS
 SELECT
     "user".*,
-    "momer_type"."name" AS momer_type
+    "momer_type"."name" AS "momer_type"
 FROM "user"
-JOIN momer_type
-    ON "user"."momer_type_id" = "momer_type"."id";
+JOIN "momer_type"
+    ON "user"."momer_type_id" = "momer_type"."id"
+WHERE "user"."role" = 'momer';
 
 COMMIT;

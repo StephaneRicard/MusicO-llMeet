@@ -18,7 +18,6 @@ module.exports = {
         return res.json(momer);
     },
 
-    // eslint-disable-next-line no-unused-vars
     async delete(req, res) {
         const momerId = req.params.id;
         const momer = await momerDatamapper.findOne(momerId);
@@ -26,5 +25,6 @@ module.exports = {
         if (!momer) {
             throw new ApiError('momer does not exists', { statusCode: 404 });
         }
+        return res.json();
     },
 };
