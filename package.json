@@ -3,17 +3,22 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
+        "serve": "node index.js",
         "start": "node .",
         "dev": "DEBUG=*,-express:*,-nodemon*,-send*,-body-parser* npx nodemon"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "bcrypt": "^5.0.1",
+        "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
         "debug": "^4.3.4",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
+        "express-async-handler": "^1.2.0",
         "joi": "^17.6.0",
+        "jsonwebtoken": "^8.5.1",
         "pg": "^8.7.1"
     },
     "devDependencies": {
