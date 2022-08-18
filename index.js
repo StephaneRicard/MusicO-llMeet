@@ -1,11 +1,9 @@
 const http = require('http');
 require('dotenv').config();
-const express = require('express');
-
-const app = express();
 const debug = require('debug')('app:server');
+const app = require('./app');
 
-const port = process.env.PORT || 3005;
+const port = process.env.PORT ?? 3012;
 
 const server = http.createServer(app);
 

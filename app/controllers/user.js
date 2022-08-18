@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const user = {
     id: 3,
     name: 'Jean',
-    email: 'jeanmusicos@gmail.com',
+    email: 'jean@gmail.com',
     admin: true,
 };
 
@@ -84,12 +84,12 @@ const authentification = {
     apiLogin(req, res) {
         // check email
         if (req.body.email !== user.email) {
-            res.status(401).send('invalid credentials');
+            res.status(401).send('email not valid');
             return;
         }
         // check password
         if (req.body.password !== 'cuillere') {
-            res.status(401).send('invalid credentials');
+            res.status(401).send('password not valid');
             return;
         }
         // if success -> generate Token
