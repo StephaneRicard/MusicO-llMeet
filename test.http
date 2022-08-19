@@ -85,6 +85,23 @@ GET {{endpoint}}ads
 
 GET {{endpoint}}ads/1
 
+### créer une annonce
+
+POST {{{{endpoint}}}}ads
+content-type: application/json
+
+{
+    "name" : "testad",
+    "description": "testad",
+    "picture_url": "testad", 
+    "owner_id": 1,
+    "address": "testad",
+    "county": "testad", 
+    "event_date": "2022-08-25 14:34:45.13344+02", 
+    "external_link": "testad", 
+    "event_type": "testad",
+    "type_of_music_needed": "testad"
+}
 
 
 

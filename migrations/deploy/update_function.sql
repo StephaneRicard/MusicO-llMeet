@@ -48,7 +48,7 @@ $$LANGUAGE sql STRICT;
 
 CREATE FUNCTION update_musical_type(int , int) RETURNS musical_type_per_users AS $$
     
-    INSERT INTO musical_type_per_users ("musical_type_id", "users_id" ) 
+    INSERT INTO "musical_type_per_users" ("musical_type_id", "users_id" ) 
     VALUES 
     (($1)::int,
     ($2)::int
