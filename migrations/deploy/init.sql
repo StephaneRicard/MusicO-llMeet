@@ -23,7 +23,7 @@ CREATE TABLE "users" (
     "city" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
-    "phone" INT,
+    "phone" TEXT,
     "address" TEXT,
     "county" VARCHAR(50) NOT NULL,
     "role" VARCHAR(20) NOT NULL,
