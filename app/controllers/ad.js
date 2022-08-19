@@ -3,12 +3,12 @@ const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {
 
-    // récupérer la liste de tous les events
+    // récupérer la liste de toutes les annonces
     async getAll(_req, res) {
         const events = await adDatamapper.findAll();
         return res.json(events);
     },
-    // récupérer 1 event
+    // récupérer 1 annonce
     async getOne(req, res) {
         const eventId = req.params.id;
         const event = await adDatamapper.findOne(eventId);
@@ -18,13 +18,13 @@ module.exports = {
         }
         return res.json(event);
     },
-    // supprimer 1 event
+    // supprimer 1 annonce
     async delete(req, res) {
         const eventId = req.params.id;
         const event = await adDatamapper.findOne(eventId);
 
         if (!event) {
-            throw new ApiError('event does not exists', { statusCode: 404 });
+            throw new ApiError('ad does not exists', { statusCode: 404 });
         }
         return res.json();
     },

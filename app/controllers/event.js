@@ -7,6 +7,8 @@ module.exports = {
     async getAll(_req, res) {
         const events = await eventDatamapper.findAll();
 
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
         events.forEach((event) => {
             // eslint-disable-next-line no-param-reassign
             event.group_name = [...new Set(event.group_name)];
@@ -22,6 +24,9 @@ module.exports = {
         if (!event) {
             throw new ApiError('event not found', { statusCode: 404 });
         }
+
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
         event.group_name = [...new Set(event.group_name)];
 
         return res.json(event);
@@ -43,6 +48,7 @@ module.exports = {
         res.json(savedAd);
     },
 
+    // mettre à jour un event(table event uniquement)
     async update(req, res) {
         const eventId = req.params.id;
         const event = await eventDatamapper.findOne(eventId);
