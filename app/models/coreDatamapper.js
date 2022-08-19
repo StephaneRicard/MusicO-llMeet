@@ -1,3 +1,5 @@
+// ensemble de méthodes communes à tous les models
+
 const client = require('../client/pg');
 
 module.exports = class CoreDatamapper {

@@ -1,7 +1,7 @@
 -- Deploy meeto_ll_musical:momer_with_type to pg
 
 BEGIN;
-
+--creation view pour récupérer les momers avec leur momer type
 CREATE VIEW "momer_with_type" AS
 SELECT
     "users".*,
