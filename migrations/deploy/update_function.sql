@@ -57,4 +57,22 @@ CREATE FUNCTION update_musical_type(int , int) RETURNS musical_type_per_users AS
 
 $$LANGUAGE sql STRICT;
 
+CREATE FUNCTION update_event(int, json) RETURNS event AS $$
+
+UPDATE event SET
+    name = COALESCE($2->>'name', name),
+    description = COALESCE($2->>'description', description),
+    picture_url = COALESCE($2->>'picture_url', picture_url),
+    owner_id = COALESCE(($2->>'owner_id')::int, owner_id),
+    address = COALESCE($2->>'address', address),
+    county = COALESCE($2->>'county', county),
+    event_date = COALESCE(($2->>'event_date')::timestamptz, event_date),
+    external_link = COALESCE($2->>'external_link', external_link),
+    event_type = COALESCE($2->>'event_type', event_type),
+    type_of_music_needed = COALESCE($2->>'type_of_music_needed', type_of_music_needed)
+    WHERE id = $1
+    RETURNING *
+
+$$LANGUAGE sql STRICT;
+
 COMMIT;

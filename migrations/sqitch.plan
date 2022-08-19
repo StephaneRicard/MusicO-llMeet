@@ -6,3 +6,4 @@ momer_with_type 2022-08-17T12:00:36Z stephane <student@teleporter> # view for mo
 musicos_with_musical_type 2022-08-18T09:01:17Z stephane <student@teleporter> # musicos with musical type
 update_function 2022-08-18T13:20:31Z stephane <student@teleporter> # update profile musicos and momer
 insert_functions 2022-08-19T11:14:53Z stephane <student@teleporter> # insert functions
+event_with_candidate 2022-08-19T15:19:24Z stephane <student@teleporter> # get event with candidate
