@@ -1,18 +1,17 @@
 const jwt = require('jsonwebtoken');
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 // const asyncHandler = require('express-async-handler');
-// const asyncHandler = require('express-async-handler');
-const user = require('../models/user');
 
-console.log(user.findByUser);
-// const user = {
-//     id: 3,
-//     name: 'Jean',
-//     email: 'jean@gmail.com',
-//     city: 'paris',
-//     county: 'rhone',
-//     admin: true,
-// };
+const user = require('../models/user');
+const CoreDatamapper = require('../models/user');
+
+// console.log(CoreDatamapper.findOneByEmail.email);
+async function getOneByEmail(req, res) {
+    const userId = req.params.id;
+    const userTry = await CoreDatamapper.findOne(userId);
+    const { email } = userTry;
+    res.json(email);
+}
 
 function generateAccessToken(userTest) {
     return jwt.sign(userTest, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1000s' });
@@ -27,12 +26,12 @@ const authentification = {
     // login
     apiLogin(req, res) {
         // check email
-        if (req.body.email !== user.findByUser.email) {
+        if (req.body.email !== CoreDatamapper.findOneByEmail.email) {
             res.status(401).send('email not valid');
             return;
         }
         // check password
-        if (req.body.password !== user.findByUser.password) {
+        if (req.body.password !== CoreDatamapper.findOneByEmail.password) {
             res.status(401).send('password not valid');
             return;
         }
@@ -49,7 +48,9 @@ const authentification = {
 
     // registration
     async apiRegistration(req, res) {
-        const { name, email, password } = req.body;
+        const {
+            name, email, city, county, role, password,
+        } = req.body;
 
         if (!name || !email || !password) {
             res.status(400);
@@ -57,35 +58,41 @@ const authentification = {
         }
 
         // Check if user exists
-        const userExists = await user.findOne({ email });
+        const userExists = await CoreDatamapper.findByEmail({ email });
 
         if (userExists) {
             res.status(400);
             throw new Error('User already exists');
         }
 
-        // // Hash password
-        // const salt = await bcrypt.genSalt(10);
-        // const hashedPassword = await bcrypt.hash(password, salt);
+        // Hash password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-        // // Create user
-        // const userBam = await User.create({
-        //     name,
-        //     email,
-        //     password: hashedPassword,
-        // });
+        // Create user
+        const userBam = await CoreDatamapper.create({
+            name,
+            email,
+            city,
+            county,
+            role,
+            password: hashedPassword,
+        });
 
-        // if (userBam) {
-        //     res.status(201).json({
-        //         id: userBam.id,
-        //         name: userBam.name,
-        //         email: userBam.email,
-        //         token: generateAccessToken(userBam.id),
-        //     });
-        // } else {
-        //     res.status(400);
-        //     throw new Error('Invalid user data');
-        // }
+        if (userBam) {
+            res.status(201).json({
+                id: userBam.id,
+                name: userBam.name,
+                email: userBam.email,
+                city: userBam.city,
+                county: userBam.county,
+                role: userBam.role,
+                token: generateAccessToken(userBam.id),
+            });
+        } else {
+            res.status(400);
+            throw new Error('Invalid user data');
+        }
     },
 
     // INSERER USER DANS TABLE
@@ -112,5 +119,5 @@ const authentification = {
 };
 
 module.exports = {
-    authentification,
+    authentification, getOneByEmail,
 };
