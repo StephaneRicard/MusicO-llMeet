@@ -3,7 +3,7 @@
 
 BEGIN;
 
-SELECT id FROM "user" WHERE false;
+SELECT id FROM "users" WHERE false;
 
 SELECT id FROM "event" WHERE false;
 
@@ -15,6 +15,6 @@ SELECT id FROM "candidate_status" WHERE false;
 
 SELECT id FROM "candidate_per_event" WHERE false;
 
-SELECT id FROM "musical_type_per_user" WHERE false;
+SELECT id FROM "musical_type_per_users" WHERE false;
 
 ROLLBACK;

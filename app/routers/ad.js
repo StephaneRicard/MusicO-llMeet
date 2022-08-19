@@ -1,13 +1,14 @@
 const express = require('express');
 
-const { momerController: controller } = require('../controllers');
+const { adController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(controllerHandler(controller.getAll));
+    .get(controllerHandler(controller.getAll))
+    .post(controllerHandler(controller.create));
 
 router
     .route('/:id')

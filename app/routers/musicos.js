@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { momerController: controller } = require('../controllers');
+const { musicosController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
 
 const router = express.Router();

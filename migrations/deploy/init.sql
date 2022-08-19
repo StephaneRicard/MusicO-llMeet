@@ -16,14 +16,14 @@ CREATE TABLE "candidate_status"(
     "updated_at" TIMESTAMPTZ
 );
 
-CREATE TABLE "user" (
+CREATE TABLE "users" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(100) NOT NULL,
     "picture_url" TEXT,
     "city" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
-    "phone" INT,
+    "phone" TEXT,
     "address" TEXT,
     "county" VARCHAR(50) NOT NULL,
     "role" VARCHAR(20) NOT NULL,
@@ -42,11 +42,11 @@ CREATE TABLE "event"(
     "name" VARCHAR(100) NOT NULL,
     "description" TEXT,
     "picture_url" TEXT,
-    "owner_id" INT NOT NULL REFERENCES "user" ("id"),
+    "owner_id" INT NOT NULL REFERENCES "users" ("id"),
     "address" TEXT,
     "county" VARCHAR(50) NOT NULL,
-    "is_published" BOOLEAN NOT NULL,
-    "is_archived" BOOLEAN NOT NULL,
+    "is_published" BOOLEAN NOT NULL DEFAULT false,
+    "is_archived" BOOLEAN NOT NULL DEFAULT false,
     "event_date" TIMESTAMPTZ NOT NULL,
     "external_link" TEXT,
     "event_type" TEXT NOT NULL,
@@ -64,17 +64,17 @@ CREATE TABLE "musical_type"(
 
 CREATE TABLE "candidate_per_event"(
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "event_id" INT NOT NULL REFERENCES "event" ("id"),
-    "user_id" INT NOT NULL REFERENCES "user" ("id"),
+    "event_id" INT REFERENCES "event" ("id"),
+    "users_id" INT REFERENCES "users" ("id"),
     "candidate_status_id" INT NOT NULL REFERENCES "candidate_status" ("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
 
-CREATE TABLE "musical_type_per_user"(
+CREATE TABLE "musical_type_per_users"(
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "musical_type_id" INT NOT NULL REFERENCES "musical_type" ("id"),
-    "user_id" INT NOT NULL REFERENCES "user" ("id"),
+    "musical_type_id" INT REFERENCES "musical_type" ("id"),
+    "users_id" INT REFERENCES "users" ("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );
