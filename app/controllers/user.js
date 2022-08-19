@@ -1,64 +1,80 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 // const asyncHandler = require('express-async-handler');
+const userDataMapper = require('../models/user');
 
-const user = require('../models/user');
-const CoreDatamapper = require('../models/user');
-
-// console.log(CoreDatamapper.findOneByEmail.email);
-async function getOneByEmail(req, res) {
-    const userId = req.params.id;
-    const userTry = await CoreDatamapper.findOne(userId);
-    const { email } = userTry;
-    res.json(email);
+function generateAccessToken(user) {
+    return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: '15',
+    });
 }
 
-function generateAccessToken(userTest) {
-    return jwt.sign(userTest, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1000s' });
-}
-
-function generateRefreshToken(userTest) {
-    return jwt.sign(userTest, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1y' });
-}
+// function generateRefreshToken(userTest) {
+//     return jwt.sign(userTest, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1y' });
+// }
 
 const authentification = {
 
+    // generateToken(user) {
+    //     return jwt.sign(user, process.env.JWT_SECRET, {
+    //         expiresIn: '15s',
+    //     });
+    // },
+
     // login
-    apiLogin(req, res) {
+    async loginUser(req, res) {
+        const {
+            email,
+            password,
+        } = req.body;
+        if (!email || !password) {
+            throw new Error('Please fill the fields');
+        }
+        const user = await userDataMapper.findOneByEmail(email);
+        console.log(user);
+
         // check email
-        if (req.body.email !== CoreDatamapper.findOneByEmail.email) {
+        if (!user) {
             res.status(401).send('email not valid');
-            return;
         }
         // check password
-        if (req.body.password !== CoreDatamapper.findOneByEmail.password) {
+        if (password !== user.password) {
             res.status(401).send('password not valid');
-            return;
-        }
-        // if success -> generate Token
-        const accessToken = generateAccessToken(user);
-        const refreshToken = generateRefreshToken(user);
-        res.send({
-            accessToken,
-            refreshToken,
+        } else (await bcrypt.compare(password, user.password));
+        res.json({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            city: user.city,
+            county: user.county,
+            token: generateAccessToken(user.id),
         });
-        // eslint-disable-next-line no-console
-        console.log('accessToken', accessToken);
     },
 
     // registration
-    async apiRegistration(req, res) {
+    async registerUser(req, res) {
         const {
-            name, email, city, county, role, password,
+            name,
+            email,
+            city,
+            county,
+            role,
+            password,
         } = req.body;
 
-        if (!name || !email || !password) {
+        // const accessToken = generateAccessToken(user);
+        // const refreshToken = generateRefreshToken(user);
+
+        if (!name || !email || !city || !county || !role || !password) {
             res.status(400);
             throw new Error('Please add all fields');
         }
 
         // Check if user exists
-        const userExists = await CoreDatamapper.findByEmail({ email });
+        const userExists = await userDataMapper.findOneByEmail({
+            email,
+        });
+        console.log(userExists);
 
         if (userExists) {
             res.status(400);
@@ -70,7 +86,7 @@ const authentification = {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Create user
-        const userBam = await CoreDatamapper.create({
+        const userBam = await userDataMapper.create({
             name,
             email,
             city,
@@ -78,7 +94,6 @@ const authentification = {
             role,
             password: hashedPassword,
         });
-
         if (userBam) {
             res.status(201).json({
                 id: userBam.id,
@@ -95,29 +110,21 @@ const authentification = {
         }
     },
 
-    // INSERER USER DANS TABLE
+    // const getMe = asyncHandler(async (req, res) => {
+    //     res.status(200).json(req.user);
+    // })
 
-    // apiRefresh(req, res) {
-    //     const authHeader = req.headers['authorization'];
-    //     const token = authHeader && authHeader.split(' ')[1];
-    //     if (!token) {
-    //         return res.sendStatus(401);
-    //     }
-    //     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-    //         if (err) {
-    //             return res.sendStatus(401);
-    //         }
-    //         // check in database to see if user still has the rights to be logged-in
-    //         delete user.iat;
-    //         delete user.exp;
-    //         const refreshedToken = generateAccessToken(user);
-    //         res.send({
-    //             accessToken: refreshedToken,
-    //         });
-    //     });
-    // },
+    // Generate JWT
+    // const generateToken = (id) => {
+    //     return jwt.sign({
+    //         id,
+    //     }, process.env.JWT_SECRET, {
+    //         expiresIn: '30d',
+    //     })
+    // }
+
 };
 
 module.exports = {
-    authentification, getOneByEmail,
+    authentification,
 };

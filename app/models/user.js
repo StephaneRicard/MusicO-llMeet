@@ -3,17 +3,17 @@ const client = require('../client/pg');
 module.exports = class CoreDatamapper {
     // verify if email exists in the database
     static async findOneByEmail(email) {
-        const result = await client.query('SELECT email, password FROM "user" WHERE email=$1', [email]);
+        const result = await client.query('SELECT * FROM "user" WHERE email=$1', [email]);
+        return result.rows[0];
+    }
+
+    static async findAllEmail() {
+        const result = await client.query('SELECT email FROM "user"');
         return result.rows[0];
     }
 
     static async findOne(id) {
         const result = await client.query('SELECT * FROM "user" WHERE id=$1', [id]);
-        return result.rows[0];
-    }
-
-    static async findByEmail(email) {
-        const result = await client.query('SELECT email FROM "user" WHERE email=$1', [email]);
         return result.rows[0];
     }
 
