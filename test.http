@@ -63,6 +63,18 @@ content-type: application/json
     "musical_type": [3,5]
 }
 
+#### EVENT PUBLIE ####
+
+### LIste des events publiés
+
+GET {{endpoint}}events
+
+### Liste de 1 event
+
+GET {{endpoint}}events/1
+
+
+
 
 
 
