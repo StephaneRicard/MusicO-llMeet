@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+// const session = require('express-session');
 // const asyncHandler = require('express-async-handler');
 const userDataMapper = require('../models/user');
 
 function generateAccessToken(user) {
     return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '15',
+        expiresIn: '15s',
     });
 }
 
@@ -49,6 +50,8 @@ const authentification = {
             county: user.county,
             token: generateAccessToken(user.id),
         });
+
+        // creating the session
     },
 
     // registration
@@ -61,9 +64,6 @@ const authentification = {
             role,
             password,
         } = req.body;
-
-        // const accessToken = generateAccessToken(user);
-        // const refreshToken = generateRefreshToken(user);
 
         if (!name || !email || !city || !county || !role || !password) {
             res.status(400);
@@ -86,7 +86,7 @@ const authentification = {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Create user
-        const userBam = await userDataMapper.create({
+        const userCreation = await userDataMapper.create({
             name,
             email,
             city,
@@ -94,15 +94,16 @@ const authentification = {
             role,
             password: hashedPassword,
         });
-        if (userBam) {
+        console.log(userCreation);
+        if (userCreation) {
             res.status(201).json({
-                id: userBam.id,
-                name: userBam.name,
-                email: userBam.email,
-                city: userBam.city,
-                county: userBam.county,
-                role: userBam.role,
-                token: generateAccessToken(userBam.id),
+                id: userCreation.id,
+                name: userCreation.name,
+                email: userCreation.email,
+                city: userCreation.city,
+                county: userCreation.county,
+                role: userCreation.role,
+                token: generateAccessToken(userCreation.id),
             });
         } else {
             res.status(400);

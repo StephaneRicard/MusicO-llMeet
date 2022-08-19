@@ -42,7 +42,8 @@ module.exports = class CoreDatamapper {
             ],
         };
         const result = await client.query(sql);
-        return result.row[0];
+        console.log(result);
+        return result.rows;
     }
 
     // pick a user from database

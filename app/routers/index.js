@@ -3,6 +3,7 @@ const express = require('express');
 const momerRouter = require('./momer');
 const controllerHandler = require('../helpers/controllerHandler');
 const { authentification } = require('../controllers/user');
+// const { protect } = require('../helpers/authHandler');
 
 const router = express.Router();
 
