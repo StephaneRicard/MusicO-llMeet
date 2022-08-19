@@ -58,12 +58,12 @@ VALUES
 --Insertition canditature pour un event
 INSERT INTO "candidate_per_event" ("event_id","users_id","candidate_status_id")
 VALUES
-(1,1,1);
+(2,3,1);
 
 --Insertition genre musical pour un musicos
 INSERT INTO "musical_type_per_users"("musical_type_id","users_id")
 VALUES
-(1,2),
-(2,2);
+(1,3),
+(2,3);
 
 COMMIT;
