@@ -2,7 +2,6 @@ const { eventDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {
-
     // récupérer la liste de tous les events
     async getAll(_req, res) {
         const events = await eventDatamapper.findAll();
@@ -55,5 +54,4 @@ module.exports = {
         const savedevent = await eventDatamapper.update(eventId, req.body);
         return res.json(savedevent);
     },
-
 };

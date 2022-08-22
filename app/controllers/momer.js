@@ -1,5 +1,7 @@
-const { momerDatamapper } = require('../models');
+const { momerDatamapper, musicosDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
+
+const CoreDatamapper = require('./index');
 
 module.exports = {
 
@@ -40,5 +42,30 @@ module.exports = {
         }
         const savedMomer = await momerDatamapper.update(momerId, req.body);
         return res.json(savedMomer);
+    },
+    // // find by county
+    // async find(req, res) {
+    //     const momerCounty = req.params.id;
+    //     const momer = await momerDatamapper.find(momerCounty);
+
+    //     if (!momer) {
+    //         throw new ApiError('momer county not found', { statusCode: 404 });
+    //     }
+    //     return res.json(momer);
+    // },
+    // récupérer la liste de tous les musicos
+    async filters(req, res) {
+        const { county } = req.query;
+        // await musicosDatamapper.findAll();
+        const sql = 'SELECT * FROM users';
+        if (!county) {
+            throw new Error('County filter not working');
+        } else {
+            const countyFilter = sql.join("',");
+            // eslint-disable-next-line no-const-assign
+            sql += ` WHERE county = ('${countyFilter}')`;
+        }
+        const data = await musicosDatamapper(CoreDatamapper, sql);
+        return res.json(data);
     },
 };
