@@ -9,14 +9,13 @@
 
 ### Liste des momers
 
-GET {{endpoint}}momers
-
+GET {{endpoint}}api/momers
 ### Liste pour 1 momer
 
-GET {{endpoint}}momers/1
+GET {{endpoint}}api/momers/1
 
 ### Modifier un momer
-PATCH {{ endpoint }}momers/1
+PATCH {{ endpoint }}api/momers/1
 content-type: application/json
 
 {
@@ -34,17 +33,21 @@ content-type: application/json
     "momer_type_id": 2
 }
 
+### Supprimer un momer
+
+DELETE {{endpoint}}api/momers/5
+
 #### MUSICOS ####
 
 ### liste des musicos
-GET {{endpoint}}musicos
+GET {{endpoint}}api/musicos
 
 ### liste pour 1 musicos
-GET {{endpoint}}musicos/3
+GET {{endpoint}}api/musicos/6
 
 ### Modifier un musicos
 
-PATCH {{ endpoint }}musicos/3
+PATCH {{ endpoint }}api/musicos/3
 content-type: application/json
 
 {
@@ -63,15 +66,19 @@ content-type: application/json
     "musical_type": [3,5]
 }
 
+### Supprimer un musicos
+
+DELETE {{endpoint}}api/musicos/3
+
 #### EVENT PUBLIE ####
 
 ### LIste des events publiés
 
-GET {{endpoint}}
+GET {{endpoint}}api/
 
 ### Liste de 1 event
 
-GET {{endpoint}}2
+GET {{endpoint}}api/2
 
 
 
@@ -79,15 +86,15 @@ GET {{endpoint}}2
 
 ### Récupérer la liste des annonces
 
-GET {{endpoint}}ads
+GET {{endpoint}}api/ads
 
 ### Récupérer 1 annonce
 
-GET {{endpoint}}ads/1
+GET {{endpoint}}api/ads/1
 
 ### créer une annonce
 
-POST {{{{endpoint}}}}ads
+POST {{endpoint}}api/ads
 content-type: application/json
 
 {
@@ -102,6 +109,44 @@ content-type: application/json
     "event_type": "testad",
     "type_of_music_needed": "testad"
 }
+
+### Supprimer une annonce
+DELETE {{endpoint}}api/ads/5
+
+#### USER ####
+
+### enregistrer un user
+POST {{endpoint}}api/signup
+content-type: application/json
+
+{
+    "name": "test",
+    "email": "t@.r",
+    "city": "test",
+    "county": "test",
+    "role": "musicos",
+    "password": "test"
+}
+
+### connexion d'un momer
+POST {{endpoint}}api/signin
+content-type: application/json
+
+{
+    "email": "momer1@mail.fr",
+    "password": "password1 momer"
+}
+
+###connexion d'un musicos
+POST {{endpoint}}api/signin
+content-type: application/json
+
+{
+    "email": "musicos2@mail.fr",
+    "password": "password1 musicos"
+}
+
+
 
 
 

@@ -7,7 +7,7 @@ SELECT
     "users".*,
     "momer_type"."name" AS "momer_type"
 FROM "users"
-JOIN "momer_type"
+FULL JOIN "momer_type"
     ON "users"."momer_type_id" = "momer_type"."id"
 WHERE "users"."role" = 'momer';
 

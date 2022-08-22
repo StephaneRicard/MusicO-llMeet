@@ -42,7 +42,7 @@ CREATE TABLE "event"(
     "name" VARCHAR(100) NOT NULL,
     "description" TEXT,
     "picture_url" TEXT,
-    "owner_id" INT NOT NULL REFERENCES "users" ("id"),
+    "owner_id" INT NOT NULL REFERENCES "users" ("id") ON DELETE CASCADE,
     "address" TEXT,
     "county" VARCHAR(50) NOT NULL,
     "is_published" BOOLEAN NOT NULL DEFAULT false,
@@ -64,8 +64,8 @@ CREATE TABLE "musical_type"(
 
 CREATE TABLE "candidate_per_event"(
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "event_id" INT REFERENCES "event" ("id"),
-    "users_id" INT REFERENCES "users" ("id"),
+    "event_id" INT REFERENCES "event" ("id") ON DELETE CASCADE,
+    "users_id" INT REFERENCES "users" ("id") ON DELETE CASCADE,
     "candidate_status_id" INT NOT NULL REFERENCES "candidate_status" ("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
@@ -74,7 +74,7 @@ CREATE TABLE "candidate_per_event"(
 CREATE TABLE "musical_type_per_users"(
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "musical_type_id" INT REFERENCES "musical_type" ("id"),
-    "users_id" INT REFERENCES "users" ("id"),
+    "users_id" INT REFERENCES "users" ("id") ON DELETE CASCADE,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );

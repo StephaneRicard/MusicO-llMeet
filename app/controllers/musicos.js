@@ -19,7 +19,7 @@ module.exports = {
         return res.json(musicos);
     },
 
-    // supprimer 1 musicos
+    // supprimer 1 musicos (de la table users, musical_type_per_users, candidate_per_event)
     async delete(req, res) {
         const musicosId = req.params.id;
         const musicos = await musicosDatamapper.findOne(musicosId);
@@ -32,6 +32,7 @@ module.exports = {
         return res.status(204).json('delete ok');
     },
 
+    // TODO: update des musical types a revoir
     // mettre à jour 1 musicos
     async update(req, res) {
         const musicosId = req.params.id;
@@ -43,7 +44,7 @@ module.exports = {
         // on met à jour la table users avec les infos de req.body
         const savedMusicos = await musicosDatamapper.updateUsers(musicosId, req.body);
 
-        // si les musical type sont modifiés on supprime les musical
+        // si les musical type sont modifiés on supprime les acniens musical types
         // type qui était présent dans la table de liaison
         if (req.body.musical_type) {
             await musicosDatamapper.deleteMusicalType(musicosId);

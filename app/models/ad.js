@@ -14,8 +14,13 @@ module.exports = class Ad {
     }
 
     // inserer une annonce avec la fonction sql insert_ad
-    static async insert(event) {
-        const savedAd = await client.query('SELECT * FROM insert_ad($1)', [event]);
+    static async insert(ad) {
+        const savedAd = await client.query('SELECT * FROM insert_ad($1)', [ad]);
         return savedAd.rows[0];
+    }
+
+    static async delete(id) {
+        const result = await client.query('DELETE FROM "event" WHERE id = $1', [id]);
+        return result.rowCount;
     }
 };
