@@ -1,0 +1,155 @@
+################################################################################
+# Fichier de test des routes HTTP de l'API
+# Nécessite l'extension REST Client pour VSCode
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+################################################################################
+@endpoint = http://localhost:{{$dotenv PORT}}/
+
+####  MOMERS ####
+
+### Liste des momers
+
+GET {{endpoint}}api/momers
+### Liste pour 1 momer
+
+GET {{endpoint}}api/momers/1
+
+### Modifier un momer
+PATCH {{ endpoint }}api/momers/1
+content-type: application/json
+
+{
+    "name": "name3",
+    "picture_url": "picture_url3",
+    "city":"city3",
+    "email":"email3@email3.fr",
+    "password":"password3",
+    "phone":"0303030303",
+    "address":"address3",
+    "county":"county3",
+    "description":"description3",
+    "external_url": "external_url3",
+    "momer_to_contact":"momer3",
+    "momer_type_id": 2
+}
+
+### Supprimer un momer
+
+DELETE {{endpoint}}api/momers/5
+
+#### MUSICOS ####
+
+### liste des musicos
+GET {{endpoint}}api/musicos
+
+### liste pour 1 musicos
+GET {{endpoint}}api/musicos/6
+
+### Modifier un musicos
+
+PATCH {{ endpoint }}api/musicos/3
+content-type: application/json
+
+{
+    "name": "name3",
+    "picture_url": "picture_url3",
+    "city":"city3",
+    "email":"email4@email4.fr",
+    "password":"password3",
+    "phone":"0303030303",
+    "address":"address3",
+    "county":"county3",
+    "description":"description3",
+    "external_url": "external_url3",
+    "musicians_number": 4,
+    "group_leader": "test3",
+    "musical_type": [3,5]
+}
+
+### Supprimer un musicos
+
+DELETE {{endpoint}}api/musicos/3
+
+#### EVENT PUBLIE ####
+
+### LIste des events publiés
+
+GET {{endpoint}}api/
+
+### Liste de 1 event
+
+GET {{endpoint}}api/2
+
+
+
+#### ANNONCE ####
+
+### Récupérer la liste des annonces
+
+GET {{endpoint}}api/ads
+
+### Récupérer 1 annonce
+
+GET {{endpoint}}api/ads/1
+
+### créer une annonce
+
+POST {{endpoint}}api/ads
+content-type: application/json
+
+{
+    "name" : "testad",
+    "description": "testad",
+    "picture_url": "testad", 
+    "owner_id": 1,
+    "address": "testad",
+    "county": "testad", 
+    "event_date": "2022-08-25 14:34:45.13344+02", 
+    "external_link": "testad", 
+    "event_type": "testad",
+    "type_of_music_needed": "testad"
+}
+
+### Supprimer une annonce
+DELETE {{endpoint}}api/ads/5
+
+#### USER ####
+
+### enregistrer un user
+POST {{endpoint}}api/signup
+content-type: application/json
+
+{
+    "name": "test",
+    "email": "t@.r",
+    "city": "test",
+    "county": "test",
+    "role": "musicos",
+    "password": "test"
+}
+
+### connexion d'un momer
+POST {{endpoint}}api/signin
+content-type: application/json
+
+{
+    "email": "momer1@mail.fr",
+    "password": "password1 momer"
+}
+
+###connexion d'un musicos
+POST {{endpoint}}api/signin
+content-type: application/json
+
+{
+    "email": "musicos2@mail.fr",
+    "password": "password1 musicos"
+}
+
+
+
+
+
+
+
+
