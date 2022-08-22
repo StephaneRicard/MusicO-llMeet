@@ -4,17 +4,17 @@ const client = require('../client/pg');
 
 module.exports = class CoreDatamapper {
     static async findAll() {
-        const result = await client.query(`SELECT * FROM ${this.tablename}`);
+        const result = await client.query(`SELECT * FROM ${this.tableName}`);
         return result.rows;
     }
 
     static async findOne(id) {
-        const result = await client.query(`SELECT * FROM ${this.tablename} WHERE id = $1`, [id]);
+        const result = await client.query(`SELECT * FROM ${this.tableName} WHERE id = $1`, [id]);
         return result.rows[0];
     }
 
     static async delete(id) {
-        const result = await client.query(`DELETE FROM ${this.tablename} WHERE id = $1`, [id]);
+        const result = await client.query(`DELETE FROM ${this.tableName} WHERE id = $1`, [id]);
         return result.rowCount;
     }
 };

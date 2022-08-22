@@ -26,9 +26,12 @@ module.exports = {
         if (!event) {
             throw new ApiError('ad does not exists', { statusCode: 404 });
         }
-        return res.json();
+
+        await adDatamapper.delete(eventId);
+        return res.status(204).json('delete ok');
     },
 
+    // TODO: ajouter condition à la création (champs requis)
     // créer un event (appelé annonce)
     async create(req, res) {
         const savedAd = await adDatamapper.insert(req.body);

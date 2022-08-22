@@ -1,4 +1,4 @@
-const { momerDatamapper } = require('../models/momer');
+const { momerDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
         }
         return res.json(momer);
     },
-    // supprimer 1 momer
+    // supprimer 1 momer (de la table users et supprimer ses event)
     async delete(req, res) {
         const momerId = req.params.id;
         const momer = await momerDatamapper.findOne(momerId);
@@ -26,12 +26,15 @@ module.exports = {
         if (!momer) {
             throw new ApiError('momer does not exists', { statusCode: 404 });
         }
-        return res.json();
+
+        await momerDatamapper.delete(momerId);
+        return res.status(204).json('delete ok');
     },
     // mettre à jour 1 momer
     async update(req, res) {
         const momerId = req.params.id;
         const momer = await momerDatamapper.findOne(momerId);
+
         if (!momer) {
             throw new ApiError('Momer does not exists', { statusCode: 404 });
         }
