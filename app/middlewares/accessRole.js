@@ -4,7 +4,7 @@ module.exports = {
 
     // donner l'accès des aux routes destinées au momers seulement
     accessMomer(req, res, next) {
-        const user = JSON.stringify(req.user)[0][1];
+        const user = Object.entries(req.user)[0][1];
         const { role } = user;
         debug(role);
 
