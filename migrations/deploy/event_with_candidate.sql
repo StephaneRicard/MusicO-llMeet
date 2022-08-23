@@ -12,7 +12,6 @@ FULL JOIN "candidate_status" ON "candidate_status"."id" = "candidate_status_id"
 FULL JOIN "musical_type_per_users" ON "musical_type_per_users"."users_id" = "users"."id"
 FULL JOIN "musical_type" ON "musical_type"."id" = "musical_type_per_users"."musical_type_id"
 
-
 GROUP BY "event"."id";
 
 COMMIT
