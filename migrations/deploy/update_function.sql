@@ -70,8 +70,8 @@ UPDATE event SET
     external_link = COALESCE($2->>'external_link', external_link),
     event_type = COALESCE($2->>'event_type', event_type),
     type_of_music_needed = COALESCE($2->>'type_of_music_needed', type_of_music_needed)
-    WHERE id = $1
-    RETURNING *
+WHERE id = $1
+RETURNING *
 
 $$LANGUAGE sql STRICT;
 
