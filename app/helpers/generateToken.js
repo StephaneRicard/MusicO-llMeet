@@ -6,7 +6,7 @@ const jwtExpires = process.env.JWT_EXPIRES;
 module.exports = {
 
     generateAccessToken(user) {
-        return jwt.sign({ user }, secret, { expiresIn: '1800s' });
+        return jwt.sign({ user }, secret, { expiresIn: '5000s' });
     },
 
 };

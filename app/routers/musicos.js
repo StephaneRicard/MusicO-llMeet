@@ -10,7 +10,8 @@ const router = express.Router();
 
 router
     .route('/')
-    .get(controllerHandler(controller.getAll));
+    // .get(controllerHandler(controller.getAll));
+    .get(controllerHandler(controller.filters));
 
 router
     .route('/:id')

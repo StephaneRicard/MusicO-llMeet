@@ -28,17 +28,20 @@ module.exports = {
 
     // récupérer la liste de tous les musicos
     async filtersCounty(req, res) {
-        const { county } = req.query;
+        const { county, city } = req.query;
         // await musicosDatamapper.findAll();
-        const sql = 'SELECT * FROM users';
-        if (!county) {
-            throw new Error('County filter not working');
-        } else {
-            const countyFilter = sql.join("','");
+        const sqlUsers = 'SELECT * FROM users';
+        if (county) {
+            const countyFilter = sqlUsers.join("','");
             // eslint-disable-next-line no-const-assign
-            sql += `WHERE county = ('${countyFilter}') AND role = musicos`;
+            sqlUsers += `WHERE county = ('${countyFilter}') AND role = musicos`;
         }
-        const data = await musicosDatamapper(CoreDatamapper, sql);
+        if (city) {
+            const cityFilter = sqlUsers.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += `WHERE city = ('${cityFilter}') AND role = musicos`;
+        }
+        const data = await musicosDatamapper(CoreDatamapper, sqlUsers);
         return res.json(data);
     },
 

@@ -12,7 +12,7 @@ const router = express.Router();
 router
     .route('/')
     // .get(controllerHandler(controller.getAll));
-    .get(controllerHandler(controller.filtersCounty));
+    .get(controllerHandler(controller.filters));
 
 router
     .route('/:id')
