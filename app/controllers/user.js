@@ -44,6 +44,7 @@ module.exports = {
             email: user.email,
             city: user.city,
             county: user.county,
+            role: user.role,
             token: generateAccessToken(user),
         });
 
