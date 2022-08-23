@@ -135,12 +135,12 @@ POST {{endpoint}}api/signup
 content-type: application/json
 
 {
-    "name": "test",
-    "email": "t@.r",
-    "city": "test",
-    "county": "test",
+    "name": "test musico",
+    "email": "test3@mail.fr",
+    "city": "Paris",
+    "county": "Paris",
     "role": "musicos",
-    "password": "test"
+    "password": "tpass11"
 }
 
 ### connexion d'un momer
@@ -160,6 +160,7 @@ content-type: application/json
     "email": "musicos2@mail.fr",
     "password": "password1 musicos"
 }
+
 
 
 
