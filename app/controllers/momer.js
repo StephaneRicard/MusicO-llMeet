@@ -58,7 +58,7 @@ module.exports = {
         county,
         role
         FROM users `;
-        // MOMERS - filter by county
+        // MUSICOS - filter by county
         if (county) {
             const countyFilter = county.join("','");
             // eslint-disable-next-line no-const-assign
@@ -70,7 +70,7 @@ module.exports = {
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
-        // MOMERS - filter by city
+        // MUSICOS - filter by city
         if (city) {
             const cityFilter = city.join("','");
             // eslint-disable-next-line no-const-assign

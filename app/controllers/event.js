@@ -59,12 +59,12 @@ module.exports = {
     // filters
     // eslint-disable-next-line consistent-return
     async filters(req, res) {
-        const { county, city } = req.query;
+        const { county, city, date, typeOfMusic } = req.query;
         // eslint-disable-next-line quotes
         let sqlUsers = `SELECT
         *
         FROM event `;
-        // MOMERS - filter by county
+        // EVENTS - filter by county
         if (county) {
             const countyFilter = county.join("','");
             // eslint-disable-next-line no-const-assign
@@ -76,11 +76,37 @@ module.exports = {
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
-        // MOMERS - filter by city
+        // EVENTS - filter by city
         if (city) {
             const cityFilter = city.join("','");
             // eslint-disable-next-line no-const-assign
             sqlUsers += `WHERE city = '${cityFilter}' AND is_published = 'true'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+
+        // EVENTS - filter by date
+        if (date) {
+            const dateFilter = date.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += `WHERE event_date = '${dateFilter}' AND is_published = 'true'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+
+        // EVENTS - filter by musical type
+        if (typeOfMusic) {
+            const typeFilter = typeOfMusic.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += `WHERE type_of_music_needed = '${typeFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
