@@ -8,5 +8,4 @@ module.exports = {
         const jwtExpires = parseInt(process.env.JWT_EXPIRES, 10);
         return jwt.sign({ user }, secret, { expiresIn: jwtExpires });
     },
-
 };
