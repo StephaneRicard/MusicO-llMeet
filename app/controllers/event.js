@@ -3,7 +3,7 @@ const { ApiError } = require('../helpers/errorHandler');
 const client = require('../client/pg');
 
 module.exports = {
-    // llist events getAll
+    // list events getAll
     // eslint-disable-next-line consistent-return
     async getAll(req, res) {
         const {
@@ -13,6 +13,7 @@ module.exports = {
         let sqlUsers = `SELECT
         *
         FROM event `;
+
         // EVENTS - filter by county
         if (county) {
             const countyFilter = county.join("','");
@@ -25,6 +26,7 @@ module.exports = {
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
+
         // EVENTS - filter by city
         if (city) {
             const cityFilter = city.join("','");
@@ -64,6 +66,7 @@ module.exports = {
             return res.json(result);
         }
 
+        // list events getAll
         if (!county && !city && date && !typeOfMusic) {
             const events = await eventDatamapper.findAll();
 
