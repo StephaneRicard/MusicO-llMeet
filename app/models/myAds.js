@@ -1,11 +1,18 @@
 const client = require('../client/pg');
-const CoreDatamapper = require('./coreDatamapper');
 
-module.exports = class MyAds extends CoreDatamapper {
-    static tableName = 'event_with_candidates';
-
-    static async findAllPersonnalAds(id) {
+module.exports = class MyAds {
+    static async findAll(id) {
         const result = await client.query('SELECT * FROM event_with_candidate WHERE owner_id = $1 AND is_published = false', [id]);
         return result.rows;
+    }
+
+    static async findOne(ownerId, adId) {
+        const result = await client.query('SELECT * FROM event_with_candidate WHERE "owner_id" = $1 AND "id" = $2 AND is_published = false', [ownerId, adId]);
+        return result.rows[0];
+    }
+
+    static async delete(ownerId, adId) {
+        const result = await client.query('DELETE FROM event WHERE "owner_id" = $1 AND "id" = $2 AND is_published = false', [ownerId, adId]);
+        return result.rowCount;
     }
 };
