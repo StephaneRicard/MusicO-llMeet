@@ -1,4 +1,4 @@
-const { adDatamapper } = require('../models');
+const { applicationsDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
 const client = require('../client/pg');
 
@@ -66,14 +66,14 @@ module.exports = {
         }
 
         if (!county && !city && !date && !typeOfMusic) {
-            const events = await adDatamapper.findAll();
+            const events = await applicationsDatamapper.findAll();
             return res.json(events);
         }
     },
     // récupérer 1 annonce
     async getOne(req, res) {
         const eventId = req.params.id;
-        const event = await adDatamapper.findOne(eventId);
+        const event = await applicationsDatamapper.findOne(eventId);
 
         if (!event) {
             throw new ApiError('event not found', { statusCode: 404 });
@@ -83,19 +83,19 @@ module.exports = {
     // supprimer 1 annonce
     async delete(req, res) {
         const eventId = req.params.id;
-        const event = await adDatamapper.findOne(eventId);
+        const event = await applicationsDatamapper.findOne(eventId);
 
         if (!event) {
             throw new ApiError('ad does not exists', { statusCode: 404 });
         }
 
-        await adDatamapper.delete(eventId);
+        await applicationsDatamapper.delete(eventId);
         return res.status(204).json('delete ok');
     },
 
     // créer un event (appelé annonce)
     async create(req, res) {
-        const savedAd = await adDatamapper.insert(req.body);
+        const savedAd = await applicationsDatamapper.insert(req.body);
         res.json(savedAd);
     },
 };

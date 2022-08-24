@@ -69,7 +69,7 @@ module.exports = {
         // list events getAll
         if (!county && !city && !date && !typeOfMusic) {
             const events = await eventDatamapper.findAll();
-
+            console.log('events error:', events);
             // permet d'éviter les doublons dans les groupes liés à l'annonce
             // (lorsque qu'ils ont plusieurs genre musicaux)
             events.forEach((event) => {

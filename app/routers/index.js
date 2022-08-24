@@ -12,6 +12,7 @@ const adRouter = require('./ad');
 const userRouter = require('./user');
 const momerRouter = require('./momer');
 const myAdsRouter = require('./myAds');
+const myapplicationsRouter = require('./myapplications');
 
 // middleware d'autentification du token
 const { authenticateToken } = require('../middlewares/jwt');
@@ -30,14 +31,17 @@ router.get('/api/logout', userController.logout);
 // on ajoute l'autentification token sur les routes qui nécessite d'être connecté
 // momers list
 router.use('/api/momers', authenticateToken, accessMusicos, momerRouter);
+// momer list of ads
+router.use('/api/myads', authenticateToken, accessMomer, myAdsRouter);
 // musicos list
 router.use('/api/musicos', authenticateToken, accessMomer, musicosRouter);
 // ads list
 router.use('/api/ads', authenticateToken, accessMomer, adRouter);
-// router users
+// router profile de la personne connectee
 router.use('/api/profile', authenticateToken, userRouter);
-// route mes annonces
-router.use('/api/myads', authenticateToken, myAdsRouter);
+// my applications list
+router.use('/api/myapplications', authenticateToken, myapplicationsRouter);
+
 // events list
 router.use('/api', eventRouter);
 // gestion des erreurs
