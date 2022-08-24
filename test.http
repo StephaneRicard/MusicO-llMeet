@@ -109,7 +109,7 @@ content-type: application/json
 
 {
     "email": "momer1@mail.fr",
-    "password": "password1 momer"
+    "password": "1111"
 }
 
 ###connexion d'un musicos
