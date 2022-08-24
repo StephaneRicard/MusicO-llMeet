@@ -4,12 +4,12 @@ module.exports = {
 
     // donner l'accès des aux routes destinées au momers seulement
     accessMomer(req, res, next) {
-        const user = Object.entries(req.user)[0][1];
+        const { user } = req;
         const { role } = user;
         debug(role);
 
         if (role !== 'momer') {
-            throw new Error('Not Authorized');
+            throw new Error('Not Authorized, you are not a momer');
         }
 
         next();
@@ -17,12 +17,12 @@ module.exports = {
 
     // donner l'accès des aux routes destinées au musicos seulement
     accessMusicos(req, res, next) {
-        const user = Object.entries(req.user)[0][1];
+        const { user } = req;
         const { role } = user;
         debug(role);
 
         if (role !== 'musicos') {
-            throw new Error('Not Authorized');
+            throw new Error('Not Authorized, you are not a musicos');
         }
 
         // on passe la suite au controller

@@ -1,9 +1,10 @@
 const bcrypt = require('bcryptjs');
 const { generateAccessToken } = require('../helpers/generateToken');
+const { ApiError } = require('../helpers/errorHandler');
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
 
-const { userDataMapper } = require('../models');
+const { userDatamapper } = require('../models');
 
 module.exports = {
 
@@ -16,7 +17,7 @@ module.exports = {
         if (!email || !password) {
             throw new Error('Please fill the fields');
         }
-        const user = await userDataMapper.findOneByEmail(email);
+        const user = await userDatamapper.findOneByEmail(email);
 
         // check email
         if (!user) {
@@ -57,7 +58,7 @@ module.exports = {
         }
 
         // Check if user exists
-        const userExists = await userDataMapper.findOneByEmail({
+        const userExists = await userDatamapper.findOneByEmail({
             email,
         });
 
@@ -71,7 +72,7 @@ module.exports = {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // Create user
-        const userCreation = await userDataMapper.create({
+        const userCreation = await userDatamapper.create({
             name,
             email,
             city,
@@ -96,15 +97,64 @@ module.exports = {
         }
     },
 
+    async getOne(req, res) {
+        const userId = parseInt(req.user.id, 10);
+        console.log(userId);
+        const user = await userDatamapper.findOne(userId);
+
+        if (!user) {
+            throw new ApiError('user does not exists', { statusCode: 404 });
+        }
+
+        return res.json(user);
+    },
+
     // deconnexion
     logout: (req, res) => {
         const authHeader = req.headers.authorization;
-        jwt.sign(authHeader, '', { expiresIn: 1 }, (logout, err) => {
+        jwt.sign({ authHeader }, ' ', { expiresIn: 1 }, (logout, err) => {
             if (logout) {
+                console.log(logout);
                 res.json({ msg: 'Vous avez été déconnecté' });
             } else {
                 res.json(err);
             }
         });
+    },
+
+    async delete(req, res) {
+        const userId = req.user.id;
+        const user = await userDatamapper.findOne(userId);
+        if (!user) {
+            throw new ApiError('user does not exists', { statusCode: 404 });
+        }
+
+        const result = await userDatamapper.delete(userId);
+        return res.status(204).json(`delete ${result} ok`);
+    },
+
+    async update(req, res) {
+        const userId = req.user.id;
+        const { role } = req.user;
+        const user = await userDatamapper.findOne(userId);
+        if (!user) {
+            throw new ApiError('user does not exists', { statusCode: 404 });
+        }
+
+        await userDatamapper.update(userId, req.body);
+        // si les musical type sont modifiés on supprime les acniens musical types
+        // type qui était présent dans la table de liaison
+        if (role === 'musicos') {
+            await userDatamapper.deleteMusicalType(userId);
+
+            // on rajoute les nouveaux dans la table de liaison
+            req.body.musical_type.forEach(
+                async (musicalType) => {
+                    await userDatamapper.updateMusicalType(musicalType, userId);
+                },
+            );
+        }
+
+        res.json(user);
     },
 };

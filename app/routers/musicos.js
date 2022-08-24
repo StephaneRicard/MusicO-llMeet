@@ -2,7 +2,6 @@ const express = require('express');
 
 const { musicosController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
-// const { accessMomer, accessMusicos } = require('../middlewares/accessRole');
 
 // TODO: acces a donner
 
@@ -14,8 +13,6 @@ router
 
 router
     .route('/:id')
-    .get(controllerHandler(controller.getOne))
-    .delete(controllerHandler(controller.delete))
-    .patch(controllerHandler(controller.update));
+    .get(controllerHandler(controller.getOne));
 
 module.exports = router;
