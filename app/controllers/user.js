@@ -99,7 +99,7 @@ module.exports = {
 
     async getOne(req, res) {
         const userId = parseInt(req.user.id, 10);
-        console.log(userId);
+
         const user = await userDatamapper.findOne(userId);
 
         if (!user) {

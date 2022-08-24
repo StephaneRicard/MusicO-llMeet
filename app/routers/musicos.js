@@ -3,8 +3,6 @@ const express = require('express');
 const { musicosController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
 
-// TODO: acces a donner
-
 const router = express.Router();
 
 router

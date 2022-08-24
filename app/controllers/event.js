@@ -22,7 +22,7 @@ module.exports = {
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
@@ -35,7 +35,7 @@ module.exports = {
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
@@ -48,7 +48,7 @@ module.exports = {
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
@@ -61,7 +61,7 @@ module.exports = {
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
