@@ -66,7 +66,7 @@ CREATE TABLE "candidate_per_event"(
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "event_id" INT REFERENCES "event" ("id") ON DELETE CASCADE,
     "users_id" INT REFERENCES "users" ("id") ON DELETE CASCADE,
-    "candidate_status_id" INT NOT NULL REFERENCES "candidate_status" ("id"),
+    "candidate_status_id" INT NOT NULL REFERENCES "candidate_status" ("id") DEFAULT 1,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ
 );

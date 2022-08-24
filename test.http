@@ -59,7 +59,7 @@ content-type: application/json
     "password": "tpass11"
 }
 
-### Modifier un momer
+### Modifier un user
 PATCH {{ endpoint }}api/momers/1
 content-type: application/json
 
@@ -76,27 +76,6 @@ content-type: application/json
     "external_url": "external_url3",
     "momer_to_contact":"momer3",
     "momer_type_id": 2
-}
-
-### Modifier un musicos
-
-PATCH {{ endpoint }}api/musicos/3
-content-type: application/json
-
-{
-    "name": "name3",
-    "picture_url": "picture_url3",
-    "city":"city3",
-    "email":"email4@email4.fr",
-    "password":"password3",
-    "phone":"0303030303",
-    "address":"address3",
-    "county":"county3",
-    "description":"description3",
-    "external_url": "external_url3",
-    "musicians_number": 4,
-    "group_leader": "test3",
-    "musical_type": [3,5]
 }
 
 ### Suppression d'un user

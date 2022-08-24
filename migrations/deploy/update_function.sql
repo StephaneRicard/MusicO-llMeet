@@ -66,6 +66,8 @@ UPDATE event SET
     owner_id = COALESCE(($2->>'owner_id')::int, owner_id),
     address = COALESCE($2->>'address', address),
     county = COALESCE($2->>'county', county),
+    is_published = COALESCE(($2->>'is_published')::boolean, is_published),
+    is_archived = COALESCE(($2->>'is_archived')::boolean, is_archived),
     event_date = COALESCE(($2->>'event_date')::timestamptz, event_date),
     external_link = COALESCE($2->>'external_link', external_link),
     event_type = COALESCE($2->>'event_type', event_type),
