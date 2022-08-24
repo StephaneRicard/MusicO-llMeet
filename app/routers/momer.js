@@ -2,10 +2,6 @@ const express = require('express');
 
 const { momerController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
-// const { accessMomer, accessMusicos } = require('../middlewares/accessRole');
-// const { filterHelper } = require('../services/filters');
-
-// TODO: acces a donner
 
 const router = express.Router();
 
@@ -15,8 +11,6 @@ router
 
 router
     .route('/:id')
-    .get(controllerHandler(controller.getOne))
-    .delete(controllerHandler(controller.delete))
-    .patch(controllerHandler(controller.update));
+    .get(controllerHandler(controller.getOne));
 
 module.exports = router;
