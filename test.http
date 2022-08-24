@@ -14,6 +14,51 @@ GET {{endpoint}}api/momers
 
 GET {{endpoint}}api/momers/1
 
+
+#### MUSICOS ####
+
+### liste des musicos
+GET {{endpoint}}api/musicos
+
+### liste pour 1 musicos
+GET {{endpoint}}api/musicos/6
+
+#### EVENT PUBLIE ####
+
+### LIste des events publiés
+
+GET {{endpoint}}api/
+
+### Liste de 1 event
+
+GET {{endpoint}}api/2
+
+
+#### ANNONCE ####
+
+### Récupérer la liste des annonces
+
+GET {{endpoint}}api/ads
+
+### Récupérer 1 annonce
+
+GET {{endpoint}}api/ads/1
+
+#### USER ####
+
+### enregistrer un user
+POST {{endpoint}}api/signup
+content-type: application/json
+
+{
+    "name": "test musico",
+    "email": "test3@mail.fr",
+    "city": "Paris",
+    "county": "Paris",
+    "role": "musicos",
+    "password": "tpass11"
+}
+
 ### Modifier un momer
 PATCH {{ endpoint }}api/momers/1
 content-type: application/json
@@ -32,18 +77,6 @@ content-type: application/json
     "momer_to_contact":"momer3",
     "momer_type_id": 2
 }
-
-### Supprimer un momer
-
-DELETE {{endpoint}}api/momers/5
-
-#### MUSICOS ####
-
-### liste des musicos
-GET {{endpoint}}api/musicos
-
-### liste pour 1 musicos
-GET {{endpoint}}api/musicos/6
 
 ### Modifier un musicos
 
@@ -64,83 +97,6 @@ content-type: application/json
     "musicians_number": 4,
     "group_leader": "test3",
     "musical_type": [3,5]
-}
-
-### Supprimer un musicos
-
-DELETE {{endpoint}}api/musicos/3
-
-#### EVENT PUBLIE ####
-
-### LIste des events publiés
-
-GET {{endpoint}}api/
-
-### Liste de 1 event
-
-GET {{endpoint}}api/2
-
-### Modification d'un event
-
-PATCH {{endpoint}}api/2
-content-type: application/json
-
-{
-    "name": "test",
-    "description":"test",
-    "picture_url":"test",
-    "address": "test",
-    "county": "test",
-    "event_date": "2022-08-25 14:34:45.13344+02",
-    "external_link": "test",
-    "event_type": "test",
-    "type_of_music_needed": "test"
-}
-
-#### ANNONCE ####
-
-### Récupérer la liste des annonces
-
-GET {{endpoint}}api/ads
-
-### Récupérer 1 annonce
-
-GET {{endpoint}}api/ads/1
-
-### créer une annonce
-
-POST {{endpoint}}api/ads
-content-type: application/json
-
-{
-    "name" : "testad",
-    "description": "testad",
-    "picture_url": "testad", 
-    "owner_id": 1,
-    "address": "testad",
-    "county": "testad", 
-    "event_date": "2022-08-25 14:34:45.13344+02", 
-    "external_link": "testad", 
-    "event_type": "testad",
-    "type_of_music_needed": "testad"
-}
-
-### Supprimer une annonce
-DELETE {{endpoint}}api/ads/5
-
-#### USER ####
-
-### enregistrer un user
-POST {{endpoint}}api/signup
-content-type: application/json
-
-{
-    "name": "test musico",
-    "email": "test3@mail.fr",
-    "city": "Paris",
-    "county": "Paris",
-    "role": "musicos",
-    "password": "tpass11"
 }
 
 ### Suppression d'un user
@@ -165,11 +121,44 @@ content-type: application/json
     "password": "password1 musicos"
 }
 
+#### MES ANNONCES #####
 
+### créer une annonce
 
+POST {{endpoint}}api/ads
+content-type: application/json
 
+{
+    "name" : "testad",
+    "description": "testad",
+    "picture_url": "testad", 
+    "owner_id": 1,
+    "address": "testad",
+    "county": "testad", 
+    "event_date": "2022-08-25 14:34:45.13344+02", 
+    "external_link": "testad", 
+    "event_type": "testad",
+    "type_of_music_needed": "testad"
+}
 
+### Supprimer une annonce
+DELETE {{endpoint}}api/ads/5
 
+#### MES EVENTS ####
 
+### Modification d'un event
 
+PATCH {{endpoint}}api/2
+content-type: application/json
 
+{
+    "name": "test",
+    "description":"test",
+    "picture_url":"test",
+    "address": "test",
+    "county": "test",
+    "event_date": "2022-08-25 14:34:45.13344+02",
+    "external_link": "test",
+    "event_type": "test",
+    "type_of_music_needed": "test"
+}

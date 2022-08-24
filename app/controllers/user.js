@@ -98,7 +98,8 @@ module.exports = {
     },
 
     async getOne(req, res) {
-        const userId = req.user.id;
+        const userId = parseInt(req.user.id, 10);
+        console.log(userId);
         const user = await userDatamapper.findOne(userId);
 
         if (!user) {
@@ -111,8 +112,9 @@ module.exports = {
     // deconnexion
     logout: (req, res) => {
         const authHeader = req.headers.authorization;
-        jwt.sign(authHeader, '', { expiresIn: 1 }, (logout, err) => {
+        jwt.sign({ authHeader }, ' ', { expiresIn: 1 }, (logout, err) => {
             if (logout) {
+                console.log(logout);
                 res.json({ msg: 'Vous avez été déconnecté' });
             } else {
                 res.json(err);
