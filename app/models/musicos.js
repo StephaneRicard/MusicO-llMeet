@@ -29,4 +29,10 @@ module.exports = class Musicos extends CoreDatamapper {
         const result = await client.query('DELETE FROM users WHERE id =$1', [id]);
         return result.rowCount;
     }
+
+    // static async filterMusicosByCity(city) {
+    // eslint-disable-next-line max-len
+    //     const result = await client.query('SELECT * FROM users WHERE city =$1 AND role = musicos', [city]);
+    //     return result.rows;
+    // }
 };
