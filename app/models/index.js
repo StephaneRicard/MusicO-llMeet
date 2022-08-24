@@ -6,6 +6,7 @@ const adDatamapper = require('./ad');
 const myapplicationsDatamapper = require('./myapplications');
 const userDatamapper = require('./user');
 const myAdsDatamapper = require('./myAds');
+const myeventsDatamapper = require('./myevents');
 
 module.exports = {
     momerDatamapper,
@@ -15,4 +16,5 @@ module.exports = {
     myapplicationsDatamapper,
     userDatamapper,
     myAdsDatamapper,
+    myeventsDatamapper,
 };
