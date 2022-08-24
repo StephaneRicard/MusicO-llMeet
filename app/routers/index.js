@@ -14,6 +14,7 @@ const router = express.Router();
 const musicosRouter = require('./musicos');
 const eventRouter = require('./event');
 const adRouter = require('./ad');
+const myapplicationsRouter = require('./myapplications');
 
 // registration
 router.post('/api/signup', controllerHandler(userController.registerUser));
@@ -29,6 +30,8 @@ router.use('/api/momers', authenticateToken, momerRouter);
 router.use('/api/musicos', authenticateToken, musicosRouter);
 // ads list
 router.use('/api/ads', authenticateToken, adRouter);
+// my applications list
+router.use('/api/myapplications', authenticateToken, myapplicationsRouter);
 // events list
 router.use('/api', eventRouter);
 
