@@ -10,4 +10,4 @@ FULL JOIN "musical_type" ON "musical_type"."id" = "musical_type_per_users"."musi
 WHERE "role" = 'musicos'
 GROUP BY "users"."id";
 
-COMMIT
+COMMIT;

@@ -14,6 +14,51 @@ GET {{endpoint}}api/momers
 
 GET {{endpoint}}api/momers/1
 
+
+#### MUSICOS ####
+
+### liste des musicos
+GET {{endpoint}}api/musicos
+
+### liste pour 1 musicos
+GET {{endpoint}}api/musicos/6
+
+#### EVENT PUBLIE ####
+
+### LIste des events publiés
+
+GET {{endpoint}}api/
+
+### Liste de 1 event
+
+GET {{endpoint}}api/2
+
+
+#### ANNONCE ####
+
+### Récupérer la liste des annonces
+
+GET {{endpoint}}api/ads
+
+### Récupérer 1 annonce
+
+GET {{endpoint}}api/ads/1
+
+#### USER ####
+
+### enregistrer un user
+POST {{endpoint}}api/signup
+content-type: application/json
+
+{
+    "name": "test musico",
+    "email": "test3@mail.fr",
+    "city": "Paris",
+    "county": "Paris",
+    "role": "musicos",
+    "password": "tpass11"
+}
+
 ### Modifier un momer
 PATCH {{ endpoint }}api/momers/1
 content-type: application/json
@@ -32,18 +77,6 @@ content-type: application/json
     "momer_to_contact":"momer3",
     "momer_type_id": 2
 }
-
-### Supprimer un momer
-
-DELETE {{endpoint}}api/momers/5
-
-#### MUSICOS ####
-
-### liste des musicos
-GET {{endpoint}}api/musicos
-
-### liste pour 1 musicos
-GET {{endpoint}}api/musicos/6
 
 ### Modifier un musicos
 
@@ -66,46 +99,29 @@ content-type: application/json
     "musical_type": [3,5]
 }
 
-### Supprimer un musicos
+### Suppression d'un user
 
-DELETE {{endpoint}}api/musicos/3
+DELETE {{endpoint}}api/profile
 
-#### EVENT PUBLIE ####
-
-### LIste des events publiés
-
-GET {{endpoint}}api/
-
-### Liste de 1 event
-
-GET {{endpoint}}api/2
-
-### Modification d'un event
-
-PATCH {{endpoint}}api/2
+### connexion d'un momer
+POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "name": "test",
-    "description":"test",
-    "picture_url":"test",
-    "address": "test",
-    "county": "test",
-    "event_date": "2022-08-25 14:34:45.13344+02",
-    "external_link": "test",
-    "event_type": "test",
-    "type_of_music_needed": "test"
+    "email": "momer1@mail.fr",
+    "password": "password1 momer"
 }
 
-#### ANNONCE ####
+###connexion d'un musicos
+POST {{endpoint}}api/signin
+content-type: application/json
 
-### Récupérer la liste des annonces
+{
+    "email": "musicos1@mail.fr",
+    "password": "password1 musicos"
+}
 
-GET {{endpoint}}api/ads
-
-### Récupérer 1 annonce
-
-GET {{endpoint}}api/ads/1
+#### MES ANNONCES #####
 
 ### créer une annonce
 
@@ -128,43 +144,21 @@ content-type: application/json
 ### Supprimer une annonce
 DELETE {{endpoint}}api/ads/5
 
-#### USER ####
+#### MES EVENTS ####
 
-### enregistrer un user
-POST {{endpoint}}api/signup
+### Modification d'un event
+
+PATCH {{endpoint}}api/2
 content-type: application/json
 
 {
     "name": "test",
-    "email": "t@.r",
-    "city": "test",
+    "description":"test",
+    "picture_url":"test",
+    "address": "test",
     "county": "test",
-    "role": "musicos",
-    "password": "test"
+    "event_date": "2022-08-25 14:34:45.13344+02",
+    "external_link": "test",
+    "event_type": "test",
+    "type_of_music_needed": "test"
 }
-
-### connexion d'un momer
-POST {{endpoint}}api/signin
-content-type: application/json
-
-{
-    "email": "momer1@mail.fr",
-    "password": "password1 momer"
-}
-
-###connexion d'un musicos
-POST {{endpoint}}api/signin
-content-type: application/json
-
-{
-    "email": "musicos2@mail.fr",
-    "password": "password1 musicos"
-}
-
-
-
-
-
-
-
-

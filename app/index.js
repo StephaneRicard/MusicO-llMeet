@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 const cors = require('cors');
 
 const router = require('./routers');
@@ -12,14 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true,
 }));
-
-app.use(
-    session({
-        secret: 'supersecret',
-        resave: false,
-        saveUninitialized: true,
-    }),
-);
 
 // On lève la restriction CORS
 app.use(cors(process.env.CORS_DOMAINS || '*'));

@@ -7,7 +7,6 @@ module.exports = {
         const authHeader = req.headers.authorization;
         const token = authHeader && authHeader.split(' ')[1];
 
-        debug(token);
         if (!token) {
             return res.sendStatus(401);
         }
@@ -17,6 +16,7 @@ module.exports = {
                 return res.status(401).json(err);
             }
             req.user = user;
+            debug(user);
             next();
         });
     },

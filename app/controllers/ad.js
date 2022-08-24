@@ -1,12 +1,74 @@
 const { adDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
+const client = require('../client/pg');
 
 module.exports = {
 
-    // récupérer la liste de toutes les annonces
-    async getAll(_req, res) {
-        const events = await adDatamapper.findAll();
-        return res.json(events);
+    // list getAll & filters
+    // eslint-disable-next-line consistent-return
+    async getAll(req, res) {
+        const {
+            county, city, date, typeOfMusic,
+        } = req.query;
+        // eslint-disable-next-line quotes
+        let sqlUsers = `SELECT
+        *
+        FROM event `;
+        // ADS - filter by county
+        if (county) {
+            const countyFilter = county.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += ` WHERE county = '${countyFilter}' AND is_published = 'false'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+        // ADS - filter by city
+        if (city) {
+            const cityFilter = city.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += `WHERE city = '${cityFilter}' AND is_published = 'false'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+
+        // ADS - filter by date
+        if (date) {
+            const dateFilter = date.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += `WHERE event_date = '${dateFilter}' AND is_published = 'false'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+
+        // ADS - filter by musical type
+        if (typeOfMusic) {
+            const typeFilter = typeOfMusic.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += `WHERE type_of_music_needed = '${typeFilter}' AND is_published = 'false'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+
+        if (!county && !city && !date && !typeOfMusic) {
+            const events = await adDatamapper.findAll();
+            return res.json(events);
+        }
     },
     // récupérer 1 annonce
     async getOne(req, res) {
@@ -31,11 +93,9 @@ module.exports = {
         return res.status(204).json('delete ok');
     },
 
-    // TODO: ajouter condition à la création (champs requis)
     // créer un event (appelé annonce)
     async create(req, res) {
         const savedAd = await adDatamapper.insert(req.body);
         res.json(savedAd);
     },
-
 };
