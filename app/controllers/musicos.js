@@ -5,9 +5,64 @@ const client = require('../client/pg');
 module.exports = {
 
     // récupérer la liste de tous les musicos
-    async getAll(_req, res) {
-        const musicos = await musicosDatamapper.findAll();
-        return res.json(musicos);
+    // eslint-disable-next-line consistent-return
+    async getAll(req, res) {
+        const { county, city, momerType } = req.query;
+        // eslint-disable-next-line quotes
+        let sqlUsers = `SELECT
+        name,
+        city,
+        email,
+        password,
+        phone,
+        county,
+        role
+        FROM users `;
+        // MOMERS - filter by county
+        if (county) {
+            const countyFilter = county.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'momer'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+        // MOMERS - filter by city
+        if (city) {
+            const cityFilter = city.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'momer'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+            console.log('sql request', sqlUsers);
+            const result = await client.query(sqlUsers);
+            return res.json(result);
+        }
+        // MOMERS - filter by momer type (restaurant, pub, etc.)
+        if (momerType) {
+            let sqlMomerType = `SELECT
+                *
+            FROM momer_with_type `;
+            const momerTypeFilter = momerType.join("','");
+            // eslint-disable-next-line no-const-assign
+            sqlMomerType += `WHERE momer_type = '${momerTypeFilter}'`;
+            if (!sqlMomerType) {
+                throw new Error('Issue with variable sqlUsers', sqlMomerType);
+            }
+            console.log('sql request', sqlMomerType);
+            const result = await client.query(sqlMomerType);
+            return res.json(result);
+        }
+
+        // getAll
+        if (!city && !county) {
+            const musicos = await musicosDatamapper.findAll();
+            return res.json(musicos);
+        }
     },
     // récupérer 1 musicos
     async getOne(req, res) {
@@ -59,60 +114,5 @@ module.exports = {
         }
         // on renvoie la table users mise a jour
         return res.json({ savedMusicos });
-    },
-
-    // filters
-    // eslint-disable-next-line consistent-return
-    async filters(req, res) {
-        const { county, city, momerType } = req.query;
-        // eslint-disable-next-line quotes
-        let sqlUsers = `SELECT
-        name,
-        city,
-        email,
-        password,
-        phone,
-        county,
-        role
-        FROM users `;
-        // MOMERS - filter by county
-        if (county) {
-            const countyFilter = county.join("','");
-            // eslint-disable-next-line no-const-assign
-            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'momer'`;
-            if (!sqlUsers) {
-                throw new Error('Issue with variable sqlUsers', sqlUsers);
-            }
-            console.log('sql request', sqlUsers);
-            const result = await client.query(sqlUsers);
-            return res.json(result);
-        }
-        // MOMERS - filter by city
-        if (city) {
-            const cityFilter = city.join("','");
-            // eslint-disable-next-line no-const-assign
-            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'momer'`;
-            if (!sqlUsers) {
-                throw new Error('Issue with variable sqlUsers', sqlUsers);
-            }
-            console.log('sql request', sqlUsers);
-            const result = await client.query(sqlUsers);
-            return res.json(result);
-        }
-        // MOMERS - filter by momer type (restaurant, pub, etc.)
-        if (momerType) {
-            let sqlMomerType = `SELECT
-                *
-            FROM momer_with_type `;
-            const momerTypeFilter = momerType.join("','");
-            // eslint-disable-next-line no-const-assign
-            sqlMomerType += `WHERE momer_type = '${momerTypeFilter}'`;
-            if (!sqlMomerType) {
-                throw new Error('Issue with variable sqlUsers', sqlMomerType);
-            }
-            console.log('sql request', sqlMomerType);
-            const result = await client.query(sqlMomerType);
-            return res.json(result);
-        }
     },
 };

@@ -11,8 +11,7 @@ const router = express.Router();
 
 router
     .route('/')
-    // .get(controllerHandler(controller.getAll));
-    .get(controllerHandler(controller.filters));
+    .get(controllerHandler(controller.getAll));
 
 router
     .route('/:id')
