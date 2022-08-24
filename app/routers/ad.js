@@ -7,8 +7,7 @@ const router = express.Router();
 
 router
     .route('/')
-    // .get(controllerHandler(controller.getAll))
-    .get(controllerHandler(controller.filters))
+    .get(controllerHandler(controller.getAll))
     .post(controllerHandler(controller.create));
 
 router
