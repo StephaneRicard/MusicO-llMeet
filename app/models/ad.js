@@ -3,13 +3,13 @@ const client = require('../client/pg');
 module.exports = class Ad {
     // retrouver toutes les annonces
     static async findAll() {
-        const result = await client.query('SELECT * FROM event WHERE is_published = false');
+        const result = await client.query('SELECT * FROM event_with_candidate WHERE is_published = false');
         return result.rows;
     }
 
     // retrouver une annonce
     static async findOne(id) {
-        const result = await client.query('SELECT * FROM event WHERE is_published = false AND id = $1', [id]);
+        const result = await client.query('SELECT * FROM event_with_candidate WHERE is_published = false AND id = $1', [id]);
         return result.rows[0];
     }
 

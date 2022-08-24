@@ -1,15 +1,9 @@
-// const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { generateAccessToken } = require('../helpers/generateToken');
-// const session = require('express-session');
-// const asyncHandler = require('express-async-handler');
-const { userDataMapper } = require('../models');
+// eslint-disable-next-line import/order
+const jwt = require('jsonwebtoken');
 
-// function generateAccessToken(user) {
-//     return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
-//         expiresIn: '15s',
-//     });
-// }
+const { userDataMapper } = require('../models');
 
 module.exports = {
 
@@ -35,19 +29,15 @@ module.exports = {
             throw new Error('Wrong password.');
         }
 
-        // if (password !== user.password) {
-        //     res.status(401).send('password not valid');
-        // } else (await bcrypt.compare(password, user.password));
         res.json({
             id: user.id,
             name: user.name,
             email: user.email,
             city: user.city,
             county: user.county,
+            role: user.role,
             token: generateAccessToken(user),
         });
-
-        // creating the session
     },
 
     // registration
@@ -104,5 +94,17 @@ module.exports = {
             res.status(400);
             throw new Error('Invalid user data');
         }
+    },
+
+    // deconnexion
+    logout: (req, res) => {
+        const authHeader = req.headers.authorization;
+        jwt.sign(authHeader, '', { expiresIn: 1 }, (logout, err) => {
+            if (logout) {
+                res.json({ msg: 'Vous avez été déconnecté' });
+            } else {
+                res.json(err);
+            }
+        });
     },
 };

@@ -80,7 +80,22 @@ GET {{endpoint}}api/
 
 GET {{endpoint}}api/2
 
+### Modification d'un event
 
+PATCH {{endpoint}}api/2
+content-type: application/json
+
+{
+    "name": "test",
+    "description":"test",
+    "picture_url":"test",
+    "address": "test",
+    "county": "test",
+    "event_date": "2022-08-25 14:34:45.13344+02",
+    "external_link": "test",
+    "event_type": "test",
+    "type_of_music_needed": "test"
+}
 
 #### ANNONCE ####
 
@@ -120,12 +135,12 @@ POST {{endpoint}}api/signup
 content-type: application/json
 
 {
-    "name": "test",
-    "email": "t@.r",
-    "city": "test",
-    "county": "test",
+    "name": "test musico",
+    "email": "test3@mail.fr",
+    "city": "Paris",
+    "county": "Paris",
     "role": "musicos",
-    "password": "test"
+    "password": "tpass11"
 }
 
 ### connexion d'un momer
@@ -145,6 +160,7 @@ content-type: application/json
     "email": "musicos2@mail.fr",
     "password": "password1 musicos"
 }
+
 
 
 

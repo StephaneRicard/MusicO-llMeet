@@ -93,7 +93,6 @@ module.exports = {
         return res.status(204).json('delete ok');
     },
 
-    // TODO: ajouter condition à la création (champs requis)
     // créer un event (appelé annonce)
     async create(req, res) {
         const savedAd = await adDatamapper.insert(req.body);
