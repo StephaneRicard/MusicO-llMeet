@@ -8,12 +8,14 @@ const { errorHandler } = require('../helpers/errorHandler');
 
 // middleware d'autentification du token
 const { authenticateToken } = require('../middlewares/jwt');
+const { accessMomer, accessMusicos } = require('../middlewares/accessRole');
 
 const router = express.Router();
 
 const musicosRouter = require('./musicos');
 const eventRouter = require('./event');
 const adRouter = require('./ad');
+const userRouter = require('./user');
 
 // registration
 router.post('/api/signup', controllerHandler(userController.registerUser));
@@ -24,11 +26,13 @@ router.get('/api/logout', userController.logout);
 
 // on ajoute l'autentification token sur les routes qui nécessite d'être connecté
 // momers list
-router.use('/api/momers', authenticateToken, momerRouter);
+router.use('/api/momers', accessMusicos, authenticateToken, momerRouter);
 // musicos list
-router.use('/api/musicos', authenticateToken, musicosRouter);
+router.use('/api/musicos', accessMomer, authenticateToken, musicosRouter);
 // ads list
 router.use('/api/ads', authenticateToken, adRouter);
+// router users
+router.use('api/profile', authenticateToken, userRouter);
 // events list
 router.use('/api', eventRouter);
 

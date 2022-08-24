@@ -143,6 +143,10 @@ content-type: application/json
     "password": "tpass11"
 }
 
+### Suppression d'un user
+
+DELETE {{endpoint}}api/profile
+
 ### connexion d'un momer
 POST {{endpoint}}api/signin
 content-type: application/json
@@ -157,7 +161,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "musicos2@mail.fr",
+    "email": "musicos1@mail.fr",
     "password": "password1 musicos"
 }
 

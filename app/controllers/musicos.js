@@ -19,23 +19,10 @@ module.exports = {
         return res.json(musicos);
     },
 
-    // supprimer 1 musicos (de la table users, musical_type_per_users, candidate_per_event)
-    async delete(req, res) {
-        const musicosId = req.params.id;
-        const musicos = await musicosDatamapper.findOne(musicosId);
-
-        if (!musicos) {
-            throw new ApiError('musicos does not exists', { statusCode: 404 });
-        }
-
-        await musicosDatamapper.delete(musicosId);
-        return res.status(204).json('delete ok');
-    },
-
     // TODO: update des musical types a revoir
     // mettre à jour 1 musicos
     async update(req, res) {
-        const musicosId = req.params.id;
+        const musicosId = req.user.id;
         const musicos = await musicosDatamapper.findOne(musicosId);
 
         if (!musicos) {
