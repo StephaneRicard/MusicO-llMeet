@@ -34,18 +34,23 @@ module.exports = {
 
     // supprimer l'un de mes events
     async delete(req, res) {
+        const myUserId = req.user.id;
+        if (!myUserId) {
+            throw new ApiError('Error on User id -> "myUserId"', myUserId, { statusCode: 404 });
+        }
+
         const myEventId = req.params.id;
         if (!myEventId) {
             throw new ApiError('Can not find anything for this id', myEventId, { statusCode: 404 });
         }
 
-        const event = await myeventsDatamapper.findOne(myEventId);
+        const myevent = await myeventsDatamapper.findOne(myUserId, myEventId);
 
-        if (!event) {
+        if (!myevent) {
             throw new ApiError('event does not exists', { statusCode: 404 });
         }
 
-        await myeventsDatamapper.delete(myEventId);
+        await myeventsDatamapper.delete(myUserId, myEventId);
         return res.status(204).json('delete ok');
     },
 };
