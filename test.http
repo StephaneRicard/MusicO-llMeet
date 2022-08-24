@@ -117,8 +117,8 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "musicos1@mail.fr",
-    "password": "password1 musicos"
+    "email": "musicos2@mail.fr",
+    "password": "password2 musicos"
 }
 
 #### MES ANNONCES #####
@@ -162,3 +162,4 @@ content-type: application/json
     "event_type": "test",
     "type_of_music_needed": "test"
 }
+
