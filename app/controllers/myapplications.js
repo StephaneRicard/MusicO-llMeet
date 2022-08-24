@@ -25,7 +25,7 @@ module.exports = {
         const myApplicationId = req.params.id;
         const myApplication = await myapplicationsDatamapper.findOne(myUserId, myApplicationId);
         if (!myApplication) {
-            throw new ApiError('Can not find any applications for this id', myApplicationId, { statusCode: 404 });
+            throw new ApiError('Can not find any anything for this id', myApplicationId, { statusCode: 404 });
         }
         return res.json(myApplication);
     },
@@ -39,16 +39,10 @@ module.exports = {
         const myApplicationId = req.params.id;
         const myApplication = await myapplicationsDatamapper.findOne(myUserId, myApplicationId);
         if (!myApplication) {
-            throw new ApiError('Application does not exists for this userId', myApplicationId, { statusCode: 404 });
+            throw new ApiError('Application does not find anything for this userId', myApplicationId, { statusCode: 404 });
         }
 
         await myapplicationsDatamapper.delete(myUserId, myApplicationId);
         return res.status(204).json('delete ok');
-    },
-
-    // create an application to an ad
-    async create(req, res) {
-        const savedAd = await myapplicationsDatamapper.insert(req.body);
-        res.json(savedAd);
     },
 };

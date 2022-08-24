@@ -18,10 +18,4 @@ module.exports = class myapplications {
         const result = await client.query('DELETE FROM "candidate_per_event" WHERE "users_id" = $1 AND "id" = $2', [myUserId, myApplicationId]);
         return result.rowCount;
     }
-
-    // insert ad into sql function insert_ad
-    static async insert(myad) {
-        const savedAd = await client.query('SELECT * FROM insert_musicos_myad($1)', [myad]);
-        return savedAd.rows[0];
-    }
 };
