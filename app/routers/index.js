@@ -31,6 +31,8 @@ router.get('/api/logout', userController.logout);
 // on ajoute l'autentification token sur les routes qui nécessite d'être connecté
 // momers list
 router.use('/api/momers', authenticateToken, accessMusicos, momerRouter);
+// momer list of ads
+router.use('/api/myads', authenticateToken, accessMomer, myAdsRouter);
 // musicos list
 router.use('/api/musicos', authenticateToken, accessMomer, musicosRouter);
 // ads list
@@ -39,7 +41,6 @@ router.use('/api/ads', authenticateToken, accessMomer, adRouter);
 router.use('/api/profile', authenticateToken, userRouter);
 // my applications list
 router.use('/api/myapplications', authenticateToken, myapplicationsRouter);
-
 
 // events list
 router.use('/api', eventRouter);
