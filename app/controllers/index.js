@@ -4,6 +4,7 @@ const musicosController = require('./musicos');
 const eventController = require('./event');
 const adController = require('./ad');
 const userController = require('./user');
+const myAdsController = require('./myAds');
 
 module.exports = {
     momerController,
@@ -11,4 +12,5 @@ module.exports = {
     eventController,
     adController,
     userController,
+    myAdsController,
 };

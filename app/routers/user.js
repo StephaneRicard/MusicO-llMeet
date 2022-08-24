@@ -4,8 +4,6 @@ const { userController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
 const { authenticateToken } = require('../middlewares/jwt');
 
-// TODO: acces a donner
-
 const router = express.Router();
 
 router
