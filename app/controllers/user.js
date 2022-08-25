@@ -17,15 +17,16 @@ module.exports = {
         if (!email || !password) {
             throw new Error('Please fill the fields');
         }
-        const user = await userDatamapper.findOneByEmail(email);
-
-        // check email
+        const verifEmail = req.body.email;
+        const verifPassword = req.body.password;
+        const user = await userDatamapper.findOneByPassworAndEmail(verifEmail, verifPassword);
+        // check email & password
         if (!user) {
-            res.status(401).send('email not valid');
+            res.status(401).send('email or passwords not valid');
         }
-        // check password
-        const isPasswordValid = bcrypt.compare(password, user.password);
 
+        // check password bcrypt
+        const isPasswordValid = bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             throw new Error('Wrong password.');
         }
