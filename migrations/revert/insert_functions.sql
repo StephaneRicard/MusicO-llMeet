@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION "insert_ad";
+DROP FUNCTION "insert_ad", "insert_musicos_myad";
 
 COMMIT;

@@ -59,8 +59,8 @@ content-type: application/json
     "password": "tpass11"
 }
 
-### Modifier un momer
-PATCH {{ endpoint }}api/momers/1
+### Modifier un user
+PATCH {{ endpoint }}api/profile
 content-type: application/json
 
 {
@@ -76,27 +76,6 @@ content-type: application/json
     "external_url": "external_url3",
     "momer_to_contact":"momer3",
     "momer_type_id": 2
-}
-
-### Modifier un musicos
-
-PATCH {{ endpoint }}api/musicos/3
-content-type: application/json
-
-{
-    "name": "name3",
-    "picture_url": "picture_url3",
-    "city":"city3",
-    "email":"email4@email4.fr",
-    "password":"password3",
-    "phone":"0303030303",
-    "address":"address3",
-    "county":"county3",
-    "description":"description3",
-    "external_url": "external_url3",
-    "musicians_number": 4,
-    "group_leader": "test3",
-    "musical_type": [3,5]
 }
 
 ### Suppression d'un user
@@ -144,11 +123,11 @@ content-type: application/json
 ### Supprimer une annonce
 DELETE {{endpoint}}api/ads/5
 
-#### MES EVENTS ####
+#### MES ANNONCES ####
 
-### Modification d'un event
+### Modification d'une annonce
 
-PATCH {{endpoint}}api/2
+PATCH {{endpoint}}api/myads/3
 content-type: application/json
 
 {
@@ -156,6 +135,8 @@ content-type: application/json
     "description":"test",
     "picture_url":"test",
     "address": "test",
+    "is_published": true,
+    "is_archived": false,
     "county": "test",
     "event_date": "2022-08-25 14:34:45.13344+02",
     "external_link": "test",
