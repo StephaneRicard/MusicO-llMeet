@@ -8,6 +8,7 @@ const { errorHandler } = require('../helpers/errorHandler');
 // importation des routers
 const musicosRouter = require('./musicos');
 const eventRouter = require('./event');
+const myeventsRouter = require('./myevents');
 const adRouter = require('./ad');
 const userRouter = require('./user');
 const momerRouter = require('./momer');
@@ -41,6 +42,8 @@ router.use('/api/ads', authenticateToken, accessMomer, adRouter);
 router.use('/api/profile', authenticateToken, userRouter);
 // my applications list
 router.use('/api/myapplications', authenticateToken, accessMusicos, myapplicationsRouter);
+// my events list
+router.use('/api/myevents', authenticateToken, accessMomer, myeventsRouter);
 
 // events list
 router.use('/api', eventRouter);
