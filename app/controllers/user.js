@@ -139,7 +139,7 @@ module.exports = {
             throw new ApiError('user does not exists', { statusCode: 404 });
         }
         console.log(req.body);
-        if (role === 'musicos' && req.body.musical_type.length > 0) {
+        if (role === 'musicos') {
             await userDatamapper.deleteMusicalType(userId);
 
             // on rajoute les nouveaux dans la table de liaison
@@ -151,9 +151,10 @@ module.exports = {
         }
 
         const savedUser = await userDatamapper.updateUsers(userId, req.body);
+        const savedMusicalType = await userDatamapper.findMusicalType(userId);
         // si les musical type sont modifiés on supprime les acniens musical types
         // type qui était présent dans la table de liaison
 
-        res.json(savedUser);
+        res.json({ savedUser, savedMusicalType });
     },
 };

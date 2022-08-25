@@ -39,6 +39,11 @@ module.exports = class User {
         return savedMusicos.rows[0];
     }
 
+    static async findMusicalType(userId) {
+        const musicalTypes = await client.query('SELECT * FROM musical_type_per_users WHERE users_id =$1', [userId]);
+        return musicalTypes.rows;
+    }
+
     // création méthode pour inserer les nouveaux musical type d'un musicos
     // dans la table musical_type_per_users avec la fonction sql update_musical_type
     static async updateMusicalType(musicalType, userId) {
