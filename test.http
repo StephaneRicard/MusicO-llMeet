@@ -60,7 +60,7 @@ content-type: application/json
 }
 
 ### Modifier un user
-PATCH {{ endpoint }}api/momers/1
+PATCH {{ endpoint }}api/profile
 content-type: application/json
 
 {
@@ -123,11 +123,11 @@ content-type: application/json
 ### Supprimer une annonce
 DELETE {{endpoint}}api/ads/5
 
-#### MES EVENTS ####
+#### MES ANNONCES ####
 
-### Modification d'un event
+### Modification d'une annonce
 
-PATCH {{endpoint}}api/2
+PATCH {{endpoint}}api/myads/3
 content-type: application/json
 
 {
@@ -135,6 +135,8 @@ content-type: application/json
     "description":"test",
     "picture_url":"test",
     "address": "test",
+    "is_published": true,
+    "is_archived": false,
     "county": "test",
     "event_date": "2022-08-25 14:34:45.13344+02",
     "external_link": "test",
