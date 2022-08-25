@@ -27,7 +27,7 @@ router.post('/api/signup', controllerHandler(userController.registerUser));
 // login
 router.post('/api/signin', controllerHandler(userController.loginUser));
 // logout
-router.get('/api/logout', userController.logout);
+router.get('/api/logout', authenticateToken, userController.logout);
 
 // on ajoute l'autentification token sur les routes qui nécessite d'être connecté
 // momers list

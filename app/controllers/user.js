@@ -17,16 +17,14 @@ module.exports = {
         if (!email || !password) {
             throw new Error('Please fill the fields');
         }
-        const verifEmail = req.body.email;
-        const verifPassword = req.body.password;
-        const user = await userDatamapper.findOneByPassworAndEmail(verifEmail, verifPassword);
+        const user = await userDatamapper.findOneByEmail(email);
         // check email & password
         if (!user) {
             res.status(401).send('email or passwords not valid');
         }
 
         // check password bcrypt
-        const isPasswordValid = bcrypt.compare(password, user.password);
+        const isPasswordValid = bcrypt.compareSync(password, user.password);
         if (!isPasswordValid) {
             throw new Error('Wrong password.');
         }
@@ -112,10 +110,9 @@ module.exports = {
 
     // deconnexion
     logout: (req, res) => {
-        const authHeader = req.headers.authorization;
-        jwt.sign({ authHeader }, ' ', { expiresIn: 1 }, (logout, err) => {
+        const user = req.user.id;
+        jwt.sign({ user }, '', { expiresIn: 1 }, (logout, err) => {
             if (logout) {
-                console.log(logout);
                 res.json({ msg: 'Vous avez été déconnecté' });
             } else {
                 res.json(err);
