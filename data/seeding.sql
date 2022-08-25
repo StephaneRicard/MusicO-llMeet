@@ -47,6 +47,7 @@ INSERT INTO "users" ("name", "picture_url","city","email","password","phone","ad
 VALUES
 ('name1 musicos','image1 musicos','city1 musicos','musicos1@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone 1 musicos','adresse1 musicos','county1 musicos','musicos','description1 musicos',3,'leader1 musicos','musicos1 lien externe'),
 ('name2 musicos','image2 musicos','city2 musicos','musicos2@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone 2 musicos','adresse2 musicos','county2 musicos','musicos','description2 musicos',3,'leader2 musicos','musicos2 lien externe');
+
 --Insertition event
 INSERT INTO "event"("name", "description","picture_url","owner_id", "address","county","is_published","is_archived","event_date","external_link","event_type","type_of_music_needed")
 VALUES

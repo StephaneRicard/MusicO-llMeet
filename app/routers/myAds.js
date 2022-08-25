@@ -15,4 +15,8 @@ router
     .delete(controllerHandler(controller.delete))
     .patch(controllerHandler(controller.update));
 
+router
+    .route('/:id/details/:userId')
+    .get(controllerHandler(controller.getApplicationDetails));
+
 module.exports = router;

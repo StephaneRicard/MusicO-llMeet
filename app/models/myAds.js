@@ -20,4 +20,10 @@ module.exports = class MyAds {
         const result = await client.query('SELECT * FROM update_event($1, $2) WHERE id=$1 AND is_published = false', [id, ad]);
         return result.rows[0];
     }
+
+    // retrouver une candidature à l'ne de mes annonces
+    static async findOneApplication(candidateId) {
+        const result = await client.query('SELECT * FROM users WHERE "id" = $1 AND "role" = "musicos"', [candidateId]);
+        return result.rows[0];
+    }
 };
