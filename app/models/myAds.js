@@ -22,8 +22,14 @@ module.exports = class MyAds {
     }
 
     // retrouver une candidature à l'ne de mes annonces
+    static async findMyEvent(eventId) {
+        const result = await client.query('SELECT * FROM event WHERE "id" = $1 AND is_published = false', [eventId]);
+        return result.rows[0];
+    }
+
     static async findOneApplication(candidateId) {
-        const result = await client.query('SELECT * FROM users WHERE "id" = $1 AND "role" = "musicos"', [candidateId]);
+        // const result = await client.query('SELECT * FROM candidate_per_event WHERE "users_id" = $1 AND "event_id" = $2', [candidateId, eventId]);
+        const result = await client.query('SELECT * FROM users WHERE "id" = $1 AND role = musicos', [candidateId]);
         return result.rows[0];
     }
 };

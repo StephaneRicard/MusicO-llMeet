@@ -60,6 +60,18 @@ module.exports = {
             throw new ApiError('This candidate does not not exists or Id does not belong to a musicos', { statusCode: 404 });
         }
         console.log('candidateId :', candidateId);
+
+        // const eventId = req.params.id;
+        // if (!eventId) {
+        //     throw new ApiError('Can not find the eventId', { statusCode: 404 });
+        // }
+        // console.log('eventId :', eventId);
+
+        // const findMyEvent = await myAdsDatamapper.findOne(eventId);
+        // if (!findMyEvent) {
+        //     throw new ApiError('Error findMyEvent', { statusCode: 404 });
+        // }
+
         const detailsCandidate = await myAdsDatamapper.findOneApplication(candidateId);
         if (!detailsCandidate) {
             throw new ApiError('profile could not be found', { statusCode: 404 });
