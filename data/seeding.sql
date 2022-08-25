@@ -39,14 +39,15 @@ VALUES
 --Insertition momer
 INSERT INTO "users" ("name", "picture_url","city","email","password","phone","address","county","role","description","external_url","momer_to_contact","momer_type_id")
 VALUES
-('name1 momer','image1 momer','city1 momer','momer1@mail.fr','$2a$10$yx/c7E6nbU31n2QbR/1o3OHCF5Zph/X9DfzH6GV6At2E6rfkwJxUS','phone1 momer','adresse1 momer','county1 momer','momer','description1 momer','lien externe1 momer', 'nom momer1', 3),
-('name2 momer','image2 momer','city2 momer','momer2@mail.fr','$2a$10$yx/c7E6nbU31n2QbR/1o3OHCF5Zph/X9DfzH6GV6At2E6rfkwJxUS','phone2 momer','adresse2 momer','county2 momer','momer','description2 momer','lien externe2 momer', 'nom momer2', 3);
+('name1 momer','image1 momer','city1 momer','momer1@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone1 momer','adresse1 momer','county1 momer','momer','description1 momer','lien externe1 momer', 'nom momer1', 3),
+('name2 momer','image2 momer','city2 momer','momer2@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone2 momer','adresse2 momer','county2 momer','momer','description2 momer','lien externe2 momer', 'nom momer2', 3);
 
 --Insertition musicos
 INSERT INTO "users" ("name", "picture_url","city","email","password","phone","address","county","role","description","musicians_number","group_leader","external_url")
 VALUES
-('name1 musicos','image1 musicos','city1 musicos','musicos1@mail.fr','$2a$10$yx/c7E6nbU31n2QbR/1o3OHCF5Zph/X9DfzH6GV6At2E6rfkwJxUS','phone 1 musicos','adresse1 musicos','county1 musicos','musicos','description1 musicos',3,'leader1 musicos','musicos1 lien externe'),
-('name2 musicos','image2 musicos','city2 musicos','musicos2@mail.fr','$2a$10$yx/c7E6nbU31n2QbR/1o3OHCF5Zph/X9DfzH6GV6At2E6rfkwJxUS','phone 2 musicos','adresse2 musicos','county2 musicos','musicos','description2 musicos',3,'leader2 musicos','musicos2 lien externe');
+('name1 musicos','image1 musicos','city1 musicos','musicos1@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone 1 musicos','adresse1 musicos','county1 musicos','musicos','description1 musicos',3,'leader1 musicos','musicos1 lien externe'),
+('name2 musicos','image2 musicos','city2 musicos','musicos2@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone 2 musicos','adresse2 musicos','county2 musicos','musicos','description2 musicos',3,'leader2 musicos','musicos2 lien externe');
+
 --Insertition event
 INSERT INTO "event"("name", "description","picture_url","owner_id", "address","county","is_published","is_archived","event_date","external_link","event_type","type_of_music_needed")
 VALUES
