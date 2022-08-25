@@ -40,7 +40,7 @@ router.use('/api/ads', authenticateToken, accessMomer, adRouter);
 // router profile de la personne connectee
 router.use('/api/profile', authenticateToken, userRouter);
 // my applications list
-router.use('/api/myapplications', authenticateToken, myapplicationsRouter);
+router.use('/api/myapplications', authenticateToken, accessMusicos, myapplicationsRouter);
 
 // events list
 router.use('/api', eventRouter);

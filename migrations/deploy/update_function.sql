@@ -10,12 +10,12 @@ UPDATE users SET
     city = COALESCE($2->>'city', city),
     email = COALESCE($2->>'email', email),
     password = COALESCE($2->>'password', password),
-    phone = (COALESCE($2->>'phone', phone)),
+    phone = COALESCE($2->>'phone', phone),
     address = COALESCE($2->>'address', address),
     county = COALESCE($2->>'county', county),
     description = COALESCE($2->>'description', description),
     momer_to_contact = COALESCE($2->>'momer_to_contact', momer_to_contact),
-    momer_type_id = (COALESCE(($2->>'momer_type_id')::int, momer_type_id))
+    momer_type_id = COALESCE(($2->>'momer_type_id')::int, momer_type_id)
 
 WHERE id = $1
 RETURNING *
@@ -32,7 +32,7 @@ UPDATE users SET
     city = COALESCE($2->>'city', city),
     email = COALESCE($2->>'email', email),
     password = COALESCE($2->>'password', password),
-    phone = (COALESCE($2->>'phone', phone)),
+    phone = COALESCE($2->>'phone', phone),
     address = COALESCE($2->>'address', address),
     county = COALESCE($2->>'county', county),
     description = COALESCE($2->>'description', description),
