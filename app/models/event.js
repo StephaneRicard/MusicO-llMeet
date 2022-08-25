@@ -13,7 +13,6 @@ module.exports = class Event {
         return result.rows[0];
     }
 
-    // TODO: revoir l'update des events pour les candidatures
     static async update(id, event) {
         const savedEvent = await client.query('SELECT * FROM update_event($1,$2)', [id, event]);
         return savedEvent.rows[0];

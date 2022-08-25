@@ -3,7 +3,6 @@ const { generateAccessToken } = require('../helpers/generateToken');
 const { ApiError } = require('../helpers/errorHandler');
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
-const debug = require('debug')('app:updateusers');
 
 const { userDatamapper } = require('../models');
 
@@ -139,8 +138,8 @@ module.exports = {
         if (!user) {
             throw new ApiError('user does not exists', { statusCode: 404 });
         }
-        if (role === 'musicos') {
-            debug(role);
+        console.log(req.body);
+        if (role === 'musicos' && req.body.musical_type.length > 0) {
             await userDatamapper.deleteMusicalType(userId);
 
             // on rajoute les nouveaux dans la table de liaison
