@@ -19,8 +19,8 @@ module.exports = class myevents {
     }
 
     // creer un event
-    static async update(myEventId, reqBody) {
-        const updateMyEvent = await client.query('SELECT * FROM update_event($1,$2) WHERE "is_published" = true AND "id" = $1', [myEventId, reqBody]);
+    static async update(myEventId, reqBody, ownerId) {
+        const updateMyEvent = await client.query('SELECT * FROM update_event($1,$2) WHERE "is_published" = true AND "owner_id" = $3 AND "id" = $1', [myEventId, reqBody, ownerId]);
         return updateMyEvent.rows[0];
     }
 };

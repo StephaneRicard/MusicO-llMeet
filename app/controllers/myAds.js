@@ -5,11 +5,7 @@ module.exports = {
 
     // récupérer mes annonces
     async getAll(req, res) {
-        const userId = parseInt(req.user.id, 10);
-
-        if (!userId) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
-        }
+        const userId = req.user.id;
 
         const myads = await myAdsDatamapper.findAll(userId);
 
@@ -17,30 +13,25 @@ module.exports = {
     },
 
     async getOne(req, res) {
-        const userId = parseInt(req.user.id, 10);
+        const userId = req.user.id;
         const adId = req.params.id;
-        if (!userId) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
-        }
-
-        if (!adId) {
-            throw new ApiError('Ad does not exists', { statusCode: 404 });
-        }
 
         const myad = await myAdsDatamapper.findOne(userId, adId);
+
+        if (!myad) {
+            throw new ApiError('Ad does not exists', { statusCode: 404 });
+        }
 
         return res.json(myad);
     },
 
     async delete(req, res) {
-        const userId = parseInt(req.user.id, 10);
+        const userId = req.user.id;
         const adId = req.params.id;
 
-        if (!userId) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
-        }
+        const ad = await myAdsDatamapper.findOne(userId, adId);
 
-        if (!adId) {
+        if (!ad) {
             throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
 
@@ -49,9 +40,12 @@ module.exports = {
     },
 
     async update(req, res) {
+        const userId = req.user.id;
         const adId = req.params.id;
 
-        if (!adId) {
+        const ad = await myAdsDatamapper.findOne(userId, adId);
+
+        if (!ad) {
             throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
 

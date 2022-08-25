@@ -26,7 +26,7 @@ module.exports = {
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
@@ -38,7 +38,7 @@ module.exports = {
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
@@ -53,7 +53,7 @@ module.exports = {
             if (!sqlMomerType) {
                 throw new Error('Issue with variable sqlUsers', sqlMomerType);
             }
-            console.log('sql request', sqlMomerType);
+
             const result = await client.query(sqlMomerType);
             return res.json(result);
         }

@@ -52,11 +52,11 @@ content-type: application/json
 
 {
     "name": "test musico",
-    "email": "test3@mail.fr",
+    "email": "test@mai.fr",
     "city": "Paris",
     "county": "Paris",
     "role": "musicos",
-    "password": "tpass11"
+    "password": "1111"
 }
 
 ### Modifier un user
@@ -96,8 +96,8 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "musicos2@mail.fr",
-    "password": "password2 musicos"
+    "email": "test@mai.fr",
+    "password": "11"
 }
 
 #### MES ANNONCES #####
