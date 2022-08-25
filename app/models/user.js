@@ -6,6 +6,12 @@ module.exports = class User {
         return result.rows[0];
     }
 
+    static async findOneByPassworAndEmail(verifEmail, verifPassword) {
+        const result = await client.query('SELECT * FROM "users" WHERE email=$1 AND password=$2', [verifEmail, verifPassword]);
+        console.log('result:', result);
+        return result.rows[0];
+    }
+
     static async findOne(id) {
         const result = await client.query('SELECT * FROM "users" WHERE id=$1', [id]);
         return result.rows[0];
