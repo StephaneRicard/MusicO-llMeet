@@ -22,14 +22,14 @@ CREATE FUNCTION insert_ad(json) RETURNS event AS $$
 
 $$ LANGUAGE sql STRICT;
 
-CREATE FUNCTION insert_musicos_myad(json) RETURNS event AS $$
+CREATE FUNCTION insert_musicos_myad(json) RETURNS candidate_per_event AS $$
 
     INSERT INTO "candidate_per_event"
     ("event_id", "users_id", "candidate_status_id")
     VALUES (
-    $1->>'event_id',
-    $1->>'users_id',
-    ($1->>'candidate_status_id')::int,
+    ($1->>'event_id')::int,
+    ($1->>'users_id')::int,
+    ($1->>'candidate_status_id')::int
     )
     RETURNING *
 

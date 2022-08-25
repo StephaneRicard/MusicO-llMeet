@@ -13,14 +13,14 @@ module.exports = class myevents {
         return result.rows[0];
     }
 
-    // TODO: revoir l'update des events pour les candidatures
-    static async update(id, event) {
-        const savedEvent = await client.query('SELECT * FROM update_event($1,$2)', [id, event]);
-        return savedEvent.rows[0];
-    }
-
     static async delete(myUserId, myEventId) {
         const result = await client.query('DELETE FROM "event" WHERE "is_published" = true AND "owner_id" = $1 AND "id" = $2', [myUserId, myEventId]);
         return result.rowCount;
+    }
+
+    // creer un event
+    static async update(myEventId, reqBody) {
+        const updateMyEvent = await client.query('SELECT * FROM update_event($1,$2) WHERE "is_published" = true AND "id" = $1', [myEventId, reqBody]);
+        return updateMyEvent.rows[0];
     }
 };

@@ -53,4 +53,25 @@ module.exports = {
         await myeventsDatamapper.delete(myUserId, myEventId);
         return res.status(204).json('delete ok');
     },
+
+    async update(req, res) {
+        const myUserId = req.user.id;
+        if (!myUserId) {
+            throw new ApiError('Error on User id -> "myUserId"', myUserId, { statusCode: 404 });
+        }
+
+        const myEventId = req.params.id;
+        if (!myEventId) {
+            throw new ApiError('Can not find anything for this id', myEventId, { statusCode: 404 });
+        }
+        const myEvent = await myeventsDatamapper.findOne(myUserId, myEventId);
+        if (!myEvent) {
+            throw new ApiError('Event does not exists', { statusCode: 404 });
+        }
+        const updateEvent = await myeventsDatamapper.update(myEventId, req.body);
+        if (!updateEvent) {
+            throw new ApiError('Error updating the database -> const updateEvent not correct', { statusCode: 404 });
+        }
+        return res.json(updateEvent);
+    },
 };
