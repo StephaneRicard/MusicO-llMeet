@@ -58,4 +58,23 @@ module.exports = {
         const savedAd = await myAdsDatamapper.update(adId, req.body);
         return res.json(savedAd);
     },
+
+    // consulter details d'une candidature
+    async getApplicationDetails(req, res) {
+        const candidateId = req.params.userId;
+        if (!candidateId) {
+            throw new ApiError('This candidate does not not exists or Id does not belong to a musicos', { statusCode: 404 });
+        }
+        console.log('candidateId :', candidateId);
+        const detailsCandidate = await myAdsDatamapper.findOneApplication(candidateId);
+        if (!detailsCandidate) {
+            throw new ApiError('profile could not be found', { statusCode: 404 });
+        }
+
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
+        // event.group_name = [...new Set(event.group_name)];
+
+        return res.json(detailsCandidate);
+    },
 };
