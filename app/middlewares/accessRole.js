@@ -1,4 +1,5 @@
 const debug = require('debug')('app: test');
+const ApiError = require('../errors/apiError');
 
 module.exports = {
 
@@ -9,7 +10,7 @@ module.exports = {
         debug(role);
 
         if (role !== 'momer') {
-            throw new Error('Not Authorized, you are not a momer');
+            throw new ApiError('You are not a momer', { statusCode: 404 });
         }
 
         next();
@@ -22,7 +23,7 @@ module.exports = {
         debug(role);
 
         if (role !== 'musicos') {
-            throw new Error('Not Authorized, you are not a musicos');
+            throw new ApiError('You are not a musicos', { statusCode: 404 });
         }
 
         // on passe la suite au controller

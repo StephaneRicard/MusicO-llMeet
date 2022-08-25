@@ -2,7 +2,7 @@ const client = require('../client/pg');
 
 module.exports = class MyAds {
     static async findAll(id) {
-        const result = await client.query('SELECT * FROM event_with_candidate WHERE owner_id = $1 AND is_published = false', [id]);
+        const result = await client.query('SELECT * FROM event_with_candidate WHERE "owner_id" = $1 AND is_published = false', [id]);
         return result.rows;
     }
 
