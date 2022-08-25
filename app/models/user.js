@@ -6,12 +6,6 @@ module.exports = class User {
         return result.rows[0];
     }
 
-    static async findOneByPassworAndEmail(verifEmail, verifPassword) {
-        const result = await client.query('SELECT * FROM "users" WHERE email=$1 AND password=$2', [verifEmail, verifPassword]);
-        console.log('result:', result);
-        return result.rows[0];
-    }
-
     static async findOne(id) {
         const result = await client.query('SELECT * FROM "users" WHERE id=$1', [id]);
         return result.rows[0];
@@ -41,7 +35,7 @@ module.exports = class User {
     // création méthode pour mettre a jour la table users d'un musicos
     // (on utilise la fonction sql update_musicos)
     static async updateUsers(id, user) {
-        const savedMusicos = await client.query('SELECT * FROM update_musicos($1,$2)', [id, user]);
+        const savedMusicos = await client.query('SELECT * FROM update_users($1,$2)', [id, user]);
         return savedMusicos.rows[0];
     }
 

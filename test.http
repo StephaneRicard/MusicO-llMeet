@@ -88,7 +88,7 @@ content-type: application/json
 
 {
     "email": "momer1@mail.fr",
-    "password": "1111"
+    "password": "111"
 }
 
 ###connexion d'un musicos
@@ -96,8 +96,8 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "test@mai.fr",
-    "password": "11"
+    "email": "musicos1@mail.fr",
+    "password": "111"
 }
 
 #### MES ANNONCES #####

@@ -3,6 +3,7 @@ const { generateAccessToken } = require('../helpers/generateToken');
 const { ApiError } = require('../helpers/errorHandler');
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
+const debug = require('debug')('app:updateusers');
 
 const { userDatamapper } = require('../models');
 
@@ -138,11 +139,8 @@ module.exports = {
         if (!user) {
             throw new ApiError('user does not exists', { statusCode: 404 });
         }
-
-        await userDatamapper.update(userId, req.body);
-        // si les musical type sont modifiés on supprime les acniens musical types
-        // type qui était présent dans la table de liaison
         if (role === 'musicos') {
+            debug(role);
             await userDatamapper.deleteMusicalType(userId);
 
             // on rajoute les nouveaux dans la table de liaison
@@ -153,6 +151,10 @@ module.exports = {
             );
         }
 
-        res.json(user);
+        const savedUser = await userDatamapper.updateUsers(userId, req.body);
+        // si les musical type sont modifiés on supprime les acniens musical types
+        // type qui était présent dans la table de liaison
+
+        res.json(savedUser);
     },
 };
