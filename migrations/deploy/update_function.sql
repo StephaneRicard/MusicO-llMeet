@@ -71,8 +71,7 @@ UPDATE event SET
     event_date = COALESCE(($2->>'event_date')::timestamptz, event_date),
     external_link = COALESCE($2->>'external_link', external_link),
     event_type = COALESCE($2->>'event_type', event_type),
-    type_of_music_needed = COALESCE($2->>'type_of_music_needed', type_of_music_needed),
-    is_published = COALESCE(($2->>'is_published')::boolean, is_published)
+    type_of_music_needed = COALESCE($2->>'type_of_music_needed', type_of_music_needed)
 WHERE id = $1
 RETURNING *
 
