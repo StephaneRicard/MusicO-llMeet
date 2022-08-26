@@ -12,6 +12,7 @@ module.exports = {
         return res.json(myads);
     },
 
+    // récupérer une de mes annonce
     async getOne(req, res) {
         const userId = req.user.id;
         const adId = req.params.id;
@@ -25,6 +26,7 @@ module.exports = {
         return res.json(myad);
     },
 
+    // supprimer une des mes annonces
     async delete(req, res) {
         const userId = req.user.id;
         const adId = req.params.id;
@@ -39,6 +41,7 @@ module.exports = {
         return res.json('delete ok');
     },
 
+    // mettre a jour une de mes annnonces
     async update(req, res) {
         const userId = req.user.id;
         const adId = req.params.id;
@@ -53,12 +56,13 @@ module.exports = {
         return res.json(savedAd);
     },
 
-    // consulter details d'une candidature
+    // consulter details d'une candidature lié à une annonce
     async getApplicationDetails(req, res) {
         const candidateId = req.params.userId;
         if (!candidateId) {
             throw new ApiError('This candidate does not not exists or Id does not belong to a musicos', { statusCode: 404 });
         }
+
         console.log('candidateId :', candidateId);
 
         // const eventId = req.params.id;
@@ -76,11 +80,6 @@ module.exports = {
         if (!detailsCandidate) {
             throw new ApiError('profile could not be found', { statusCode: 404 });
         }
-
-        // permet d'éviter les doublons dans les groupes liés à l'annonce
-        // (lorsque qu'ils ont plusieurs genre musicaux)
-        // event.group_name = [...new Set(event.group_name)];
-
         return res.json(detailsCandidate);
     },
 
