@@ -112,7 +112,6 @@ module.exports = {
         const userId = req.user.id;
         const { role } = req.user;
 
-        }
         if (role === 'musicos') {
             const user = await musicosDatamapper.findOne(userId);
             return res.json(user);
