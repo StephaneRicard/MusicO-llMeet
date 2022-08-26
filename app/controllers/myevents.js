@@ -14,6 +14,7 @@ module.exports = {
         myEvents.forEach((event) => {
             // eslint-disable-next-line no-param-reassign
             event.group_name = [...new Set(event.group_name)];
+            
         });
 
         return res.json(myEvents);
