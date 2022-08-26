@@ -11,7 +11,10 @@
 ### Liste des momers
 
 GET {{endpoint}}api/momers
+?county[]=
 Authorization: token 
+
+
 ### Liste pour 1 momer
 
 GET {{endpoint}}api/momers/1
@@ -34,6 +37,7 @@ Authorization: token
 ### LIste des events publiés
 
 GET {{endpoint}}api/
+?county[]=county2 event
 
 ### Liste de 1 event
 
@@ -84,7 +88,8 @@ content-type: application/json
     "city": "Paris",
     "county": "Paris",
     "role": "momer",
-    "password": "111"
+    "password": "111",
+    "password2": "111"
 }
 
 ### Visualiser son profil

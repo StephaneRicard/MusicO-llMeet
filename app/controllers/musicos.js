@@ -19,24 +19,24 @@ module.exports = {
         // MOMERS - filter by county
         if (county) {
             const countyFilter = county.join("','");
-            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'momer'`;
+            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'musicos'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
         // MOMERS - filter by city
         if (city) {
             const cityFilter = city.join("','");
-            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'momer'`;
+            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'musicos'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
         // MOMERS - filter by momer type (restaurant, pub, etc.)
         if (momerType) {
@@ -50,7 +50,7 @@ module.exports = {
             }
 
             const result = await client.query(sqlMomerType);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // getAll

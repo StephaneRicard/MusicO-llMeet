@@ -22,7 +22,7 @@ module.exports = {
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // EVENTS - filter by city
@@ -35,7 +35,7 @@ module.exports = {
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // EVENTS - filter by date
@@ -48,7 +48,7 @@ module.exports = {
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // EVENTS - filter by musical type
@@ -61,7 +61,7 @@ module.exports = {
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // list events getAll

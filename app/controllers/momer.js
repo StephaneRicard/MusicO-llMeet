@@ -22,25 +22,25 @@ module.exports = {
         if (county) {
             const countyFilter = county.join("','");
 
-            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'musicos'`;
+            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'momer'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
         // MUSICOS - filter by city
         if (city) {
             const cityFilter = city.join("','");
 
-            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'musicos'`;
+            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'momer'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // getAll
