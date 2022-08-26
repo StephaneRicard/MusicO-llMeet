@@ -7,10 +7,8 @@ const client = require('../client/pg');
 module.exports = {
 
     // list momers getAll
-    // eslint-disable-next-line consistent-return
     async getAll(req, res) {
         const { county, city } = req.query;
-        // eslint-disable-next-line quotes
         let sqlUsers = `SELECT
         name,
         city,
@@ -19,30 +17,30 @@ module.exports = {
         phone,
         county,
         role
-        FROM users `;
+        FROM users`;
         // MUSICOS - filter by county
         if (county) {
             const countyFilter = county.join("','");
-            // eslint-disable-next-line no-const-assign
-            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'musicos'`;
+
+            sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'momer'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
         // MUSICOS - filter by city
         if (city) {
             const cityFilter = city.join("','");
-            // eslint-disable-next-line no-const-assign
-            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'musicos'`;
+
+            sqlUsers += `WHERE city = '${cityFilter}' AND role = 'momer'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // getAll
@@ -50,6 +48,7 @@ module.exports = {
             const momers = await momerDatamapper.findAll();
             return res.json(momers);
         }
+        return null;
     },
     // récupérer 1 momer
     async getOne(req, res) {

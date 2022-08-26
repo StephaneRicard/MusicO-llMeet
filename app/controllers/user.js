@@ -8,9 +8,7 @@ const {
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
 
-const {
-    userDatamapper,
-} = require('../models');
+const { userDatamapper, musicosDatamapper, momerDatamapper } = require('../models');
 
 module.exports = {
 
@@ -34,7 +32,7 @@ module.exports = {
         if (!isPasswordValid) {
             throw new Error('Wrong password.');
         }
-
+        // on renvoi les données avec le token si tout est ok
         res.json({
             id: user.id,
             name: user.name,
@@ -58,6 +56,7 @@ module.exports = {
             password2,
         } = req.body;
 
+        // vérif de la présence de chaque champs
         if (!name || !email || !city || !county || !role || !password || !password2) {
             res.status(400);
             throw new Error('Please file all fields');
@@ -91,6 +90,7 @@ module.exports = {
             password: hashedPassword,
         });
 
+        // on renvoi les infos avec le token si tout est ok(connexion en direct)
         if (userCreation) {
             res.status(201).json({
                 id: userCreation.id,
@@ -107,18 +107,23 @@ module.exports = {
         }
     },
 
+    // récupérer le profil de la personne connecté
     async getOne(req, res) {
-        const userId = parseInt(req.user.id, 10);
+        const userId = req.user.id;
+        const { role } = req.user;
 
-        const user = await userDatamapper.findOne(userId);
-
-        if (!user) {
-            throw new ApiError('user does not exists', {
-                statusCode: 404,
-            });
+        }
+        if (role === 'musicos') {
+            const user = await musicosDatamapper.findOne(userId);
+            return res.json(user);
         }
 
-        return res.json(user);
+        if (role === 'momer') {
+            const user = await momerDatamapper.findOne(userId);
+            return res.json(user);
+        }
+
+        return null;
     },
 
     // deconnexion
@@ -139,6 +144,7 @@ module.exports = {
         });
     },
 
+    // supprimer son profil
     async delete(req, res) {
         const userId = req.user.id;
         const user = await userDatamapper.findOne(userId);
@@ -152,6 +158,7 @@ module.exports = {
         return res.status(204).json(`delete ${result} ok`);
     },
 
+    // mettre à jour son profil
     async update(req, res) {
         const userId = req.user.id;
         const {
@@ -163,10 +170,7 @@ module.exports = {
                 statusCode: 404,
             });
         }
-
-        await userDatamapper.update(userId, req.body);
-        // si les musical type sont modifiés on supprime les acniens musical types
-        // type qui était présent dans la table de liaison
+        // si c'est un musicos il faut modifier les genres musicaux de la table de liaison
         if (role === 'musicos') {
             await userDatamapper.deleteMusicalType(userId);
 
@@ -178,6 +182,11 @@ module.exports = {
             );
         }
 
-        res.json(user);
+        const savedUser = await userDatamapper.updateUsers(userId, req.body);
+        const savedMusicalType = await userDatamapper.findMusicalType(userId);
+        // si les musical type sont modifiés on supprime les acniens musical types
+        // type qui était présent dans la table de liaison
+
+        res.json({ savedUser, savedMusicalType });
     },
 };

@@ -19,4 +19,8 @@ router
     .route('/:id/details/:userId')
     .get(controllerHandler(controller.getApplicationDetails));
 
+router
+    .route('/:id/details/:userId/response')
+    .patch(controllerHandler(controller.updateCandidateStatus));
+
 module.exports = router;

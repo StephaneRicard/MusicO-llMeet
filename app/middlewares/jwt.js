@@ -1,6 +1,6 @@
+// vérification du token pour les routes ou le user doit être connecté
 /* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
-const debug = require('debug')('app:jwt');
 
 module.exports = {
     authenticateToken(req, res, next) {
@@ -16,7 +16,6 @@ module.exports = {
                 return res.status(401).json(err);
             }
             req.user = user;
-            debug(user);
             next();
         });
     },
