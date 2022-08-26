@@ -1,6 +1,10 @@
 const bcrypt = require('bcryptjs');
-const { generateAccessToken } = require('../helpers/generateToken');
-const { ApiError } = require('../helpers/errorHandler');
+const {
+    generateAccessToken,
+} = require('../helpers/generateToken');
+const {
+    ApiError,
+} = require('../helpers/errorHandler');
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
 
@@ -108,8 +112,6 @@ module.exports = {
         const userId = req.user.id;
         const { role } = req.user;
 
-        if (!userId) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
         }
         if (role === 'musicos') {
             const user = await musicosDatamapper.findOne(userId);
@@ -127,9 +129,15 @@ module.exports = {
     // deconnexion
     logout: (req, res) => {
         const user = req.user.id;
-        jwt.sign({ user }, '', { expiresIn: 1 }, (logout, err) => {
+        jwt.sign({
+            user,
+        }, '', {
+            expiresIn: 1,
+        }, (logout, err) => {
             if (logout) {
-                res.json({ msg: 'Vous avez été déconnecté' });
+                res.json({
+                    msg: 'Vous avez été déconnecté',
+                });
             } else {
                 res.json(err);
             }
@@ -141,7 +149,9 @@ module.exports = {
         const userId = req.user.id;
         const user = await userDatamapper.findOne(userId);
         if (!user) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
+            throw new ApiError('user does not exists', {
+                statusCode: 404,
+            });
         }
 
         const result = await userDatamapper.delete(userId);
@@ -151,10 +161,14 @@ module.exports = {
     // mettre à jour son profil
     async update(req, res) {
         const userId = req.user.id;
-        const { role } = req.user;
+        const {
+            role,
+        } = req.user;
         const user = await userDatamapper.findOne(userId);
         if (!user) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
+            throw new ApiError('user does not exists', {
+                statusCode: 404,
+            });
         }
         // si c'est un musicos il faut modifier les genres musicaux de la table de liaison
         if (role === 'musicos') {

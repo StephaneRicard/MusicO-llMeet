@@ -42,6 +42,7 @@ VALUES
 ('name1 momer','image1 momer','city1 momer','momer1@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone1 momer','adresse1 momer','county1 momer','momer','description1 momer','lien externe1 momer', 'nom momer1', 3),
 ('name2 momer','image2 momer','city2 momer','momer2@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','phone2 momer','adresse2 momer','county2 momer','momer','description2 momer','lien externe2 momer', 'nom momer2', 3);
 
+
 --Insertition musicos
 INSERT INTO "users" ("name", "picture_url","city","email","password","phone","address","county","role","description","musicians_number","group_leader","external_url")
 VALUES
