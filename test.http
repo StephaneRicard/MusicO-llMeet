@@ -127,7 +127,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "momer1@mail.fr",
+    "email": "momer2@mail.fr",
     "password": "111"
 }
 
@@ -150,7 +150,6 @@ Authorization: token
 ### Visualiser une des mes annonces
 GET {{endpoint}}api/myads/1
 Authorization: token 
-
 
 ### Supprimer une annonce
 DELETE {{endpoint}}api/myads/5
