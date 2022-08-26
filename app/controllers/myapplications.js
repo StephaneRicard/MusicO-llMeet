@@ -11,7 +11,7 @@ module.exports = {
 
         return res.json(myApplications);
     },
-    // récupérer 1 annonce
+    // récupérer 1 candidature
     async getOne(req, res) {
         const myUserId = req.user.id;
         const myApplicationId = req.params.id;
@@ -23,7 +23,7 @@ module.exports = {
         }
         return res.json(myApplication);
     },
-    // supprimer 1 annonce
+    // supprimer 1 candidature
     async delete(req, res) {
         const myUserId = req.user.id;
         const myApplicationId = req.params.id;

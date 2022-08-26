@@ -13,6 +13,7 @@ module.exports = class myevents {
         return result.rows[0];
     }
 
+    // supprimer un event
     static async delete(myUserId, myEventId) {
         const result = await client.query('DELETE FROM "event" WHERE "is_published" = true AND "owner_id" = $1 AND "id" = $2', [myUserId, myEventId]);
         return result.rowCount;

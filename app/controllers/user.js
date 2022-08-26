@@ -28,7 +28,7 @@ module.exports = {
         if (!isPasswordValid) {
             throw new Error('Wrong password.');
         }
-
+        // on renvoi les données avec le token si tout est ok
         res.json({
             id: user.id,
             name: user.name,
@@ -51,6 +51,7 @@ module.exports = {
             password,
         } = req.body;
 
+        // vérif de la présence de chaque champs
         if (!name || !email || !city || !county || !role || !password) {
             res.status(400);
             throw new Error('Please add all fields');
@@ -80,6 +81,7 @@ module.exports = {
             password: hashedPassword,
         });
 
+        // on renvoi les infos avec le token si tout est ok(connexion en direct)
         if (userCreation) {
             res.status(201).json({
                 id: userCreation.id,
@@ -96,6 +98,7 @@ module.exports = {
         }
     },
 
+    // récupérer le profil de la personne connecté
     async getOne(req, res) {
         const userId = parseInt(req.user.id, 10);
 
@@ -120,6 +123,7 @@ module.exports = {
         });
     },
 
+    // supprimer son profil
     async delete(req, res) {
         const userId = req.user.id;
         const user = await userDatamapper.findOne(userId);
@@ -131,6 +135,7 @@ module.exports = {
         return res.status(204).json(`delete ${result} ok`);
     },
 
+    // mettre à jour son profil
     async update(req, res) {
         const userId = req.user.id;
         const { role } = req.user;
@@ -138,7 +143,7 @@ module.exports = {
         if (!user) {
             throw new ApiError('user does not exists', { statusCode: 404 });
         }
-        console.log(req.body);
+        // si c'est un musicos il faut modifier les genres musicaux de la table de liaison
         if (role === 'musicos') {
             await userDatamapper.deleteMusicalType(userId);
 

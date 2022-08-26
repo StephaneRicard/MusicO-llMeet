@@ -2,7 +2,7 @@ const express = require('express');
 
 const { adController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
-const {accessMusicos, accessMomer} = require('../middlewares/accessRole')
+const { accessMusicos, accessMomer } = require('../middlewares/accessRole');
 
 const router = express.Router();
 
