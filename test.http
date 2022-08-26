@@ -28,8 +28,8 @@ GET {{endpoint}}api/musicos
 Authorization: token 
 
 ### liste pour 1 musicos
-GET {{endpoint}}api/musicos/6
-Authorization: token 
+GET {{endpoint}}api/musicos/3
+Authorization: token
 
 ###################################################################################
 #### EVENT PUBLIE ####
@@ -37,7 +37,6 @@ Authorization: token
 ### LIste des events publiés
 
 GET {{endpoint}}api/
-?county[]=county2 event
 
 ### Liste de 1 event
 
@@ -84,10 +83,10 @@ content-type: application/json
 
 {
     "name": "test momer",
-    "email": "test@mail.fr",
+    "email": "te@mail.fr",
     "city": "Paris",
     "county": "Paris",
-    "role": "momer",
+    "role": "musicos",
     "password": "111",
     "password2": "111"
 }
@@ -128,7 +127,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "momer2@mail.fr",
+    "email": "momer1@mail.fr",
     "password": "111"
 }
 
@@ -164,11 +163,11 @@ Authorization: token
 content-type: application/json
 
 {
-    "name": "test",
+    "name": "test1",
     "description":"test",
     "picture_url":"test",
     "address": "test",
-    "is_published": true,
+    "is_published": false,
     "is_archived": false,
     "county": "test",
     "event_date": "2022-08-25 14:34:45.13344+02",
@@ -222,7 +221,7 @@ Authorization: token
 
 ### Visualiser une des mes candidature
 GET {{endpoint}}api/myapplications/1
-Authorization: token 
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6Im5hbWUxIG11c2ljb3MiLCJwaWN0dXJlX3VybCI6ImltYWdlMSBtdXNpY29zIiwiY2l0eSI6ImNpdHkxIG11c2ljb3MiLCJlbWFpbCI6Im11c2ljb3MxQG1haWwuZnIiLCJwYXNzd29yZCI6IiQyYSQxMiRzM0Rtb1h5VDN3aG5zYTBkSUZrdUF1ZHkxck4vQzkxU3lVLmYzU1lkMkZYangxdlFxc0RQNiIsInBob25lIjoicGhvbmUgMSBtdXNpY29zIiwiYWRkcmVzcyI6ImFkcmVzc2UxIG11c2ljb3MiLCJjb3VudHkiOiJjb3VudHkxIG11c2ljb3MiLCJyb2xlIjoibXVzaWNvcyIsImRlc2NyaXB0aW9uIjoiZGVzY3JpcHRpb24xIG11c2ljb3MiLCJtdXNpY2lhbnNfbnVtYmVyIjozLCJncm91cF9sZWFkZXIiOiJsZWFkZXIxIG11c2ljb3MiLCJleHRlcm5hbF91cmwiOiJtdXNpY29zMSBsaWVuIGV4dGVybmUiLCJtb21lcl90b19jb250YWN0IjpudWxsLCJtb21lcl90eXBlX2lkIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMi0wOC0yNlQxMjoyMjoxMy43NzVaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjYxNTE3MjEyLCJleHAiOjE2NjE1MzUyMTJ9.qppIK00AuS2YpSwcdb8721EUwX5ziBQXlfmcpIYTHXY
 
 ### Supprimer une candidature
 DELETE {{endpoint}}api/myapplications/5
