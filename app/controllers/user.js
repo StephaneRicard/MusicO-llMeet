@@ -49,12 +49,18 @@ module.exports = {
             county,
             role,
             password,
+            password2,
         } = req.body;
 
         // vérif de la présence de chaque champs
-        if (!name || !email || !city || !county || !role || !password) {
+        if (!name || !email || !city || !county || !role || !password || !password2) {
+
             res.status(400);
-            throw new Error('Please add all fields');
+            throw new Error('Please file all fields');
+        }
+        if (password !== password2) {
+            res.status(400);
+            throw new Error('Passwords not the same');
         }
 
         // Check if user exists
