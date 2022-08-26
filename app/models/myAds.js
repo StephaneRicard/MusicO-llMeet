@@ -28,8 +28,15 @@ module.exports = class MyAds {
     }
 
     static async findOneApplication(candidateId) {
+        // eslint-disable-next-line max-len
         // const result = await client.query('SELECT * FROM candidate_per_event WHERE "users_id" = $1 AND "event_id" = $2', [candidateId, eventId]);
         const result = await client.query('SELECT * FROM users WHERE "id" = $1 AND role = musicos', [candidateId]);
+        return result.rows[0];
+    }
+
+    // update le status d'un candidat (accepté, refusé)
+    static async updateCandidateStatus(eventId, candidateId, reqBody) {
+        const result = await client.query('SELECT * FROM candidate_per_event($1, $2) WHERE event_id=$1 AND users_id=$2 AND candidate_status_id=$3', [eventId, candidateId, reqBody]);
         return result.rows[0];
     }
 };

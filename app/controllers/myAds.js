@@ -83,4 +83,30 @@ module.exports = {
 
         return res.json(detailsCandidate);
     },
+
+    // accepter ou refuser un candidat
+    async updateCandidateStatus(req, res) {
+        const eventId = req.params.id;
+        const findEventId = await myAdsDatamapper.findOne(eventId);
+        if (!findEventId) {
+            throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
+        }
+
+        const candidateId = req.params.userId;
+        const findUsertId = await myAdsDatamapper.findOne(candidateId);
+        if (!findUsertId) {
+            throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
+        }
+
+        // eslint-disable-next-line prefer-destructuring
+        const response = req.params.response;
+        const findResponseForCandidate = await myAdsDatamapper.findOne(response);
+        if (!findResponseForCandidate) {
+            throw new ApiError('response for candidate does not exist or can not be found', { statusCode: 404 });
+        }
+
+        // eslint-disable-next-line max-len
+        const updateCandidateStatus = await myAdsDatamapper.update(eventId, candidateId, response);
+        return res.json(updateCandidateStatus);
+    },
 };
