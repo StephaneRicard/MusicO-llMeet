@@ -10,7 +10,7 @@ module.exports = {
             county, city, date, typeOfMusic,
         } = req.query;
 
-        let sqlUsers = 'SELECT * FROM event ';
+        let sqlUsers = 'SELECT * FROM event_with_candidate ';
 
         // EVENTS - filter by county
         if (county) {
