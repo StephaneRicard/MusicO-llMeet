@@ -3,13 +3,13 @@ const client = require('../client/pg');
 module.exports = class myevents {
     // retrouver tous les events
     static async findAll(myId) {
-        const result = await client.query('SELECT * FROM event WHERE "is_published" = true AND "owner_id" = $1', [myId]);
+        const result = await client.query('SELECT * FROM event_with_candidate WHERE "is_published" = true AND "owner_id" = $1', [myId]);
         return result.rows;
     }
 
     // retrouver un event
     static async findOne(myUserId, myEventId) {
-        const result = await client.query('SELECT * FROM event WHERE "is_published" = true AND "owner_id" = $1 AND "id" = $2', [myUserId, myEventId]);
+        const result = await client.query('SELECT * FROM event_with_candidate WHERE "is_published" = true AND "owner_id" = $1 AND "id" = $2', [myUserId, myEventId]);
         return result.rows[0];
     }
 

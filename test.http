@@ -11,7 +11,6 @@
 ### Liste des momers
 
 GET {{endpoint}}api/momers
-?county[]=
 Authorization: token 
 
 
@@ -25,10 +24,10 @@ Authorization: token
 
 ### liste des musicos
 GET {{endpoint}}api/musicos
-Authorization: token 
+Authorization: token
 
 ### liste pour 1 musicos
-GET {{endpoint}}api/musicos/6
+GET {{endpoint}}api/musicos/3
 Authorization: token 
 
 ###################################################################################
@@ -94,7 +93,7 @@ content-type: application/json
 
 ### Visualiser son profil
 GET {{endpoint}}api/profile
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6Im5hbWUxIG11c2ljb3MiLCJwaWN0dXJlX3VybCI6ImltYWdlMSBtdXNpY29zIiwiY2l0eSI6ImNpdHkxIG11c2ljb3MiLCJlbWFpbCI6Im11c2ljb3MxQG1haWwuZnIiLCJwYXNzd29yZCI6IiQyYSQxMiRzM0Rtb1h5VDN3aG5zYTBkSUZrdUF1ZHkxck4vQzkxU3lVLmYzU1lkMkZYangxdlFxc0RQNiIsInBob25lIjoicGhvbmUgMSBtdXNpY29zIiwiYWRkcmVzcyI6ImFkcmVzc2UxIG11c2ljb3MiLCJjb3VudHkiOiJjb3VudHkxIG11c2ljb3MiLCJyb2xlIjoibXVzaWNvcyIsImRlc2NyaXB0aW9uIjoiZGVzY3JpcHRpb24xIG11c2ljb3MiLCJtdXNpY2lhbnNfbnVtYmVyIjozLCJncm91cF9sZWFkZXIiOiJsZWFkZXIxIG11c2ljb3MiLCJleHRlcm5hbF91cmwiOiJtdXNpY29zMSBsaWVuIGV4dGVybmUiLCJtb21lcl90b19jb250YWN0IjpudWxsLCJtb21lcl90eXBlX2lkIjpudWxsLCJjcmVhdGVkX2F0IjoiMjAyMi0wOC0yNlQwOTo0Mzo0NC4wODhaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjYxNTA3MDM2LCJleHAiOjE2NjE1MjUwMzZ9._sCLE0SHENJY7QmuFaNsBuho7Uwq7v6-QYnyeSj2jGA
+Authorization: token 
 
 ### Modifier son profil
 PATCH {{ endpoint }}api/profile
@@ -128,7 +127,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "momer2@mail.fr",
+    "email": "momer1@mail.fr",
     "password": "111"
 }
 
@@ -185,17 +184,17 @@ GET {{endpoint}}api/myevents
 Authorization: token 
 
 ### Visualiser une des mes event
-GET {{endpoint}}api/myevents/1
+GET {{endpoint}}api/myevents/2
 Authorization: token 
 
 
 ### Supprimer un event
-DELETE {{endpoint}}api/myevents/5
+DELETE {{endpoint}}api/myevents/2
 Authorization: token 
 
 ### Modification d'un event
 
-PATCH {{endpoint}}api/myevents/3
+PATCH {{endpoint}}api/myevents/4
 Authorization: token 
 content-type: application/json
 

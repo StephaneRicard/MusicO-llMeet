@@ -9,6 +9,13 @@ module.exports = {
 
         const myEvents = await myeventsDatamapper.findAll(myId);
 
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
+        myEvents.forEach((event) => {
+            // eslint-disable-next-line no-param-reassign
+            event.group_name = [...new Set(event.group_name)];
+        });
+
         return res.json(myEvents);
     },
 
@@ -22,6 +29,8 @@ module.exports = {
         if (!myEvent) {
             throw new ApiError('Can not find anything for this id', myEventId, { statusCode: 404 });
         }
+
+        myEvent.group_name = [...new Set(myEvent.group_name)];
 
         return res.json(myEvent);
     },

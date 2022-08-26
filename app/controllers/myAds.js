@@ -9,6 +9,13 @@ module.exports = {
 
         const myads = await myAdsDatamapper.findAll(userId);
 
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
+        myads.forEach((ad) => {
+            // eslint-disable-next-line no-param-reassign
+            ad.group_name = [...new Set(ad.group_name)];
+        });
+
         return res.json(myads);
     },
 
@@ -22,6 +29,9 @@ module.exports = {
         if (!myad) {
             throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
+        myad.group_name = [...new Set(myad.group_name)];
 
         return res.json(myad);
     },
@@ -93,6 +103,5 @@ module.exports = {
         // eslint-disable-next-line max-len
         const updateCandidateStatus = await myAdsDatamapper.update(eventId, candidateId, response);
         return res.json(updateCandidateStatus);
-
     },
 };
