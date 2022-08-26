@@ -1,10 +1,20 @@
 const bcrypt = require('bcryptjs');
-const { generateAccessToken } = require('../helpers/generateToken');
-const { ApiError } = require('../helpers/errorHandler');
+const {
+    generateAccessToken
+} = require('../helpers/generateToken');
+const {
+    ApiError
+} = require('../helpers/errorHandler');
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
+const {
+    body,
+    validationResult
+} = require('express-validator');
 
-const { userDatamapper } = require('../models');
+const {
+    userDatamapper
+} = require('../models');
 
 module.exports = {
 
@@ -49,11 +59,16 @@ module.exports = {
             county,
             role,
             password,
+            password2,
         } = req.body;
 
-        if (!name || !email || !city || !county || !role || !password) {
+        if (!name || !email || !city || !county || !role || !password || !password2) {
             res.status(400);
-            throw new Error('Please add all fields');
+            throw new Error('Please file all fields');
+        }
+        if (password !== password2) {
+            res.status(400);
+            throw new Error('Passwords not the same');
         }
 
         // Check if user exists
@@ -102,7 +117,9 @@ module.exports = {
         const user = await userDatamapper.findOne(userId);
 
         if (!user) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
+            throw new ApiError('user does not exists', {
+                statusCode: 404
+            });
         }
 
         return res.json(user);
@@ -111,9 +128,15 @@ module.exports = {
     // deconnexion
     logout: (req, res) => {
         const user = req.user.id;
-        jwt.sign({ user }, '', { expiresIn: 1 }, (logout, err) => {
+        jwt.sign({
+            user
+        }, '', {
+            expiresIn: 1
+        }, (logout, err) => {
             if (logout) {
-                res.json({ msg: 'Vous avez été déconnecté' });
+                res.json({
+                    msg: 'Vous avez été déconnecté'
+                });
             } else {
                 res.json(err);
             }
@@ -124,7 +147,9 @@ module.exports = {
         const userId = req.user.id;
         const user = await userDatamapper.findOne(userId);
         if (!user) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
+            throw new ApiError('user does not exists', {
+                statusCode: 404
+            });
         }
 
         const result = await userDatamapper.delete(userId);
@@ -133,10 +158,14 @@ module.exports = {
 
     async update(req, res) {
         const userId = req.user.id;
-        const { role } = req.user;
+        const {
+            role
+        } = req.user;
         const user = await userDatamapper.findOne(userId);
         if (!user) {
-            throw new ApiError('user does not exists', { statusCode: 404 });
+            throw new ApiError('user does not exists', {
+                statusCode: 404
+            });
         }
 
         await userDatamapper.update(userId, req.body);
