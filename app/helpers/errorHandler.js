@@ -1,3 +1,4 @@
+// centralisatisation de la gestion des erreurs
 const ApiError = require('../errors/apiError');
 
 // eslint-disable-next-line no-unused-vars

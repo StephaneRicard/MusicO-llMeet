@@ -41,6 +41,7 @@ module.exports = {
         return res.json('delete ok');
     },
 
+    // mettre à jour un de mes events
     async update(req, res) {
         const myUserId = req.user.id;
         const myEventId = req.params.id;

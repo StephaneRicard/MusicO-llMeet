@@ -1,3 +1,4 @@
+// vérification du token pour les routes ou le user doit être connecté
 /* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
 

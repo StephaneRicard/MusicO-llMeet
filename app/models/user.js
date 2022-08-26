@@ -1,11 +1,13 @@
 const client = require('../client/pg');
 
 module.exports = class User {
+    // retrouver un user en fonction de son mail
     static async findOneByEmail(email) {
         const result = await client.query('SELECT * FROM "users" WHERE email=$1', [email]);
         return result.rows[0];
     }
 
+    // retrouver un user en fonction de son id
     static async findOne(id) {
         const result = await client.query('SELECT * FROM "users" WHERE id=$1', [id]);
         return result.rows[0];
@@ -39,6 +41,7 @@ module.exports = class User {
         return savedMusicos.rows[0];
     }
 
+    // retrouver les genres musicaux d'un musicos
     static async findMusicalType(userId) {
         const musicalTypes = await client.query('SELECT * FROM musical_type_per_users WHERE users_id =$1', [userId]);
         return musicalTypes.rows;

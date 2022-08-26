@@ -4,20 +4,18 @@ const client = require('../client/pg');
 
 module.exports = {
     // list events getAll
-    // eslint-disable-next-line consistent-return
+
     async getAll(req, res) {
         const {
             county, city, date, typeOfMusic,
         } = req.query;
-        // eslint-disable-next-line quotes
-        let sqlUsers = `SELECT
-        *
-        FROM event `;
+
+        let sqlUsers = 'SELECT * FROM event ';
 
         // EVENTS - filter by county
         if (county) {
             const countyFilter = county.join("','");
-            // eslint-disable-next-line no-const-assign
+
             sqlUsers += ` WHERE county = '${countyFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
@@ -30,7 +28,7 @@ module.exports = {
         // EVENTS - filter by city
         if (city) {
             const cityFilter = city.join("','");
-            // eslint-disable-next-line no-const-assign
+
             sqlUsers += `WHERE city = '${cityFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
@@ -43,7 +41,7 @@ module.exports = {
         // EVENTS - filter by date
         if (date) {
             const dateFilter = date.join("','");
-            // eslint-disable-next-line no-const-assign
+
             sqlUsers += `WHERE event_date = '${dateFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
@@ -56,7 +54,7 @@ module.exports = {
         // EVENTS - filter by musical type
         if (typeOfMusic) {
             const typeFilter = typeOfMusic.join("','");
-            // eslint-disable-next-line no-const-assign
+
             sqlUsers += `WHERE type_of_music_needed = '${typeFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
@@ -69,7 +67,7 @@ module.exports = {
         // list events getAll
         if (!county && !city && !date && !typeOfMusic) {
             const events = await eventDatamapper.findAll();
-            console.log('events error:', events);
+
             // permet d'éviter les doublons dans les groupes liés à l'annonce
             // (lorsque qu'ils ont plusieurs genre musicaux)
             events.forEach((event) => {
@@ -79,6 +77,7 @@ module.exports = {
 
             return res.json(events);
         }
+        return null;
     },
 
     // récupérer 1 event
@@ -109,8 +108,7 @@ module.exports = {
         return res.status(204).json('delete ok');
     },
 
-    // mettre à jour un event(table event uniquement)
-    // TODO: voir comment modifier les candidatures
+    // mettre à jour un event
     async update(req, res) {
         const eventId = req.params.id;
         const event = await eventDatamapper.findOne(eventId);
@@ -122,7 +120,6 @@ module.exports = {
     },
 
     // filters
-    // eslint-disable-next-line consistent-return
     async filters(req, res) {
         const {
             county, city, date, typeOfMusic,
@@ -134,24 +131,21 @@ module.exports = {
         // EVENTS - filter by county
         if (county) {
             const countyFilter = county.join("','");
-            // eslint-disable-next-line no-const-assign
             sqlUsers += ` WHERE county = '${countyFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
         // EVENTS - filter by city
         if (city) {
             const cityFilter = city.join("','");
-            // eslint-disable-next-line no-const-assign
             sqlUsers += `WHERE city = '${cityFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
@@ -159,12 +153,11 @@ module.exports = {
         // EVENTS - filter by date
         if (date) {
             const dateFilter = date.join("','");
-            // eslint-disable-next-line no-const-assign
             sqlUsers += `WHERE event_date = '${dateFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
@@ -172,14 +165,14 @@ module.exports = {
         // EVENTS - filter by musical type
         if (typeOfMusic) {
             const typeFilter = typeOfMusic.join("','");
-            // eslint-disable-next-line no-const-assign
             sqlUsers += `WHERE type_of_music_needed = '${typeFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-            console.log('sql request', sqlUsers);
+
             const result = await client.query(sqlUsers);
             return res.json(result);
         }
+        return null;
     },
 };

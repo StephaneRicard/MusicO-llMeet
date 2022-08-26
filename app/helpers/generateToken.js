@@ -1,3 +1,4 @@
+// géneration du token (utilisé a la connection et l'enregistrement)
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 

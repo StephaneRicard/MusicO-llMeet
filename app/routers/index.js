@@ -43,7 +43,7 @@ router.use('/api/profile', authenticateToken, userRouter);
 // my applications list
 router.use('/api/myapplications', authenticateToken, accessMusicos, myapplicationsRouter);
 // my events list
-router.use('/api/myevents', authenticateToken, accessMomer, myeventsRouter);
+router.use('/api/myevents', authenticateToken, myeventsRouter);
 
 // events list
 router.use('/api', eventRouter);
