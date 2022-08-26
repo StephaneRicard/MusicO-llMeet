@@ -1,19 +1,15 @@
 const bcrypt = require('bcryptjs');
 const {
-    generateAccessToken
+    generateAccessToken,
 } = require('../helpers/generateToken');
 const {
-    ApiError
+    ApiError,
 } = require('../helpers/errorHandler');
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
-const {
-    body,
-    validationResult
-} = require('express-validator');
 
 const {
-    userDatamapper
+    userDatamapper,
 } = require('../models');
 
 module.exports = {
@@ -118,7 +114,7 @@ module.exports = {
 
         if (!user) {
             throw new ApiError('user does not exists', {
-                statusCode: 404
+                statusCode: 404,
             });
         }
 
@@ -129,13 +125,13 @@ module.exports = {
     logout: (req, res) => {
         const user = req.user.id;
         jwt.sign({
-            user
+            user,
         }, '', {
-            expiresIn: 1
+            expiresIn: 1,
         }, (logout, err) => {
             if (logout) {
                 res.json({
-                    msg: 'Vous avez été déconnecté'
+                    msg: 'Vous avez été déconnecté',
                 });
             } else {
                 res.json(err);
@@ -148,7 +144,7 @@ module.exports = {
         const user = await userDatamapper.findOne(userId);
         if (!user) {
             throw new ApiError('user does not exists', {
-                statusCode: 404
+                statusCode: 404,
             });
         }
 
@@ -159,12 +155,12 @@ module.exports = {
     async update(req, res) {
         const userId = req.user.id;
         const {
-            role
+            role,
         } = req.user;
         const user = await userDatamapper.findOne(userId);
         if (!user) {
             throw new ApiError('user does not exists', {
-                statusCode: 404
+                statusCode: 404,
             });
         }
 
