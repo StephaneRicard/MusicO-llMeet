@@ -4,7 +4,7 @@ const { ApiError } = require('../helpers/errorHandler');
 // eslint-disable-next-line import/order
 const jwt = require('jsonwebtoken');
 
-const { userDatamapper } = require('../models');
+const { userDatamapper, musicosDatamapper, momerDatamapper } = require('../models');
 
 module.exports = {
 
@@ -54,7 +54,6 @@ module.exports = {
 
         // vérif de la présence de chaque champs
         if (!name || !email || !city || !county || !role || !password || !password2) {
-
             res.status(400);
             throw new Error('Please file all fields');
         }
@@ -106,15 +105,23 @@ module.exports = {
 
     // récupérer le profil de la personne connecté
     async getOne(req, res) {
-        const userId = parseInt(req.user.id, 10);
+        const userId = req.user.id;
+        const { role } = req.user;
 
-        const user = await userDatamapper.findOne(userId);
-
-        if (!user) {
+        if (!userId) {
             throw new ApiError('user does not exists', { statusCode: 404 });
         }
+        if (role === 'musicos') {
+            const user = await musicosDatamapper.findOne(userId);
+            return res.json(user);
+        }
 
-        return res.json(user);
+        if (role === 'momer') {
+            const user = await momerDatamapper.findOne(userId);
+            return res.json(user);
+        }
+
+        return null;
     },
 
     // deconnexion
