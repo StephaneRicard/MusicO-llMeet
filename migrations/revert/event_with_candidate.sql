@@ -2,6 +2,6 @@
 
 BEGIN;
 
--- XXX Add DDLs here.
+DROP VIEW "event_with_candidate";
 
 COMMIT;

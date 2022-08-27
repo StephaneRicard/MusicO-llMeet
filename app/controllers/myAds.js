@@ -12,10 +12,11 @@ module.exports = {
         // permet d'éviter les doublons dans les groupes liés à l'annonce
         // (lorsque qu'ils ont plusieurs genre musicaux)
         myads.forEach((ad) => {
+            const ids = ad.groups.map((group) => group.id);
+            const filtered = ad.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
             // eslint-disable-next-line no-param-reassign
-            ad.group_name = [...new Set(ad.group_name)];
+            ad.groups = filtered;
         });
-
         return res.json(myads);
     },
 
@@ -31,7 +32,10 @@ module.exports = {
         }
         // permet d'éviter les doublons dans les groupes liés à l'annonce
         // (lorsque qu'ils ont plusieurs genre musicaux)
-        myad.group_name = [...new Set(myad.group_name)];
+        const ids = myad.groups.map((group) => group.id);
+        const filtered = myad.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+        // eslint-disable-next-line no-param-reassign
+        myad.groups = filtered;
 
         return res.json(myad);
     },

@@ -145,11 +145,11 @@ content-type: application/json
 
 ### Visualiser mes annonces
 GET {{endpoint}}api/myads
-Authorization: token 
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Im5hbWUxIG1vbWVyIiwicGljdHVyZV91cmwiOiJpbWFnZTEgbW9tZXIiLCJjaXR5IjoiY2l0eTEgbW9tZXIiLCJlbWFpbCI6Im1vbWVyMUBtYWlsLmZyIiwicGFzc3dvcmQiOiIkMmEkMTIkczNEbW9YeVQzd2huc2EwZElGa3VBdWR5MXJOL0M5MVN5VS5mM1NZZDJGWGp4MXZRcXNEUDYiLCJwaG9uZSI6InBob25lMSBtb21lciIsImFkZHJlc3MiOiJhZHJlc3NlMSBtb21lciIsImNvdW50eSI6ImNvdW50eTEgbW9tZXIiLCJyb2xlIjoibW9tZXIiLCJkZXNjcmlwdGlvbiI6ImRlc2NyaXB0aW9uMSBtb21lciIsIm11c2ljaWFuc19udW1iZXIiOm51bGwsImdyb3VwX2xlYWRlciI6bnVsbCwiZXh0ZXJuYWxfdXJsIjoibGllbiBleHRlcm5lMSBtb21lciIsIm1vbWVyX3RvX2NvbnRhY3QiOiJub20gbW9tZXIxIiwibW9tZXJfdHlwZV9pZCI6MywiY3JlYXRlZF9hdCI6IjIwMjItMDgtMjdUMDc6MzY6MTkuMzcyWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY2MTU4NTgwMywiZXhwIjoxNjYxNjAzODAzfQ.C4sqz4j9o9L1-dWEzePm1egOaOb7wCaJhOBBJ3RQbzE
 
 ### Visualiser une des mes annonces
 GET {{endpoint}}api/myads/1
-Authorization: token 
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Im5hbWUxIG1vbWVyIiwicGljdHVyZV91cmwiOiJpbWFnZTEgbW9tZXIiLCJjaXR5IjoiY2l0eTEgbW9tZXIiLCJlbWFpbCI6Im1vbWVyMUBtYWlsLmZyIiwicGFzc3dvcmQiOiIkMmEkMTIkczNEbW9YeVQzd2huc2EwZElGa3VBdWR5MXJOL0M5MVN5VS5mM1NZZDJGWGp4MXZRcXNEUDYiLCJwaG9uZSI6InBob25lMSBtb21lciIsImFkZHJlc3MiOiJhZHJlc3NlMSBtb21lciIsImNvdW50eSI6ImNvdW50eTEgbW9tZXIiLCJyb2xlIjoibW9tZXIiLCJkZXNjcmlwdGlvbiI6ImRlc2NyaXB0aW9uMSBtb21lciIsIm11c2ljaWFuc19udW1iZXIiOm51bGwsImdyb3VwX2xlYWRlciI6bnVsbCwiZXh0ZXJuYWxfdXJsIjoibGllbiBleHRlcm5lMSBtb21lciIsIm1vbWVyX3RvX2NvbnRhY3QiOiJub20gbW9tZXIxIiwibW9tZXJfdHlwZV9pZCI6MywiY3JlYXRlZF9hdCI6IjIwMjItMDgtMjdUMDc6MzY6MTkuMzcyWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY2MTU4NTgwMywiZXhwIjoxNjYxNjAzODAzfQ.C4sqz4j9o9L1-dWEzePm1egOaOb7wCaJhOBBJ3RQbzE
 
 
 ### Supprimer une annonce
@@ -176,12 +176,19 @@ content-type: application/json
     "type_of_music_needed": "test"
 }
 
+### Visualiser une candidature à une de mes annonces
+GET {{endpoint}}api/myads/3/1
+
+### Modifier le status d'un candidature à une de mes annonces
+
+GET {{endpoint}}api/myads/3/1
+
 ######################################################################################
 #### MES EVENTS ####
 
 ### Visualiser mes events
 GET {{endpoint}}api/myevents
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Im5hbWUxIG1vbWVyIiwicGljdHVyZV91cmwiOiJpbWFnZTEgbW9tZXIiLCJjaXR5IjoiY2l0eTEgbW9tZXIiLCJlbWFpbCI6Im1vbWVyMUBtYWlsLmZyIiwicGFzc3dvcmQiOiIkMmEkMTIkczNEbW9YeVQzd2huc2EwZElGa3VBdWR5MXJOL0M5MVN5VS5mM1NZZDJGWGp4MXZRcXNEUDYiLCJwaG9uZSI6InBob25lMSBtb21lciIsImFkZHJlc3MiOiJhZHJlc3NlMSBtb21lciIsImNvdW50eSI6ImNvdW50eTEgbW9tZXIiLCJyb2xlIjoibW9tZXIiLCJkZXNjcmlwdGlvbiI6ImRlc2NyaXB0aW9uMSBtb21lciIsIm11c2ljaWFuc19udW1iZXIiOm51bGwsImdyb3VwX2xlYWRlciI6bnVsbCwiZXh0ZXJuYWxfdXJsIjoibGllbiBleHRlcm5lMSBtb21lciIsIm1vbWVyX3RvX2NvbnRhY3QiOiJub20gbW9tZXIxIiwibW9tZXJfdHlwZV9pZCI6MywiY3JlYXRlZF9hdCI6IjIwMjItMDgtMjZUMTY6Mzg6NTIuODU3WiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY2MTUzMTk0MiwiZXhwIjoxNjYxNTQ5OTQyfQ._53ElOgMOs18dlxLZHf9r5ZAhJH9nZ6B_JbrJWAgXcw
+Authorization: token 
 
 ### Visualiser une des mes event
 GET {{endpoint}}api/myevents/2

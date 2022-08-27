@@ -17,7 +17,8 @@ router
 
 router
     .route('/:id/details/:userId')
-    .get(controllerHandler(controller.getApplicationDetails));
+    .get(controllerHandler(controller.getApplicationDetails))
+    .patch(controllerHandler(controller.updateApplicationStatus));
 
 router
     .route('/:id/details/:userId/response')
