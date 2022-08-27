@@ -1,4 +1,4 @@
-const { myAdsDatamapper } = require('../models');
+const { myAdsDatamapper, myapplicationsDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = {
@@ -71,41 +71,74 @@ module.exports = {
     },
 
     // consulter details d'une candidature lié à une annonce
+    // async getApplicationDetails(req, res) {
+    //     const candidateId = req.params.userId;
+    //     if (!candidateId) {
+    //         throw new ApiError(
+    // 'This candidate does not not exists or Id does not belong to a musicos',
+    // { statusCode: 404 });
+    //     }
+    //     const detailsCandidate = await myAdsDatamapper.findOneApplication(candidateId);
+    //     if (!detailsCandidate) {
+    //         throw new ApiError('profile could not be found', { statusCode: 404 });
+    //     }
+    //     return res.json(detailsCandidate);
+    // },
+
     async getApplicationDetails(req, res) {
-        const candidateId = req.params.userId;
-        if (!candidateId) {
-            throw new ApiError('This candidate does not not exists or Id does not belong to a musicos', { statusCode: 404 });
+        const userId = req.user.id;
+        const adId = req.params.id;
+        const { applicationId } = req.params;
+        const ad = await myAdsDatamapper.findOne(userId, adId);
+        const application = await myapplicationsDatamapper.findOne(applicationId);
+
+        if (!ad) {
+            throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
-        const detailsCandidate = await myAdsDatamapper.findOneApplication(candidateId);
-        if (!detailsCandidate) {
-            throw new ApiError('profile could not be found', { statusCode: 404 });
+        if (!application) {
+            throw new ApiError('Application does not exists', { statusCode: 404 });
         }
-        return res.json(detailsCandidate);
+
+        const applicationDetail = await myAdsDatamapper.findApplicationDetail(applicationId);
+        return res.json(applicationDetail);
     },
 
-    // accepter ou refuser un candidat
     async updateCandidateStatus(req, res) {
-        const eventId = req.params.id;
-        const findEventId = await myAdsDatamapper.findOne(eventId);
-        if (!findEventId) {
-            throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
+        const { applicationId } = req.params;
+
+        const application = await myapplicationsDatamapper.findOne(applicationId);
+
+        if (!application) {
+            throw new ApiError('Application does not exists', { statusCode: 404 });
         }
 
-        const candidateId = req.params.userId;
-        const findUsertId = await myAdsDatamapper.findOne(candidateId);
-        if (!findUsertId) {
-            throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
-        }
-
-        // eslint-disable-next-line prefer-destructuring
-        const response = req.params.response;
-        const findResponseForCandidate = await myAdsDatamapper.findOne(response);
-        if (!findResponseForCandidate) {
-            throw new ApiError('response for candidate does not exist or can not be found', { statusCode: 404 });
-        }
-
-        // eslint-disable-next-line max-len
-        const updateCandidateStatus = await myAdsDatamapper.update(eventId, candidateId, response);
-        return res.json(updateCandidateStatus);
+        const updateApplication = await myAdsDatamapper.updateApplicationStatus(applicationId, req.body);
+        return res.json(updateApplication);
     },
+
+    // // accepter ou refuser un candidat
+    // async updateCandidateStatus(req, res) {
+    //     const eventId = req.params.id;
+    //     const findEventId = await myAdsDatamapper.findOne(eventId);
+    //     if (!findEventId) {
+    //         throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
+    //     }
+
+    //     const candidateId = req.params.userId;
+    //     const findUsertId = await myAdsDatamapper.findOne(candidateId);
+    //     if (!findUsertId) {
+    //         throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
+    //     }
+
+    //     // eslint-disable-next-line prefer-destructuring
+    //     const response = req.params.response;
+    //     const findResponseForCandidate = await myAdsDatamapper.findOne(response);
+    //     if (!findResponseForCandidate) {
+    //         throw new ApiError('response for candidate does not exist or can not be found', { statusCode: 404 });
+    //     }
+
+    //     // eslint-disable-next-line max-len
+    //     const updateCandidateStatus = await myAdsDatamapper.update(eventId, candidateId, response);
+    //     return res.json(updateCandidateStatus);
+    // },
 };

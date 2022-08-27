@@ -15,13 +15,18 @@ router
     .delete(controllerHandler(controller.delete))
     .patch(controllerHandler(controller.update));
 
-router
-    .route('/:id/details/:userId')
-    .get(controllerHandler(controller.getApplicationDetails))
-    .patch(controllerHandler(controller.updateApplicationStatus));
+// router
+//     .route('/:id/details/:userId')
+//     .get(controllerHandler(controller.getApplicationDetails))
+//     .patch(controllerHandler(controller.updateApplicationStatus));
+
+// router
+//     .route('/:id/details/:userId/response')
+//     .patch(controllerHandler(controller.updateCandidateStatus));
 
 router
-    .route('/:id/details/:userId/response')
+    .route('/:id/:applicationId')
+    .get(controllerHandler(controller.getApplicationDetails))
     .patch(controllerHandler(controller.updateCandidateStatus));
 
 module.exports = router;

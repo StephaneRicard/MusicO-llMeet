@@ -57,4 +57,13 @@ RETURNING *
 
 $$LANGUAGE sql STRICT;
 
+CREATE FUNCTION update_status(int, json) RETURNS candidate_per_event AS $$
+
+UPDATE candidate_per_event SET
+candidate_status_id = COALESCE(($2->>'candidate_status_id')::int, candidate_status_id)
+WHERE id = $1
+RETURNING *
+
+$$LANGUAGE sql STRICT;
+
 COMMIT;
