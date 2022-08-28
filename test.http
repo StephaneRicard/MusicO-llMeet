@@ -104,7 +104,7 @@ content-type: application/json
     "name": "name3",
     "picture_url": "picture_url3",
     "city":"city3",
-    "email":"email3@email3.fr",
+    "email":"email@email3.fr",
     "password":"password3",
     "phone":"0303030303",
     "address":"address3",
@@ -112,7 +112,7 @@ content-type: application/json
     "description":"description3",
     "external_url": "external_url3",
     "momer_to_contact":"momer3",
-    "momer_type_id": 2
+    "momer_type_id": 2,
 }
 
 
@@ -158,7 +158,7 @@ Authorization: token
 ### Modification d'une annonce
 
 PATCH {{endpoint}}api/myads/3
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Im5hbWUxIG1vbWVyIiwicGljdHVyZV91cmwiOiJpbWFnZTEgbW9tZXIiLCJjaXR5IjoiY2l0eTEgbW9tZXIiLCJlbWFpbCI6Im1vbWVyMUBtYWlsLmZyIiwicGFzc3dvcmQiOiIkMmEkMTIkczNEbW9YeVQzd2huc2EwZElGa3VBdWR5MXJOL0M5MVN5VS5mM1NZZDJGWGp4MXZRcXNEUDYiLCJwaG9uZSI6InBob25lMSBtb21lciIsImFkZHJlc3MiOiJhZHJlc3NlMSBtb21lciIsImNvdW50eSI6ImNvdW50eTEgbW9tZXIiLCJyb2xlIjoibW9tZXIiLCJkZXNjcmlwdGlvbiI6ImRlc2NyaXB0aW9uMSBtb21lciIsIm11c2ljaWFuc19udW1iZXIiOm51bGwsImdyb3VwX2xlYWRlciI6bnVsbCwiZXh0ZXJuYWxfdXJsIjoibGllbiBleHRlcm5lMSBtb21lciIsIm1vbWVyX3RvX2NvbnRhY3QiOiJub20gbW9tZXIxIiwibW9tZXJfdHlwZV9pZCI6MywiY3JlYXRlZF9hdCI6IjIwMjItMDgtMjdUMTc6MzY6MjEuMzQwWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY2MTYyMjgwMCwiZXhwIjoxNjYxNjQwODAwfQ.4-A63Pp7RojYMxGPKdpi-pLhe1X5qpbyDj02g6yB_v8 
+Authorization: token 
 content-type: application/json 
 
 {

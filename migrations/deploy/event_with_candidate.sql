@@ -8,10 +8,15 @@ CREATE VIEW "event_with_candidate" AS
 SELECT "event".*, json_agg(json_build_object('id', "users"."id",'groupe_name',"users"."name", 'status', "candidate_status"."name")) as groups, json_agg("musical_type"."name") as musical_type FROM "event"
 FULL JOIN "candidate_per_event" ON "event_id" = "event"."id"
 FULL JOIN "users" ON "users"."id" = "candidate_per_event"."users_id"
-FULL JOIN "candidate_status" ON "candidate_status"."id" = "candidate_status_id"
+FULL JOIN "candidate_status" ON "candidate_status"."id" = "candidate_per_event"."candidate_status_id"
 FULL JOIN "musical_type_per_users" ON "musical_type_per_users"."users_id" = "users"."id"
 FULL JOIN "musical_type" ON "musical_type"."id" = "musical_type_per_users"."musical_type_id"
 
 GROUP BY "event"."id";
+
+CREATE VIEW "event_by_application" as
+SELECT event.*, "candidate_status"."name" FROM "event"
+FULL JOIN "candidate_per_event" ON "candidate_per_event"."event_id" = "event"."id"
+FULL JOIN "candidate_status" ON "candidate_status"."id" = "candidate_per_event"."candidate_status_id"
 
 COMMIT;
