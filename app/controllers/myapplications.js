@@ -17,7 +17,7 @@ module.exports = {
         const myApplicationId = req.params.id;
 
         const myApplication = await myapplicationsDatamapper.findOne(myUserId, myApplicationId);
-        console.log(myApplication);
+
         if (!myApplication) {
             throw new ApiError('Can not find any anything for this id', myApplicationId, { statusCode: 404 });
         }

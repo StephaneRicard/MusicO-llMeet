@@ -5,7 +5,7 @@ BEGIN;
 --view pour récupérer les musicos avec l'ensemble des musical type
 --(les musical type sont mis dans un tableau avec l'aggregation json_agg)
 CREATE VIEW "event_with_candidate" AS
-SELECT "event".*, json_agg(json_build_object('id', "users"."id",'groupe_name',"users"."name", 'status', "candidate_status"."name")) as groups, json_agg("musical_type"."name") as musical_type FROM "event"
+SELECT "event".*, json_agg(json_build_object('id', "users"."id",'group_name',"users"."name", 'status', "candidate_status"."name")) as groups, json_agg("musical_type"."name") as musical_type FROM "event"
 FULL JOIN "candidate_per_event" ON "event_id" = "event"."id"
 FULL JOIN "users" ON "users"."id" = "candidate_per_event"."users_id"
 FULL JOIN "candidate_status" ON "candidate_status"."id" = "candidate_per_event"."candidate_status_id"

@@ -17,7 +17,8 @@ UPDATE users SET
     momer_to_contact = COALESCE($2->>'momer_to_contact', momer_to_contact),
     momer_type_id = COALESCE(($2->>'momer_type_id')::int, momer_type_id),
     musicians_number = COALESCE(($2->>'musicians_number')::int, musicians_number),
-    group_leader = COALESCE($2->>'groupe_leader', group_leader)
+    group_leader = COALESCE($2->>'group_leader', group_leader),
+    external_url = COALESCE($2->>'external_url', external_url)
 
 WHERE id = $1
 RETURNING *

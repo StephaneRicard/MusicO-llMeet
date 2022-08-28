@@ -90,23 +90,22 @@ module.exports = {
         const adId = req.params.id;
         const { applicationId } = req.params;
         const ad = await myAdsDatamapper.findOne(userId, adId);
-        const application = await myapplicationsDatamapper.findOne(applicationId);
-
         if (!ad) {
             throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
+
+        const application = await myAdsDatamapper.findApplicationDetail(applicationId);
+
         if (!application) {
             throw new ApiError('Application does not exists', { statusCode: 404 });
         }
-
-        const applicationDetail = await myAdsDatamapper.findApplicationDetail(applicationId);
-        return res.json(applicationDetail);
+        return res.json(application);
     },
 
     async updateCandidateStatus(req, res) {
         const { applicationId } = req.params;
 
-        const application = await myapplicationsDatamapper.findOne(applicationId);
+        const application = await myAdsDatamapper.findApplicationDetail(applicationId);
 
         if (!application) {
             throw new ApiError('Application does not exists', { statusCode: 404 });

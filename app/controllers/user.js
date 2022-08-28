@@ -114,11 +114,21 @@ module.exports = {
 
         if (role === 'musicos') {
             const user = await musicosDatamapper.findOne(userId);
+            if (!user) {
+                throw new ApiError('user does not exists', {
+                    statusCode: 404,
+                });
+            }
             return res.json(user);
         }
 
         if (role === 'momer') {
             const user = await momerDatamapper.findOne(userId);
+            if (!user) {
+                throw new ApiError('user does not exists', {
+                    statusCode: 404,
+                });
+            }
             return res.json(user);
         }
 

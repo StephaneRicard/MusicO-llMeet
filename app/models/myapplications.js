@@ -25,7 +25,7 @@ module.exports = class myapplications {
 
     static async findOne(userId, applicationId) {
         const result = await client.query('SELECT * FROM event_by_application WHERE users_id = $1 AND application_id = $2', [userId, applicationId]);
-        return result.rows;
+        return result.rows[0];
     }
 
     // delete application to an ad
