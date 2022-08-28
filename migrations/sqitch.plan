@@ -8,3 +8,4 @@ update_function 2022-08-18T13:20:31Z stephane <student@teleporter> # update prof
 insert_functions 2022-08-19T11:14:53Z stephane <student@teleporter> # insert functions
 event_with_candidate 2022-08-19T15:19:24Z stephane <student@teleporter> # get event with candidate
 application_by_musicos 2022-08-27T16:51:26Z stephane <student@teleporter> # view of profile musicos and status linked with the application of the event
+event_by_application 2022-08-28T13:24:44Z stephane <student@teleporter> # display application statut with the event

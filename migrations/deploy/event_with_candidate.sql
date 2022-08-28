@@ -14,9 +14,4 @@ FULL JOIN "musical_type" ON "musical_type"."id" = "musical_type_per_users"."musi
 
 GROUP BY "event"."id";
 
-CREATE VIEW "event_by_application" as
-SELECT event.*, "candidate_status"."name" FROM "event"
-FULL JOIN "candidate_per_event" ON "candidate_per_event"."event_id" = "event"."id"
-FULL JOIN "candidate_status" ON "candidate_status"."id" = "candidate_per_event"."candidate_status_id"
-
 COMMIT;
