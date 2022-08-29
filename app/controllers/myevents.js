@@ -9,6 +9,15 @@ module.exports = {
 
         const myEvents = await myeventsDatamapper.findAll(myId);
 
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
+        myEvents.forEach((event) => {
+            const ids = event.groups.map((group) => group.id);
+            const filtered = event.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+            // eslint-disable-next-line no-param-reassign
+            event.groups = filtered;
+        });
+
         return res.json(myEvents);
     },
 
@@ -22,6 +31,11 @@ module.exports = {
         if (!myEvent) {
             throw new ApiError('Can not find anything for this id', myEventId, { statusCode: 404 });
         }
+
+        const ids = myEvent.groups.map((group) => group.id);
+        const filtered = myEvent.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+        // eslint-disable-next-line no-param-reassign
+        myEvent.groups = filtered;
 
         return res.json(myEvent);
     },

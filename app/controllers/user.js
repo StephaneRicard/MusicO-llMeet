@@ -107,18 +107,28 @@ module.exports = {
         }
     },
 
-    // récupérer le profil de la personne connecté
+    // récupérer le profil de la personne connecté en fonction du role
     async getOne(req, res) {
         const userId = req.user.id;
         const { role } = req.user;
 
         if (role === 'musicos') {
             const user = await musicosDatamapper.findOne(userId);
+            if (!user) {
+                throw new ApiError('user does not exists', {
+                    statusCode: 404,
+                });
+            }
             return res.json(user);
         }
 
         if (role === 'momer') {
             const user = await momerDatamapper.findOne(userId);
+            if (!user) {
+                throw new ApiError('user does not exists', {
+                    statusCode: 404,
+                });
+            }
             return res.json(user);
         }
 

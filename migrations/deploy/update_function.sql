@@ -17,7 +17,8 @@ UPDATE users SET
     momer_to_contact = COALESCE($2->>'momer_to_contact', momer_to_contact),
     momer_type_id = COALESCE(($2->>'momer_type_id')::int, momer_type_id),
     musicians_number = COALESCE(($2->>'musicians_number')::int, musicians_number),
-    group_leader = COALESCE($2->>'groupe_leader', group_leader)
+    group_leader = COALESCE($2->>'group_leader', group_leader),
+    external_url = COALESCE($2->>'external_url', external_url)
 
 WHERE id = $1
 RETURNING *
@@ -52,6 +53,15 @@ UPDATE event SET
     external_link = COALESCE($2->>'external_link', external_link),
     event_type = COALESCE($2->>'event_type', event_type),
     type_of_music_needed = COALESCE($2->>'type_of_music_needed', type_of_music_needed)
+WHERE id = $1
+RETURNING *
+
+$$LANGUAGE sql STRICT;
+
+CREATE FUNCTION update_status(int, json) RETURNS candidate_per_event AS $$
+
+UPDATE candidate_per_event SET
+candidate_status_id = COALESCE(($2->>'candidate_status_id')::int, candidate_status_id)
 WHERE id = $1
 RETURNING *
 
