@@ -14,9 +14,15 @@ module.exports = class Ad {
     }
 
     // inserer une annonce avec la fonction sql insert_ad
-    static async insert(ad) {
+    static async insertEvent(ad) {
         const savedAd = await client.query('SELECT * FROM insert_ad($1)', [ad]);
         return savedAd.rows[0];
+    }
+
+    // inserer une annonce avec la fonction sql insert_ad
+    static async insertApplication(userId, adId) {
+        const applyToAd = await client.query('INSERT INTO candidate_per_event("event_id", "users_id") VALUES ($1, $2) RETURNING *', [adId, userId]);
+        return applyToAd.rows[0];
     }
 
     // supprimer une annonce
