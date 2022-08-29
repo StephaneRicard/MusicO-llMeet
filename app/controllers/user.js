@@ -9,6 +9,7 @@ const {
 const jwt = require('jsonwebtoken');
 
 const { userDatamapper, musicosDatamapper, momerDatamapper } = require('../models');
+const { cloudinary } = require('../helpers/cloudinary');
 
 module.exports = {
 
@@ -173,12 +174,22 @@ module.exports = {
         const {
             role,
         } = req.user;
+        const { image } = req.body;
+        let { picture_url } = req.body;
+
         const user = await userDatamapper.findOne(userId);
         if (!user) {
             throw new ApiError('user does not exists', {
                 statusCode: 404,
             });
         }
+
+        await cloudinary.v2.uploader.upload(image, {
+            upload_preset: 'profile_image',
+        });
+
+        const publicId = image.public_id;
+        picture_url = publicId;
         // si c'est un musicos il faut modifier les genres musicaux de la table de liaison
         if (role === 'musicos') {
             await userDatamapper.deleteMusicalType(userId);

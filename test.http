@@ -36,6 +36,7 @@ Authorization: token
 ### LIste des events publiés
 
 GET {{endpoint}}api/
+Authorization: token 
 
 ### Liste de 1 event
 
