@@ -80,8 +80,24 @@ module.exports = {
     },
 
     // créer un event (appelé annonce)
-    async create(req, res) {
-        const savedAd = await adDatamapper.insert(req.body);
+    async createEvent(req, res) {
+        const savedAd = await adDatamapper.insertEvent(req.body);
         res.json(savedAd);
+    },
+
+    // postuler a une annonce
+    async createApplication(req, res) {
+        // On vérifie si le user existe
+        const userId = req.user.id;
+
+        // On vérifie si l'ad existe
+        const adId = req.params.id;
+        const ad = await adDatamapper.findOne(adId);
+        if (!ad) {
+            throw new ApiError('Ad does not exists or can not be found', { statusCode: 404 });
+        }
+
+        const applyToAd = await adDatamapper.insertApplication(userId, adId);
+        res.json(applyToAd);
     },
 };
