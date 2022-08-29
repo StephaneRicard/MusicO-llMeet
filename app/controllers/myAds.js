@@ -59,9 +59,7 @@ module.exports = {
     async update(req, res) {
         const userId = req.user.id;
         const adId = req.params.id;
-
         const ad = await myAdsDatamapper.findOne(userId, adId);
-
         if (!ad) {
             throw new ApiError('Ad does not exists', { statusCode: 404 });
         }

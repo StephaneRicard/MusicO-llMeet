@@ -36,6 +36,7 @@ Authorization: token
 ### LIste des events publiés
 
 GET {{endpoint}}api/
+
 ### Liste de 1 event
 
 GET {{endpoint}}api/2
@@ -81,10 +82,10 @@ content-type: application/json
 
 {
     "name": "test momer",
-    "email": "test@mail.fr",
+    "email": "te@mail.fr",
     "city": "Paris",
     "county": "Paris",
-    "role": "momer",
+    "role": "musicos",
     "password": "111",
     "password2": "111"
 }
@@ -162,11 +163,11 @@ Authorization: token
 content-type: application/json 
 
 {
-    "name": "test",
+    "name": "test1",
     "description":"test",
     "picture_url":"test",
     "address": "test",
-    "is_published": true,
+    "is_published": false,
     "is_archived": false,
     "county": "test",
     "event_date": "2022-08-25 14:34:45.13344+02",
@@ -233,6 +234,7 @@ GET {{endpoint}}api/myapplications
 Authorization: token 
 
 ### Visualiser une des mes candidature
+
 GET {{endpoint}}api/myapplications/2
 Authorization: token 
 
