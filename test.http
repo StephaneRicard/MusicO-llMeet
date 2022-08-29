@@ -136,7 +136,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "musicos2@mail.fr",
+    "email": "musicos1@mail.fr",
     "password": "111"
 }
 
@@ -177,7 +177,7 @@ content-type: application/json
 
 ### Visualiser une candidature à une de mes annonces
 GET {{endpoint}}api/myads/1/3
-Authorization: token 
+Authorization: token
 
 ### Modifier le statut d'un candidature à une de mes annonces
 
@@ -186,7 +186,7 @@ Authorization: token
 content-type: application/json 
 
 {
-    "candidate_status_id": 2
+    "candidate_status_id": 3
 }
 
 ######################################################################################

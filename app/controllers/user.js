@@ -107,7 +107,7 @@ module.exports = {
         }
     },
 
-    // récupérer le profil de la personne connecté
+    // récupérer le profil de la personne connecté en fonction du role
     async getOne(req, res) {
         const userId = req.user.id;
         const { role } = req.user;

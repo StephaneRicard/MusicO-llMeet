@@ -19,6 +19,7 @@ module.exports = class Ad {
         return savedAd.rows[0];
     }
 
+    // supprimer une annonce
     static async delete(id) {
         const result = await client.query('DELETE FROM "event" WHERE id = $1', [id]);
         return result.rowCount;
