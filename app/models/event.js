@@ -13,11 +13,13 @@ module.exports = class Event {
         return result.rows[0];
     }
 
+    // mettre à jour un event
     static async update(id, event) {
         const savedEvent = await client.query('SELECT * FROM update_event($1,$2)', [id, event]);
         return savedEvent.rows[0];
     }
 
+    // supprimer un event
     static async delete(id) {
         const result = await client.query('DELETE FROM "event" WHERE id = $1', [id]);
         return result.rowCount;

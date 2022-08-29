@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION "update_momer", "update_musicos", "update_musical_type", "update_event";
+DROP FUNCTION "update_users", "update_musical_type", "update_event", "update_status";
 
 COMMIT;
