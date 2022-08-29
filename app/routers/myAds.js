@@ -16,11 +16,8 @@ router
     .patch(controllerHandler(controller.update));
 
 router
-    .route('/:id/details/:userId')
-    .get(controllerHandler(controller.getApplicationDetails));
-
-router
-    .route('/:id/details/:userId/response')
+    .route('/:id/:applicationId')
+    .get(controllerHandler(controller.getApplicationDetails))
     .patch(controllerHandler(controller.updateCandidateStatus));
 
 module.exports = router;

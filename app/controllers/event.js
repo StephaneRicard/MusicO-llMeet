@@ -71,8 +71,10 @@ module.exports = {
             // permet d'éviter les doublons dans les groupes liés à l'annonce
             // (lorsque qu'ils ont plusieurs genre musicaux)
             events.forEach((event) => {
-            // eslint-disable-next-line no-param-reassign
-                event.group_name = [...new Set(event.group_name)];
+                const ids = event.groups.map((group) => group.id);
+                const filtered = event.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+                // eslint-disable-next-line no-param-reassign
+                event.groups = filtered;
             });
 
             return res.json(events);
@@ -91,7 +93,10 @@ module.exports = {
 
         // permet d'éviter les doublons dans les groupes liés à l'annonce
         // (lorsque qu'ils ont plusieurs genre musicaux)
-        event.group_name = [...new Set(event.group_name)];
+        const ids = event.groups.map((group) => group.id);
+        const filtered = event.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+        // eslint-disable-next-line no-param-reassign
+        event.groups = filtered;
 
         return res.json(event);
     },

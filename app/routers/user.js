@@ -10,7 +10,6 @@ router
     .route('/')
     .get(authenticateToken, controllerHandler(controller.getOne))
     .delete(authenticateToken, controllerHandler(controller.delete))
-    // a revoir ne marche pas
     .patch(authenticateToken, controllerHandler(controller.update));
 
 module.exports = router;

@@ -29,6 +29,7 @@ module.exports = class User {
         return result.rows[0];
     }
 
+    // supprimer un user
     static async delete(id) {
         const result = await client.query('DELETE FROM users WHERE id =$1', [id]);
         return result.rowCount;

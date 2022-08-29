@@ -9,6 +9,14 @@ module.exports = {
 
         const myads = await myAdsDatamapper.findAll(userId);
 
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
+        myads.forEach((ad) => {
+            const ids = ad.groups.map((group) => group.id);
+            const filtered = ad.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+            // eslint-disable-next-line no-param-reassign
+            ad.groups = filtered;
+        });
         return res.json(myads);
     },
 
@@ -22,6 +30,12 @@ module.exports = {
         if (!myad) {
             throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
+        // permet d'éviter les doublons dans les groupes liés à l'annonce
+        // (lorsque qu'ils ont plusieurs genre musicaux)
+        const ids = myad.groups.map((group) => group.id);
+        const filtered = myad.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+        // eslint-disable-next-line no-param-reassign
+        myad.groups = filtered;
 
         return res.json(myad);
     },
@@ -56,43 +70,35 @@ module.exports = {
         return res.json(savedAd);
     },
 
-    // consulter details d'une candidature lié à une annonce
+    // visualiser le detail d'un annonce lié à une de mes annonces
     async getApplicationDetails(req, res) {
-        const candidateId = req.params.userId;
-        if (!candidateId) {
-            throw new ApiError('This candidate does not not exists or Id does not belong to a musicos', { statusCode: 404 });
+        const userId = req.user.id;
+        const adId = req.params.id;
+        const { applicationId } = req.params;
+        const ad = await myAdsDatamapper.findOne(userId, adId);
+        if (!ad) {
+            throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
-        const detailsCandidate = await myAdsDatamapper.findOneApplication(candidateId);
-        if (!detailsCandidate) {
-            throw new ApiError('profile could not be found', { statusCode: 404 });
+
+        const application = await myAdsDatamapper.findApplicationDetail(applicationId);
+
+        if (!application) {
+            throw new ApiError('Application does not exists', { statusCode: 404 });
         }
-        return res.json(detailsCandidate);
+        return res.json(application);
     },
 
-    // accepter ou refuser un candidat
+    // mettre à jour un statut lié à une candidature d'une de mes annonces
     async updateCandidateStatus(req, res) {
-        const eventId = req.params.id;
-        const findEventId = await myAdsDatamapper.findOne(eventId);
-        if (!findEventId) {
-            throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
+        const { applicationId } = req.params;
+
+        const application = await myAdsDatamapper.findApplicationDetail(applicationId);
+
+        if (!application) {
+            throw new ApiError('Application does not exists', { statusCode: 404 });
         }
 
-        const candidateId = req.params.userId;
-        const findUsertId = await myAdsDatamapper.findOne(candidateId);
-        if (!findUsertId) {
-            throw new ApiError('userId does not exist or can not be found', { statusCode: 404 });
-        }
-
-        // eslint-disable-next-line prefer-destructuring
-        const response = req.params.response;
-        const findResponseForCandidate = await myAdsDatamapper.findOne(response);
-        if (!findResponseForCandidate) {
-            throw new ApiError('response for candidate does not exist or can not be found', { statusCode: 404 });
-        }
-
-        // eslint-disable-next-line max-len
-        const updateCandidateStatus = await myAdsDatamapper.update(eventId, candidateId, response);
-        return res.json(updateCandidateStatus);
-
+        const updateApplication = await myAdsDatamapper.updateApplicationStatus(applicationId, req.body);
+        return res.json(updateApplication);
     },
 };
