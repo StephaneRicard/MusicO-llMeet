@@ -174,8 +174,6 @@ module.exports = {
         const {
             role,
         } = req.user;
-        const { image } = req.body;
-        let { picture_url } = req.body;
 
         const user = await userDatamapper.findOne(userId);
         if (!user) {
@@ -184,12 +182,6 @@ module.exports = {
             });
         }
 
-        await cloudinary.v2.uploader.upload(image, {
-            upload_preset: 'profile_image',
-        });
-
-        const publicId = image.public_id;
-        picture_url = publicId;
         // si c'est un musicos il faut modifier les genres musicaux de la table de liaison
         if (role === 'musicos') {
             await userDatamapper.deleteMusicalType(userId);
@@ -208,5 +200,16 @@ module.exports = {
         // type qui était présent dans la table de liaison
 
         res.json({ savedUser, savedMusicalType });
+    },
+
+    async uploadImage(req, res) {
+        const fileStr = req.body.data;
+
+        await cloudinary.uploader.upload(image, {
+            upload_preset: 'profile_image',
+        });
+
+        // eslint-disable-next-line no-unused-vars
+        pictureUrl = req.file.secure_url;
     },
 };

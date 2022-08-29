@@ -244,4 +244,16 @@ DELETE {{endpoint}}api/myapplications/2
 Authorization: token 
 
 
+### image
+
+POST {{{endpoint}}}api/upload
+Authorization: token 
+Content-Type: application/json
+
+{
+    "fileStr": "drgrgrdgrdgdhthdtjf"
+}
+
+
+
 
