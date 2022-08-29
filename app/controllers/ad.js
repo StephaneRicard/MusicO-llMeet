@@ -97,6 +97,14 @@ module.exports = {
             throw new ApiError('Ad does not exists or can not be found', { statusCode: 404 });
         }
 
+        // on verifie que le musicos n'a pas deja postulé a cette ad et qu'il est en attente
+        const applicationStatus1 = await adDatamapper.findIfCandidateAlreadyAppliedToThisAd1(adId, userId);
+        // on verifie que le musicos n'a pas deja postulé a cette ad et qu'il a été refusé
+        const applicationStatus2 = await adDatamapper.findIfCandidateAlreadyAppliedToThisAd2(adId, userId);
+        if (applicationStatus1 || applicationStatus2) {
+            throw new ApiError('You already applied to this ad', { statusCode: 406 });
+        }
+
         const applyToAd = await adDatamapper.insertApplication(userId, adId);
         res.json(applyToAd);
     },
