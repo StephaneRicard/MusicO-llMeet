@@ -205,7 +205,7 @@ module.exports = {
     async uploadImage(req, res) {
         const fileStr = req.body.data;
 
-        await cloudinary.uploader.upload(image, {
+        const uploadResponse = await cloudinary.uploader.upload(image, {
             upload_preset: 'profile_image',
         });
 
