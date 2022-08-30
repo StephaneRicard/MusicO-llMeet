@@ -28,7 +28,7 @@ module.exports = class MyAds {
 
     // retrouver le détail d'un candidature à une annonce
     static async findApplicationDetail(id) {
-        const result = await client.query('SELECT * FROM application_by_musicos WHERE application_id=$1', [id]);
+        const result = await client.query('SELECT * FROM application_by_musicos WHERE "application_id"=$1', [id]);
         return result.rows[0];
     }
 

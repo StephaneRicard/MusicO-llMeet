@@ -83,6 +83,7 @@ module.exports = {
         if (!application) {
             throw new ApiError('Application does not exists', { statusCode: 404 });
         }
+        console.log('application :', application);
         return res.json(application);
     },
 
