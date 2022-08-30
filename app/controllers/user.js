@@ -208,8 +208,7 @@ module.exports = {
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: 'profile_image',
         });
-        console.log(uploadResponse.url)
-        const savedUrl = await userDatamapper.updateImage(userId, uploadResponse.url);
+        const savedUrl = await userDatamapper.updateImage(userId, uploadResponse.secure_url);
 
         res.json(savedUrl);
     },
