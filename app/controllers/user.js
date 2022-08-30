@@ -204,12 +204,13 @@ module.exports = {
 
     async uploadImage(req, res) {
         const fileStr = req.body.data;
-
-        const uploadResponse = await cloudinary.uploader.upload(image, {
+        const userId = req.user.id;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: 'profile_image',
         });
+        console.log(uploadResponse.url)
+        const savedUrl = await userDatamapper.updateImage(userId, uploadResponse.url);
 
-        // eslint-disable-next-line no-unused-vars
-        pictureUrl = req.file.secure_url;
+        res.json(savedUrl);
     },
 };

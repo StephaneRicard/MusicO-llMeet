@@ -45,7 +45,7 @@ router.use('/api/myapplications', authenticateToken, accessMusicos, myapplicatio
 // my events list
 router.use('/api/myevents', authenticateToken, myeventsRouter);
 
-router.use('/api/upload', authenticateToken, userController.uploadImage);
+router.patch('/api/upload', authenticateToken, controllerHandler(userController.uploadImage));
 
 // events list
 router.use('/api', eventRouter);
