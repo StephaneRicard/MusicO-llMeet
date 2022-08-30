@@ -36,6 +36,7 @@ Authorization: token
 ### LIste des events publiés
 
 GET {{endpoint}}api/
+Authorization: token 
 
 ### Liste de 1 event
 
@@ -241,6 +242,18 @@ Authorization: token
 ### Supprimer une candidature
 DELETE {{endpoint}}api/myapplications/2
 Authorization: token 
+
+
+### image
+
+POST {{{endpoint}}}api/upload
+Authorization: token 
+Content-Type: application/json
+
+{
+    "fileStr": "drgrgrdgrdgdhthdtjf"
+}
+
 
 
 

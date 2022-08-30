@@ -19,7 +19,7 @@ CREATE TABLE "candidate_status"(
 CREATE TABLE "users" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "name" VARCHAR(100) NOT NULL,
-    "picture_url" TEXT,
+    "picture_url" TEXT DEFAULT 'http://res.cloudinary.com/dxmyypsrl/image/upload/v1661854198/profile_image/jz10qxsnfku14n9iz5qu.svg',
     "city" VARCHAR(50) NOT NULL,
     "email" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,

@@ -61,4 +61,9 @@ module.exports = class User {
         const result = await client.query('DELETE FROM musical_type_per_users WHERE users_id = $1', [userId]);
         return result.rowCount;
     }
+
+    static async updateImage(id, imageUrl) {
+        const result = await client.query('UPDATE "users" SET "picture_url"=$2 WHERE id=$1 RETURNING *', [id, imageUrl]);
+        return result.rows[0];
+    }
 };
