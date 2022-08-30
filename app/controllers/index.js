@@ -7,6 +7,7 @@ const myapplicationsController = require('./myapplications');
 const userController = require('./user');
 const myAdsController = require('./myAds');
 const myeventController = require('./myevents');
+const contactcontroller = require('./contact');
 
 module.exports = {
     momerController,
@@ -17,4 +18,5 @@ module.exports = {
     userController,
     myAdsController,
     myeventController,
+    contactcontroller,
 };

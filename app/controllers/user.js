@@ -208,5 +208,4 @@ module.exports = {
         res.json({ savedUser, savedMusicalType });
     },
 
-
 };

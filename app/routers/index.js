@@ -14,6 +14,7 @@ const userRouter = require('./user');
 const momerRouter = require('./momer');
 const myAdsRouter = require('./myAds');
 const myapplicationsRouter = require('./myapplications');
+const contactController = require('./contact');
 
 // middleware d'autentification du token
 const { authenticateToken } = require('../middlewares/jwt');
@@ -28,6 +29,8 @@ router.post('/api/signup', controllerHandler(userController.registerUser));
 router.post('/api/signin', controllerHandler(userController.loginUser));
 // logout
 router.get('/api/logout', authenticateToken, userController.logout);
+// contact
+router.post('/api/contact', controllerHandler(contactController.contactForm));
 
 // on ajoute l'autentification token sur les routes qui nécessite d'être connecté
 // momers list

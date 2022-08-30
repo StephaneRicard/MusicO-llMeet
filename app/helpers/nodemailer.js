@@ -4,6 +4,7 @@ const {
 } = require('googleapis');
 require('dotenv').config();
 
+// eslint-disable-next-line prefer-destructuring
 const OAuth2 = google.auth.OAuth2;
 
 const OAuth2Client = new OAuth2(
