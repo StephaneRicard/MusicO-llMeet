@@ -9,6 +9,7 @@ const {
 const jwt = require('jsonwebtoken');
 
 const { userDatamapper, musicosDatamapper, momerDatamapper } = require('../models');
+const { transporter } = require('../helpers/nodemailer');
 
 module.exports = {
 
@@ -101,6 +102,14 @@ module.exports = {
                 role: userCreation.role,
                 token: generateAccessToken(userCreation),
             });
+
+            const resultSendMail = await transporter.sendMail({
+                from: 'NodeMailer Oauth2',
+                to: email,
+                subject: 'Your account has been created',
+                text: `Password: ${password}`,
+            });
+            console.log(resultSendMail);
         } else {
             res.status(400);
             throw new Error('Invalid user data');
@@ -198,4 +207,6 @@ module.exports = {
 
         res.json({ savedUser, savedMusicalType });
     },
+
+
 };
