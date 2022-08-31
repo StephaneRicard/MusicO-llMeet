@@ -11,6 +11,7 @@ router
 
 router
     .route('/:id')
-    .get(controllerHandler(controller.getOne));
+    .get(controllerHandler(controller.getOne))
+    .post(controllerHandler(controller.sendEmail));
 
 module.exports = router;

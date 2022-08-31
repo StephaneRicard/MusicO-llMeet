@@ -1,4 +1,5 @@
 const { musicosDatamapper } = require('../models');
+const { transporter } = require('../helpers/nodemailer');
 const { ApiError } = require('../helpers/errorHandler');
 const client = require('../client/pg');
 
@@ -69,5 +70,48 @@ module.exports = {
             throw new ApiError('musicos not found', { statusCode: 404 });
         }
         return res.json(musicos);
+    },
+
+    async sendEmail(req, res) {
+        const userId = req.user.id;
+
+        // On vérifie qu'on a bien récupéré l'id de l'user
+        const user = await musicosDatamapper.findUser(userId);
+        if (!user) {
+            throw new ApiError('User does not exists or can not be found', { statusCode: 404 });
+        }
+
+        // On récupère les info du musicos qui m'intéresse à partir de son id
+        const musicosId = req.params.id;
+        const musicos = await musicosDatamapper.findUser(musicosId);
+        if (!musicos) {
+            throw new ApiError('Musicos does not exists or can not be found', { statusCode: 404 });
+        }
+
+        console.log('email du momer :', musicos.email);
+
+        // on récupère tous les parametres pour de l'user
+        const UserName = req.user.name;
+        const UserEmail = req.user.email;
+        const UserRole = req.user.role;
+        const UserId = req.user.id;
+
+        console.log('req.user :', UserName, UserEmail, UserRole, UserId);
+
+        // On récupère ce qui a été rentré dans le body
+        const { textEmail } = req.body;
+
+        const resultSendMail = await transporter.sendMail({
+            from: `${UserEmail}`,
+            to: musicos.email,
+            subject: `${UserName} veut vous envoyer des bisous`,
+            text: `Bonjour, je suis un(e) ${UserRole} et voici mon plus beau poeme ! - ${textEmail}`,
+        });
+        if (!resultSendMail) {
+            res.status(400);
+            throw new Error('Error, mail could not be send');
+        } else {
+            return res.json('email envoyé');
+        }
     },
 };

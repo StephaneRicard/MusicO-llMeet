@@ -109,4 +109,5 @@ module.exports = {
         const applyToAd = await adDatamapper.insertApplication(userId, adId);
         res.json(applyToAd);
     },
+
 };
