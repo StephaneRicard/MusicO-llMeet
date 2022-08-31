@@ -42,4 +42,10 @@ module.exports = class Ad {
         const result = await client.query('DELETE FROM "event" WHERE id = $1', [id]);
         return result.rowCount;
     }
+
+    // retrouver un user en fonction de son id
+    static async findUser(id) {
+        const result = await client.query('SELECT * FROM "users" WHERE id=$1', [id]);
+        return result.rows[0];
+    }
 };

@@ -37,4 +37,10 @@ module.exports = class MyAds {
         const result = await client.query('SELECT * FROM update_status($1, $2)', [id, statusId]);
         return result.rows[0];
     }
+
+    // trouver les données du user en fonctiond e son id
+    static async findUser(userId) {
+        const result = await client.query('SELECT * FROM users WHERE id = $1', [userId]);
+        return result.rows;
+    }
 };
