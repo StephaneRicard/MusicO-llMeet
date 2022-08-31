@@ -6,7 +6,7 @@ const controllerHandler = require('../helpers/controllerHandler');
 const router = express.Router();
 
 router
-    .route('/contact')
-    .post(controllerHandler(controller.contactForm));
+    .route('/')
+    .post(controllerHandler(controller.postForm));
 
 module.exports = router;

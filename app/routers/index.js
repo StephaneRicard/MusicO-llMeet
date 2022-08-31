@@ -30,7 +30,7 @@ router.post('/api/signin', controllerHandler(userController.loginUser));
 // logout
 router.get('/api/logout', authenticateToken, userController.logout);
 // contact
-router.post('/api/contact', controllerHandler(contactController.contactForm));
+router.use('/api/contact', controllerHandler(contactController));
 
 // on ajoute l'autentification token sur les routes qui nécessite d'être connecté
 // momers list

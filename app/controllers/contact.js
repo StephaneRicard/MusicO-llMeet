@@ -7,21 +7,28 @@ module.exports = {
 * @param {response} res response json
 * @method {POST}
 */
-    async contactForm(req, res) {
+    async postForm(req, res) {
         const {
             name,
             email,
             role,
             textEmail,
         } = req.body;
-        console.log('req.body :', name, email, role);
+        // if (!email) {
+        //     const emailConnectedUser = user.email;
+        // }
+        console.log('req.body :', name, email, role, textEmail);
         const resultSendMail = await transporter.sendMail({
             from: `${email}`,
-            to: 'NodeMailer Oauth2',
+            to: 'meetollmusical@gmail.com',
             subject: `${name} nous envoie des bisous`,
             text: `Bonjour, je suis un(e) ${role} et voici mon plus beau poeme ! - ${textEmail}`,
         });
-        console.log(resultSendMail);
-        return res.json('email envoyé', email);
+        if (!resultSendMail) {
+            res.status(400);
+            throw new Error('Error, mail could not be send');
+        } else {
+            return res.json('email envoyé');
+        }
     },
 };

@@ -1,5 +1,6 @@
 const { adDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
+const { transporter } = require('../helpers/nodemailer');
 const client = require('../client/pg');
 
 module.exports = {
@@ -107,5 +108,60 @@ module.exports = {
 
         const applyToAd = await adDatamapper.insertApplication(userId, adId);
         res.json(applyToAd);
+    },
+
+    async sendEmail(req, res) {
+        const userId = req.user.id;
+
+        // On vérifie qu'on a bien récupéré l'id de l'user
+        const user = await adDatamapper.findUser(userId);
+        if (!user) {
+            throw new ApiError('User does not exists or can not be found', { statusCode: 404 });
+        }
+
+        // On récupère l'id de l'évent qui m'intéresse
+        const eventId = req.params.id;
+        const receiver = await adDatamapper.findOne(eventId);
+        if (!receiver) {
+            throw new ApiError('User does not exists or can not be found', { statusCode: 404 });
+        }
+
+        // on récupère l'id du momer ayant créé l'ad qui m'intéresse
+        const findEventOwnerId = await adDatamapper.findOwnerEventId(eventId);
+        if (!findEventOwnerId) {
+            throw new ApiError('Event owner ID could not be found', { statusCode: 404 });
+        }
+
+        // on récupère l'email du owner
+        const findEventOwnerEmail = await adDatamapper.findOwnerEventEmail(findEventOwnerId.owner_id);
+        if (!findEventOwnerEmail) {
+            throw new ApiError('Event owner email could not be found', { statusCode: 404 });
+        }
+
+        console.log('email du momer :', findEventOwnerEmail);
+
+        // on récupère tous les parametres pour de l'user
+        const UserName = req.user.name;
+        const UserEmail = req.user.email;
+        const UserRole = req.user.role;
+        const UserId = req.user.id;
+
+        console.log('req.user :', UserName, UserEmail, UserRole, UserId);
+
+        // On récupère ce qui a été rentré dans le body
+        const { textEmail } = req.body;
+
+        const resultSendMail = await transporter.sendMail({
+            from: `${UserEmail}`,
+            to: findEventOwnerEmail.email,
+            subject: `${UserName} veut vous envoyer des bisous`,
+            text: `Bonjour, je suis un(e) ${UserRole} et voici mon plus beau poeme ! - ${textEmail}`,
+        });
+        if (!resultSendMail) {
+            res.status(400);
+            throw new Error('Error, mail could not be send');
+        } else {
+            return res.json('email envoyé');
+        }
     },
 };
