@@ -1,8 +1,10 @@
 // centralisatisation de la gestion des erreurs
 const ApiError = require('../errors/apiError');
+const logger = require('./logger');
 
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, _, res, next) => {
+    logger.error(err);
     let { message } = err;
     let statusCode = err.infos?.statusCode;
 
