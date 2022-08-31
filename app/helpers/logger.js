@@ -8,7 +8,14 @@ const streams = [{
     count: 3,
 }];
 
+if (process.env.NODE_ENV !== 'production') {
+    streams.push({
+        level: 'info',
+        stream: process.stdout,
+    });
+}
+
 module.exports = bunyan.createLogger({
-    name: 'musical',
+    name: 'musicalLog',
     streams,
 });

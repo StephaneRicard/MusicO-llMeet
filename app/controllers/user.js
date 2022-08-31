@@ -60,11 +60,15 @@ module.exports = {
         // vérif de la présence de chaque champs
         if (!name || !email || !city || !county || !role || !password || !password2) {
             res.status(400);
-            throw new Error('Please file all fields');
+            throw new ApiError('Please file all fields', {
+                statusCode: 403,
+            });
         }
         if (password !== password2) {
             res.status(400);
-            throw new Error('Passwords not the same');
+            throw new ApiError('Passwords not the same', {
+                statusCode: 403,
+            });
         }
 
         // Check if user exists
@@ -74,7 +78,9 @@ module.exports = {
 
         if (userExists) {
             res.status(400);
-            throw new Error('User already exists');
+            throw new ApiError('User already exists', {
+                statusCode: 403,
+            });
         }
 
         // Hash password
@@ -104,7 +110,9 @@ module.exports = {
             });
         } else {
             res.status(400);
-            throw new Error('Invalid user data');
+            throw new ApiError('Invalid user data', {
+                statusCode: 403,
+            });
         }
     },
 

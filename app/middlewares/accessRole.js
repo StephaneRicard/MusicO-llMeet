@@ -1,4 +1,3 @@
-const debug = require('debug')('app: test');
 const ApiError = require('../errors/apiError');
 
 module.exports = {
@@ -7,7 +6,6 @@ module.exports = {
     accessMomer(req, res, next) {
         const { user } = req;
         const { role } = user;
-        debug(role);
 
         if (role !== 'momer') {
             throw new ApiError('You are not a momer', { statusCode: 404 });
@@ -20,7 +18,6 @@ module.exports = {
     accessMusicos(req, res, next) {
         const { user } = req;
         const { role } = user;
-        debug(role);
 
         if (role !== 'musicos') {
             throw new ApiError('You are not a musicos', { statusCode: 404 });
