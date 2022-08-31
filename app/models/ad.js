@@ -48,16 +48,4 @@ module.exports = class Ad {
         const result = await client.query('SELECT * FROM "users" WHERE id=$1', [id]);
         return result.rows[0];
     }
-
-    // retrouver l'id de l'utilisateur a qui on souhaite envoyer un mail
-    static async findOwnerEventId(eventId) {
-        const result = await client.query('SELECT owner_id FROM "event" WHERE id=$1', [eventId]);
-        return result.rows[0];
-    }
-
-    // retrouver l'email de l'utilisateur a qui on souhaite envoyer un mail
-    static async findOwnerEventEmail(ownerID) {
-        const result = await client.query('SELECT email FROM "users" WHERE id=$1', [ownerID]);
-        return result.rows[0];
-    }
 };

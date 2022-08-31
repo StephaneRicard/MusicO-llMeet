@@ -20,4 +20,8 @@ router
     .get(controllerHandler(controller.getApplicationDetails))
     .patch(controllerHandler(controller.updateCandidateStatus));
 
+router
+    .route('/:id/:applicationId/contact')
+    .post(controllerHandler(controller.sendEmail));
+
 module.exports = router;

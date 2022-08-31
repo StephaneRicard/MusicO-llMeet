@@ -16,8 +16,4 @@ router
     .post(accessMusicos, controllerHandler(controller.createApplication))
     .get(controllerHandler(controller.getOne));
 
-router
-    .route('/:id/contact')
-    .post(accessMusicos, controllerHandler(controller.sendEmail));
-
 module.exports = router;
