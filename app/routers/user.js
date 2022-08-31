@@ -12,4 +12,7 @@ router
     .delete(authenticateToken, controllerHandler(controller.delete))
     .patch(authenticateToken, controllerHandler(controller.update));
 
+router.route('/upload')
+    .patch(authenticateToken, controllerHandler(controller.uploadImage));
+
 module.exports = router;

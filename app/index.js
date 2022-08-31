@@ -4,11 +4,11 @@ const cors = require('cors');
 const router = require('./routers');
 
 const app = express();
-
 // On active le middleware pour parser le payload JSON
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 // On active le middleware pour parser le payload urlencoded
 app.use(express.urlencoded({
+    limit: '50mb',
     extended: true,
 }));
 

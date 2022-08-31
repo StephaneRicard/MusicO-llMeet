@@ -1,6 +1,7 @@
 const { eventDatamapper } = require('../models');
 const { ApiError } = require('../helpers/errorHandler');
 const client = require('../client/pg');
+const { cloudinary } = require('../helpers/cloudinary');
 
 module.exports = {
     // list events getAll
@@ -179,5 +180,16 @@ module.exports = {
             return res.json(result);
         }
         return null;
+    },
+
+    async uploadImage(req, res) {
+        const fileStr = req.body.data;
+        const eventId = req.params.id;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'event_image',
+        });
+        const savedUrl = await eventDatamapper.updateImage(eventId, uploadResponse.secure_url);
+
+        res.json(savedUrl);
     },
 };

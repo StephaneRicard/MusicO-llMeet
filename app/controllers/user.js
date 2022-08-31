@@ -9,6 +9,7 @@ const {
 const jwt = require('jsonwebtoken');
 
 const { userDatamapper, musicosDatamapper, momerDatamapper } = require('../models');
+const { cloudinary } = require('../helpers/cloudinary');
 
 module.exports = {
 
@@ -173,12 +174,14 @@ module.exports = {
         const {
             role,
         } = req.user;
+
         const user = await userDatamapper.findOne(userId);
         if (!user) {
             throw new ApiError('user does not exists', {
                 statusCode: 404,
             });
         }
+
         // si c'est un musicos il faut modifier les genres musicaux de la table de liaison
         if (role === 'musicos') {
             await userDatamapper.deleteMusicalType(userId);
@@ -197,5 +200,17 @@ module.exports = {
         // type qui était présent dans la table de liaison
 
         res.json({ savedUser, savedMusicalType });
+    },
+
+    async uploadImage(req, res) {
+        const fileStr = req.body.data;
+        const userId = req.user.id;
+
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'profile_image',
+        });
+        const savedUrl = await userDatamapper.updateImage(userId, uploadResponse.secure_url);
+
+        res.json(savedUrl);
     },
 };
