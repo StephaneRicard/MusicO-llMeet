@@ -205,6 +205,7 @@ module.exports = {
     async uploadImage(req, res) {
         const fileStr = req.body.data;
         const userId = req.user.id;
+
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: 'profile_image',
         });
