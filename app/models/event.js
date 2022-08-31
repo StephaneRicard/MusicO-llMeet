@@ -24,4 +24,9 @@ module.exports = class Event {
         const result = await client.query('DELETE FROM "event" WHERE id = $1', [id]);
         return result.rowCount;
     }
+
+    static async uploadImage(id, imageUrl) {
+        const result = await client.query('UPDATE "event" SET "picture_url"=$2 WHERE id=$1 RETURNING *', [id, imageUrl]);
+        return result.rows[0];
+    }
 };

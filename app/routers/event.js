@@ -13,4 +13,7 @@ router
     .route('/:id')
     .get(controllerHandler(controller.getOne));
 
+router.route('/:id/upload')
+    .patch(controllerHandler(controller.uploadImage));
+
 module.exports = router;
