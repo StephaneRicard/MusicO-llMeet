@@ -12,7 +12,6 @@ const { userDatamapper, musicosDatamapper, momerDatamapper } = require('../model
 const { transporter } = require('../helpers/nodemailer');
 const { cloudinary } = require('../helpers/cloudinary');
 
-
 module.exports = {
 
     // login
@@ -227,8 +226,9 @@ module.exports = {
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: 'profile_image',
         });
+
         const savedUrl = await userDatamapper.updateImage(userId, uploadResponse.secure_url);
 
-        res.json(savedUrl);
+        res.json(uploadResponse.secure_url);
     },
 };
