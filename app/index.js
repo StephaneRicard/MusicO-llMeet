@@ -1,5 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+const logger = require('./helpers/logger');
+
+process.on('unhandledRejection', (err) => {
+    throw err;
+});
+
+process.on('uncaughtException', (err) => {
+    logger.info(err);
+    process.exit(0);
+});
 
 const router = require('./routers');
 
