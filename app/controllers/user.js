@@ -221,13 +221,10 @@ module.exports = {
 
     async uploadImage(req, res) {
         const fileStr = req.body.data;
-        const userId = req.user.id;
 
         const uploadResponse = await cloudinary.uploader.upload(fileStr, {
             upload_preset: 'profile_image',
         });
-
-        const savedUrl = await userDatamapper.updateImage(userId, uploadResponse.secure_url);
 
         res.json(uploadResponse.secure_url);
     },
