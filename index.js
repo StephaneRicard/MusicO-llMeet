@@ -1,6 +1,6 @@
 const http = require('http');
 require('dotenv').config();
-const debug = require('debug')('app:server');
+const logger = require('./app/helpers/logger');
 const app = require('./app');
 
 const port = process.env.PORT || 3003;
@@ -8,5 +8,5 @@ const port = process.env.PORT || 3003;
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    debug(`Listening on ${port}`);
+    logger.info(`Listening on ${port}`);
 });

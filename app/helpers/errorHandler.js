@@ -1,18 +1,15 @@
 // centralisatisation de la gestion des erreurs
 const ApiError = require('../errors/apiError');
+const logger = require('./logger');
 
 // eslint-disable-next-line no-unused-vars
 const errorHandler = (err, _, res, next) => {
-    let { message } = err;
+    logger.error(err);
+    const { message } = err;
     let statusCode = err.infos?.statusCode;
 
     if (!statusCode || Number.isNaN(Number(statusCode))) {
         statusCode = 500;
-    }
-
-    // Si l'application n'est pas en développement on reste vague sur l'erreur serveur
-    if (statusCode === 500 && process.env.NODE_ENV === 'production') {
-        message = 'Internal Server Error';
     }
 
     if (res.get('Content-type')?.includes('html')) {
