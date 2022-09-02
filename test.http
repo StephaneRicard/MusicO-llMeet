@@ -17,7 +17,7 @@ Authorization: token
 ### Liste pour 1 momer
 
 GET {{endpoint}}api/momers/1
-Authorization: token 
+Authorization: token
 
 #################################################################################
 #### MUSICOS ####
@@ -35,12 +35,12 @@ Authorization: token
 
 ### LIste des events publiés
 
-GET {{endpoint}}api/757575
+GET {{endpoint}}api/
 Authorization: token 
 
 ### Liste de 1 event
 
-GET {{endpoint}}api/254545
+GET {{endpoint}}api/
 
 ###################################################################################
 #### ANNONCE ####
@@ -48,7 +48,7 @@ GET {{endpoint}}api/254545
 ### Récupérer la liste des annonces
 
 GET {{endpoint}}api/ads
-Authorization: token 
+Authorization: token  
 
 ### Récupérer 1 annonce
 
@@ -129,7 +129,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "momer1@mail.fr",
+    "email": "carla@mail.fr",
     "password": "111"
 }
 
