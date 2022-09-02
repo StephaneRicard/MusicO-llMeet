@@ -138,7 +138,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "musicos1@mail.fr",
+    "email": "claudine@mail.fr",
     "password": "111"
 }
 
