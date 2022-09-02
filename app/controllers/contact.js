@@ -1,12 +1,7 @@
 const { transporter } = require('../helpers/nodemailer');
 
 module.exports = {
-/**
-* display formulaire de contact de l'équipe
-* @param {request} req request object
-* @param {response} res response json
-* @method {POST}
-*/
+
     async postForm(req, res) {
         const {
             name,
