@@ -41,7 +41,7 @@ module.exports = {
 
         // EVENTS - filter by date
         if (eventDate) {
-            const dateFilter = date.join("','");
+            const dateFilter = eventDate.join("','");
 
             sqlUsers += `WHERE event_date = '${dateFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
