@@ -8,7 +8,7 @@ module.exports = {
 
     async getAll(req, res) {
         const {
-            county, eventType, date, typeOfMusic,
+            county, eventType, eventDate, typeOfMusic,
         } = req.query;
 
         let sqlUsers = 'SELECT * FROM event_with_candidate ';
@@ -26,7 +26,7 @@ module.exports = {
             return res.json(result.rows);
         }
 
-        // EVENTS - filter by city
+        // EVENTS - filter by eventType
         if (eventType) {
             const eventTypeFilter = eventType.join("','");
 
@@ -40,7 +40,7 @@ module.exports = {
         }
 
         // EVENTS - filter by date
-        if (date) {
+        if (eventDate) {
             const dateFilter = date.join("','");
 
             sqlUsers += `WHERE event_date = '${dateFilter}' AND is_published = 'true'`;
@@ -66,7 +66,7 @@ module.exports = {
         }
 
         // list events getAll
-        if (!county && !eventType && !date && !typeOfMusic) {
+        if (!county && !eventType && !eventDate && !typeOfMusic) {
             const events = await eventDatamapper.findAll();
 
             // permet d'éviter les doublons dans les groupes liés à l'annonce
