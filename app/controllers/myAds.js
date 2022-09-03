@@ -6,15 +6,15 @@ module.exports = {
 
     // récupérer mes annonces
     async getAll(req, res) {
-        const userId = req.user.id;
+        const usersId = req.user.id;
 
-        const myads = await myAdsDatamapper.findAll(userId);
+        const myads = await myAdsDatamapper.findAll(usersId);
 
         // permet d'éviter les doublons dans les groupes liés à l'annonce
         // (lorsque qu'ils ont plusieurs genre musicaux)
         myads.forEach((ad) => {
-            const ids = ad.groups.map((group) => group.id);
-            const filtered = ad.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+            const ids = ad.groups.map((group) => group.userId);
+            const filtered = ad.groups.filter(({ userId }, index) => !ids.includes(userId, index + 1));
             // eslint-disable-next-line no-param-reassign
             ad.groups = filtered;
         });
@@ -23,21 +23,20 @@ module.exports = {
 
     // récupérer une de mes annonce
     async getOne(req, res) {
-        const userId = req.user.id;
+        const usersId = req.user.id;
         const adId = req.params.id;
 
-        const myad = await myAdsDatamapper.findOne(userId, adId);
+        const myad = await myAdsDatamapper.findOne(usersId, adId);
 
         if (!myad) {
             throw new ApiError('Ad does not exists', { statusCode: 404 });
         }
         // permet d'éviter les doublons dans les groupes liés à l'annonce
         // (lorsque qu'ils ont plusieurs genre musicaux)
-        const ids = myad.groups.map((group) => group.id);
-        const filtered = myad.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+        const ids = myad.groups.map((group) => group.userId);
+        const filtered = myad.groups.filter(({ userId }, index) => !ids.includes(userId, index + 1));
         // eslint-disable-next-line no-param-reassign
         myad.groups = filtered;
-
         return res.json(myad);
     },
 

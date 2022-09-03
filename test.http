@@ -40,7 +40,7 @@ Authorization: token
 
 ### Liste de 1 event
 
-GET {{endpoint}}api/
+GET {{endpoint}}api/2
 
 ###################################################################################
 #### ANNONCE ####
@@ -129,7 +129,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "carla@mail.fr",
+    "email": "francois@mail.fr",
     "password": "111"
 }
 
@@ -150,9 +150,8 @@ GET {{endpoint}}api/myads
 Authorization: token 
 
 ### Visualiser une des mes annonces
-GET {{endpoint}}api/myads/1
+GET {{endpoint}}api/myads/12
 Authorization: token 
-
 ### Supprimer une annonce
 DELETE {{endpoint}}api/myads/5
 Authorization: token 
@@ -199,7 +198,7 @@ GET {{endpoint}}api/myevents
 Authorization: token 
 
 ### Visualiser une des mes event
-GET {{endpoint}}api/myevents/2
+GET {{endpoint}}api/myevents/15
 Authorization: token 
 
 
