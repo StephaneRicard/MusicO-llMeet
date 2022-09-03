@@ -12,8 +12,8 @@ module.exports = {
         // permet d'éviter les doublons dans les groupes liés à l'annonce
         // (lorsque qu'ils ont plusieurs genre musicaux)
         myEvents.forEach((event) => {
-            const ids = event.groups.map((group) => group.id);
-            const filtered = event.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+            const ids = event.groups.map((group) => group.userId);
+            const filtered = event.groups.filter(({ userId }, index) => !ids.includes(userId, index + 1));
             // eslint-disable-next-line no-param-reassign
             event.groups = filtered;
         });
@@ -32,8 +32,8 @@ module.exports = {
             throw new ApiError('Can not find anything for this id', myEventId, { statusCode: 404 });
         }
 
-        const ids = myEvent.groups.map((group) => group.id);
-        const filtered = myEvent.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+        const ids = myEvent.groups.map((group) => group.userId);
+        const filtered = myEvent.groups.filter(({ userId }, index) => !ids.includes(userId, index + 1));
         // eslint-disable-next-line no-param-reassign
         myEvent.groups = filtered;
 

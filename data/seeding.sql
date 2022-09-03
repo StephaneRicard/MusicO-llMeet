@@ -28,7 +28,6 @@ VALUES
 ('Classique'),
 ('Musique du monde');
 
-
 --Insertition statut candidat
 INSERT INTO "candidate_status" ("name")
 VALUES
@@ -36,9 +35,10 @@ VALUES
 ('Refusée'),
 ('Acceptée');
 
+
 --Insertition momer
-INSERT INTO "users" ("name", "picture_url","city","email","passwordphotosLyon","phone","address","county","role","description","external_url","momer_to_contact","momer_type_id")
-VALUEScalvados
+INSERT INTO "users" ("name", "picture_url","city","email","password","phone","address","county","role","description","external_url","momer_to_contact","momer_type_id")
+VALUES
 ('francois','https://cdn.pixabay.com/photo/2014/03/07/10/08/hard-rock-cafe-282006_960_720.jpg','Lyon','francois@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33770411497','9 rue du general doufin','Rhône','momer','bar bien frequente par les boomers','http://catcordion.sergethew.com/', 'francois', 1),
 ('luc','https://cdn.pixabay.com/photo/2017/05/25/21/23/temple-bar-2344400_960_720.jpg','paris','luc@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33700046727','23 rue du colonel jean mi','Île-de-France','momer','restaurant gastronomique 2 etoiles','https://estcequecestbientotleweekend.fr/', 'luc', 1),
 ('luc','https://cdn.pixabay.com/photo/2020/03/18/21/47/ireland-4945565_960_720.jpg','paris','lucledeuxieme@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33767402086','1 rue de la gare','Île-de-France','momer','association DuFest, on organise des festivales','http://orteil.dashnet.org/cookieclicker/', 'luc', 3),
@@ -53,8 +53,7 @@ VALUEScalvados
 ('bruna','https://images.pexels.com/photos/7061481/pexels-photo-7061481.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','paris','bruna@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33700062667','5 avenue du pavillon','Île-de-France','momer','bar dans une vieille eglise, endroit parfait pour decompresser','http://www.rrrgggbbb.com/', 'cloclo', 1),
 ('maelis','https://images.pexels.com/photos/9008746/pexels-photo-9008746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','paris','maelis@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33700745649','85 rue de la tour','Île-de-France','momer','Ce restaurant Bocuse avec terrasse et vaste véranda propose des plats de saison aux saveurs méditerranéennes.','http://www.koalastothemax.com/', 'dilou', 1),
 ('carla','https://images.pexels.com/photos/13221458/pexels-photo-13221458.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Lyon','carla@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33600745649','12 parc des princes','Rhône','momer','Repas sur place · Aucun plat à emporter · Aucune livraison','http://randomcolour.com/', 'carla', 3),
-('johnny','https://images.pexels.com/photos/9936440/pexels-photo-9936440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Bordeaux','johnny@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33700765149','6 rue du bouquet','Gironde','momer','Depuis 2005,  le Collectif des festivals accompagne les festivals
-dans leurs démarches de développement durable.','https://r33b.net/', 'johnny', 3),
+('johnny','https://images.pexels.com/photos/9936440/pexels-photo-9936440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Bordeaux','johnny@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33700765149','6 rue du bouquet','Gironde','momer','Depuis 2005,  le Collectif des festivals accompagne les festivals dans leurs démarches de développement durable.','https://r33b.net/', 'johnny', 3),
 ('joe','https://images.pexels.com/photos/3783471/pexels-photo-3783471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Gouvix','joe@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33659745149','9bis rue des marons','Calvados','momer','Association animée par l’esprit collaboratif, nous menons depuis 25 ans des projets culturels pour tous et toutes, en partenariat avec les habitant·e·s, associations, collectivités… du Pays de Retz.','https://thatsthefinger.com/', 'joe', 3),
 ('joe','https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Gouvix','joe2@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33600825693','23bis rue du chabys','Calvados','momer','Very Important Bénévoles : le collectif des festivals Gouvixnais mène une étude, inédite, sur les (indispensables) bénévoles','https://www.bus-paradise.com/fr', 'tintin', 3),
 ('valentin','https://images.pexels.com/photos/1047442/pexels-photo-1047442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Marseille','valentin@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33625745949','2 rue des gentilles dames','Bouches-du-Rhône','momer','bar dans l ambiance medievale, organisation de gigs tous les dimanches','https://www.bus-paradise.com/fr', 'valentin', 1),
@@ -62,6 +61,7 @@ dans leurs démarches de développement durable.','https://r33b.net/', 'johnny',
 ('baptiste','https://images.pexels.com/photos/3566226/pexels-photo-3566226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Lyon','baptiste@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33642746949','32 avenue du manque dinspiration','Rhône','momer','Organisateur de mariages, toujours à la recherche de groupes pour des concerts en plein air et autres','https://www.bus-paradise.com/fr', 'baptiste', 3),
 ('kelly','https://images.pexels.com/photos/2034851/pexels-photo-2034851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','paris','kelly@mail.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33613567849','6 rue des beaux yeux','Île-de-France','momer','comite du petit theatre, organisateur de concerts en plein air, en partenariat avec les colectivites locales pour la promotion de la region','https://www.bus-paradise.com/fr', 'peneloppe', 3),
 ('richard','https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1','Lyon','richard.darcy@escen.fr','$2a$12$s3DmoXyT3whnsa0dIFkuAudy1rN/C91SyU.f3SYd2FXjx1vQqsDP6','+33642746949','32 avenue du manque dinspiration','Rhône','momer','StripClub situe en face de l ecole','https://www.bus-paradise.com/fr', 'richard', 3);
+
 
 --Insertition musicos
 INSERT INTO "users" ("name", "picture_url","city","email","password","phone","address","county","role","description","musicians_number","group_leader","external_url")
