@@ -17,7 +17,7 @@ Authorization: token
 ### Liste pour 1 momer
 
 GET {{endpoint}}api/momers/1
-Authorization: token 
+Authorization: token
 
 #################################################################################
 #### MUSICOS ####
@@ -35,12 +35,12 @@ Authorization: token
 
 ### LIste des events publiés
 
-GET {{endpoint}}api/757575
+GET {{endpoint}}api/
 Authorization: token 
 
 ### Liste de 1 event
 
-GET {{endpoint}}api/254545
+GET {{endpoint}}api/2
 
 ###################################################################################
 #### ANNONCE ####
@@ -48,7 +48,7 @@ GET {{endpoint}}api/254545
 ### Récupérer la liste des annonces
 
 GET {{endpoint}}api/ads
-Authorization: token 
+Authorization: token  
 
 ### Récupérer 1 annonce
 
@@ -129,7 +129,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "momer1@mail.fr",
+    "email": "francois@mail.fr",
     "password": "111"
 }
 
@@ -138,7 +138,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "musicos1@mail.fr",
+    "email": "claudine@mail.fr",
     "password": "111"
 }
 
@@ -150,9 +150,8 @@ GET {{endpoint}}api/myads
 Authorization: token 
 
 ### Visualiser une des mes annonces
-GET {{endpoint}}api/myads/1
+GET {{endpoint}}api/myads/12
 Authorization: token 
-
 ### Supprimer une annonce
 DELETE {{endpoint}}api/myads/5
 Authorization: token 
@@ -199,7 +198,7 @@ GET {{endpoint}}api/myevents
 Authorization: token 
 
 ### Visualiser une des mes event
-GET {{endpoint}}api/myevents/2
+GET {{endpoint}}api/myevents/15
 Authorization: token 
 
 

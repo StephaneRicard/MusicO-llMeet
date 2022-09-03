@@ -8,7 +8,7 @@ module.exports = {
 
     async getAll(req, res) {
         const {
-            county, city, date, typeOfMusic,
+            county, eventType, eventDate, typeOfMusic,
         } = req.query;
 
         let sqlUsers = 'SELECT * FROM event_with_candidate ';
@@ -26,11 +26,11 @@ module.exports = {
             return res.json(result.rows);
         }
 
-        // EVENTS - filter by city
-        if (city) {
-            const cityFilter = city.join("','");
+        // EVENTS - filter by eventType
+        if (eventType) {
+            const eventTypeFilter = eventType.join("','");
 
-            sqlUsers += `WHERE city = '${cityFilter}' AND is_published = 'true'`;
+            sqlUsers += `WHERE event_type = '${eventTypeFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
@@ -40,8 +40,8 @@ module.exports = {
         }
 
         // EVENTS - filter by date
-        if (date) {
-            const dateFilter = date.join("','");
+        if (eventDate) {
+            const dateFilter = eventDate.join("','");
 
             sqlUsers += `WHERE event_date = '${dateFilter}' AND is_published = 'true'`;
             if (!sqlUsers) {
@@ -66,14 +66,14 @@ module.exports = {
         }
 
         // list events getAll
-        if (!county && !city && !date && !typeOfMusic) {
+        if (!county && !eventType && !eventDate && !typeOfMusic) {
             const events = await eventDatamapper.findAll();
 
             // permet d'éviter les doublons dans les groupes liés à l'annonce
             // (lorsque qu'ils ont plusieurs genre musicaux)
             events.forEach((event) => {
-                const ids = event.groups.map((group) => group.id);
-                const filtered = event.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+                const ids = event.groups.map((group) => group.userId);
+                const filtered = event.groups.filter(({ userId }, index) => !ids.includes(userId, index + 1));
                 // eslint-disable-next-line no-param-reassign
                 event.groups = filtered;
             });
@@ -94,8 +94,8 @@ module.exports = {
 
         // permet d'éviter les doublons dans les groupes liés à l'annonce
         // (lorsque qu'ils ont plusieurs genre musicaux)
-        const ids = event.groups.map((group) => group.id);
-        const filtered = event.groups.filter(({ id }, index) => !ids.includes(id, index + 1));
+        const ids = event.groups.map((group) => group.userId);
+        const filtered = event.groups.filter(({ userId }, index) => !ids.includes(userId, index + 1));
         // eslint-disable-next-line no-param-reassign
         event.groups = filtered;
 
