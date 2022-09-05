@@ -53,12 +53,12 @@ Authorization: token
 ### Récupérer 1 annonce
 
 GET {{endpoint}}api/ads/1
-Authorization: token 
+Authorization: token
 
 ### créer une annonce
 
 POST {{endpoint}}api/ads
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImZyYW5jb2lzIiwicGljdHVyZV91cmwiOiJodHRwczovL2kucGluaW1nLmNvbS83MzZ4L2IzLzIxL2E1L2IzMjFhNThmYTYyNTcxNjIzYjEyZmVmYjRiODlkMjMwLmpwZyIsImNpdHkiOiJseW9uIiwiZW1haWwiOiJmcmFuY29pc0BtYWlsLmZyIiwicGFzc3dvcmQiOiIkMmEkMTIkczNEbW9YeVQzd2huc2EwZElGa3VBdWR5MXJOL0M5MVN5VS5mM1NZZDJGWGp4MXZRcXNEUDYiLCJwaG9uZSI6IiszMzc3MDQxMTQ5NyIsImFkZHJlc3MiOiI5IHJ1ZSBkdSBnZW5lcmFsIGRvdWZpbiIsImNvdW50eSI6InJob25lIiwicm9sZSI6Im1vbWVyIiwiZGVzY3JpcHRpb24iOiJiYXIgYmllbiBmcmVxdWVudGUgcGFyIGxlcyBib29tZXJzIiwibXVzaWNpYW5zX251bWJlciI6bnVsbCwiZ3JvdXBfbGVhZGVyIjpudWxsLCJleHRlcm5hbF91cmwiOiJsaWVuIGV4dGVybmUxIG1vbWVyIiwibW9tZXJfdG9fY29udGFjdCI6ImZyYW5jb2lzIiwibW9tZXJfdHlwZV9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjItMDgtMzBUMTM6NDM6MDEuMzgyWiIsInVwZGF0ZWRfYXQiOm51bGwsImlhdCI6MTY2MjM2MjExMCwiZXhwIjoxNjYyNDYyMTEwfQ.vrskOuHXChgi5jIhxtr-fa-EtUGFnjImXkjuj9gcVnE
+Authorization: token 
 content-type: application/json
 
 {
@@ -68,7 +68,8 @@ content-type: application/json
     "owner_id": 1,
     "address": "testad",
     "county": "testad", 
-    "event_date": "2022-08-25 14:34:45.13344+02", 
+    "city": "testad",
+    "event_date": "25-08-2022", 
     "external_link": "testad", 
     "event_type": "testad",
     "type_of_music_needed": "testad"
@@ -82,13 +83,13 @@ POST {{endpoint}}api/signup
 content-type: application/json
 
 {
-    "name": "test momer",
-    "email": "te@mail.fr",
-    "city": "Paris",
-    "county": "Paris",
+    "name": "test",
+    "email": "test3@mail.fr",
+    "city": "aa",
+    "county": "aa",
     "role": "musicos",
-    "password": "D111azea",
-    "password2": "D111azea"
+    "password": "Azerty123",
+    "password2": "Azerty123"
 }
 
 ### Visualiser son profil
@@ -106,7 +107,7 @@ content-type: application/json
     "city":"city3",
     "email":"email@email3.fr",
     "password":"password3",
-    "phone":"0303030303",
+    "phone":"0505050505",
     "address":"address3",
     "county":"county3",
     "description":"description3",
@@ -129,7 +130,7 @@ POST {{endpoint}}api/signin
 content-type: application/json
 
 {
-    "email": "francois@mail.fr",
+    "email": "carla@mail.fr",
     "password": "111"
 }
 
@@ -170,7 +171,8 @@ content-type: application/json
     "is_published": false,
     "is_archived": false,
     "county": "test",
-    "event_date": "2022-08-25 14:34:45.13344+02",
+    "city": "test",
+    "event_date": "25-08-2022",
     "external_link": "test",
     "event_type": "test",
     "type_of_music_needed": "test"
