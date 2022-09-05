@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-module.exports = {
+module.exports = Joi.object({
     name: Joi.string().required().max(100),
     picture_url: Joi.string(),
     email: Joi.string().email({ minDomainSegments: 2 }),
@@ -8,6 +8,7 @@ module.exports = {
     county: Joi.string().max(50),
     role: Joi.string().pattern(/^musicos$|^momer$/),
     password: Joi.string().pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
+    password2: Joi.ref('password'),
     phone: Joi.string().min(10).max(15),
     address: Joi.string(),
     description: Joi.string().max(500),
@@ -16,5 +17,4 @@ module.exports = {
     external_url: Joi.string(),
     momer_to_contact: Joi.string().max(100),
     momer_type_id: Joi.number(),
-
-};
+});
