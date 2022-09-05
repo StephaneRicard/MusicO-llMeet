@@ -5,15 +5,29 @@ const client = require('../client/pg');
 
 module.exports = {
 
-    // list getAll & filters
+    /**
+     * display all the events not published - with filters
+     * @param {string} req - user data input in url (added filter)
+     * @param {json} res - returns a json
+     * @returns all the columns matching the sql request
+     */
     async getAll(req, res) {
         const {
             county, city, date, typeOfMusic,
         } = req.query;
 
         let sqlUsers = 'SELECT * FROM event_with_candidate ';
-        // ADS - filter by county
+
+        /**
+         * ADS - filter by county by url query
+         * @typedef {string} county
+         */
         if (county) {
+            /**
+             * name of the county in url you wish to filter by
+             * @constant
+             * @type {string}
+             */
             const countyFilter = county.join("','");
 
             sqlUsers += ` WHERE county = '${countyFilter}' AND is_published = 'false'`;
@@ -24,7 +38,10 @@ module.exports = {
             const result = await client.query(sqlUsers);
             return res.json(result.rows);
         }
-        // ADS - filter by city
+        /**
+         * ADS - filter by city by url query
+         * @typedef {string} city
+         */
         if (city) {
             const cityFilter = city.join("','");
 
@@ -36,8 +53,10 @@ module.exports = {
             const result = await client.query(sqlUsers);
             return res.json(result.rows);
         }
-
-        // ADS - filter by date
+        /**
+         * ADS - filter by date by url query
+         * @typedef {date} date
+         */
         if (date) {
             const dateFilter = date.join("','");
 
@@ -49,8 +68,10 @@ module.exports = {
             const result = await client.query(sqlUsers);
             return res.json(result.rows);
         }
-
-        // ADS - filter by musical type
+        /**
+         * ADS - filter by musical type by url query
+         * @typedef {string} typeOfMusic
+         */
         if (typeOfMusic) {
             const typeFilter = typeOfMusic.join("','");
 
@@ -69,8 +90,19 @@ module.exports = {
         }
         return null;
     },
-    // récupérer 1 annonce
+
+    /**
+     * getting one specific ad by its id
+     * @param {number} req - data parameters in url (id)
+     * @param {json} res - returns a json
+     * @returns all the columns matching the sql request
+     */
     async getOne(req, res) {
+        /**
+         * id of the event in url parameters
+         * @constant
+         * @type {number}
+         */
         const eventId = req.params.id;
         const event = await adDatamapper.findOne(eventId);
 
@@ -80,13 +112,21 @@ module.exports = {
         return res.json(event);
     },
 
-    // créer un event (appelé annonce)
+    /**
+     * create an event not puslished (ad)
+     * @param {object} req - user data input in body
+     * @param {json} res returns a json
+     */
     async createEvent(req, res) {
         const savedAd = await adDatamapper.insertEvent(req.body);
         res.json(savedAd);
     },
 
-    // postuler a une annonce
+    /**
+     * apply function for an ad
+     * @param {number} req - user data (id) or parameters in url (id)
+     * @param {json} res - returns a json
+     */
     async createApplication(req, res) {
         // On vérifie si le user existe
         const userId = req.user.id;

@@ -1,7 +1,10 @@
 const client = require('../client/pg');
 
 module.exports = class Ad {
-    // retrouver toutes les annonces
+    /**
+     * findAll ads not published
+     * @returns all the ads with all their columns
+     */
     static async findAll() {
         const result = await client.query('SELECT * FROM event_with_candidate WHERE is_published = false');
         return result.rows;
