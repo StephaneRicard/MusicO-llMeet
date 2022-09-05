@@ -8,7 +8,7 @@ module.exports = {
     // list getAll & filters
     async getAll(req, res) {
         const {
-            county, city, date, typeOfMusic,
+            county, date, typeOfMusic,
         } = req.query;
 
         let sqlUsers = 'SELECT * FROM event_with_candidate ';
@@ -17,18 +17,6 @@ module.exports = {
             const countyFilter = county.join("','");
 
             sqlUsers += ` WHERE county = '${countyFilter}' AND is_published = 'false'`;
-            if (!sqlUsers) {
-                throw new Error('Issue with variable sqlUsers', sqlUsers);
-            }
-
-            const result = await client.query(sqlUsers);
-            return res.json(result.rows);
-        }
-        // ADS - filter by city
-        if (city) {
-            const cityFilter = city.join("','");
-
-            sqlUsers += `WHERE city = '${cityFilter}' AND is_published = 'false'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
@@ -63,7 +51,7 @@ module.exports = {
             return res.json(result.rows);
         }
 
-        if (!county && !city && !date && !typeOfMusic) {
+        if (!county && !date && !typeOfMusic) {
             const events = await adDatamapper.findAll();
             return res.json(events);
         }
