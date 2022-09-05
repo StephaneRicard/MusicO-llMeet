@@ -30,6 +30,10 @@ Authorization: token
 GET {{endpoint}}api/musicos/25
 Authorization: token 
 
+### liste des musicos avec type of music 1
+GET {{endpoint}}api/musicos?musical_type[]=1
+Authorization: token 
+
 ###################################################################################
 #### EVENT PUBLIE ####
 
