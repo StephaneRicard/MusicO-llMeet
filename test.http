@@ -87,8 +87,8 @@ content-type: application/json
     "city": "Paris",
     "county": "Paris",
     "role": "musicos",
-    "password": "111",
-    "password2": "11"
+    "password": "D111azea",
+    "password2": "D111azea"
 }
 
 ### Visualiser son profil
@@ -241,18 +241,6 @@ Authorization: token
 ### Supprimer une candidature
 DELETE {{endpoint}}api/myapplications/2
 Authorization: token 
-
-
-### image
-
-POST {{{endpoint}}}api/upload
-Authorization: token 
-Content-Type: application/json
-
-{
-    "fileStr": "drgrgrdgrdgdhthdtjf"
-}
-
 
 
 
