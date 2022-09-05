@@ -17,7 +17,7 @@ Authorization: token
 ### Liste pour 1 momer
 
 GET {{endpoint}}api/momers/1
-Authorization: token
+Authorization: token 
 
 #################################################################################
 #### MUSICOS ####
@@ -52,12 +52,12 @@ GET {{endpoint}}api/2
 ### Récupérer la liste des annonces
 
 GET {{endpoint}}api/ads
-Authorization: token  
+Authorization: token
 
 ### Récupérer 1 annonce
 
 GET {{endpoint}}api/ads/1
-Authorization: token
+Authorization: token 
 
 ### créer une annonce
 
@@ -183,8 +183,8 @@ content-type: application/json
 }
 
 ### Visualiser une candidature à une de mes annonces
-GET {{endpoint}}api/myads/1/3
-Authorization: token
+GET {{endpoint}}api/myads/12/40
+Authorization: token 
 
 ### Modifier le statut d'un candidature à une de mes annonces
 
