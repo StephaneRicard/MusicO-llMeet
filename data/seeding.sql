@@ -112,12 +112,10 @@ Sans parler de la partie street food qu’on adore aussi, miam.','https://cdn.pi
 ('Nuits Sonores','Toujours à la pointe de l’innovation, le festival brouille les codes en investissant l’immense site des anciennes usines Fagor-Brandt en pleine journée pour les Days (de 16 h à minuit), avec une scène live, une scène performances hybrides et vidéos 360° et un espace soundsystem. Chaque soir (de 23 h à 5 h), c’est un artiste qui sert de curateur et invite la crème des artistes musicaux du moment dans l’autre lieu emblématique du festival, la Sucrière. En parallèle, d’autres concerts, performances et animations sont organisées un peu partout dans la ville ','https://cdn.pixabay.com/photo/2017/11/12/08/43/audio-2941753_960_720.jpg',19,'7bis rue de la flotte','Haute-Garonne',true,true,'2022-03-06','https://www.internetlivestats.com/','pool party','rap'),
 ('Le Gros 4','en référence au Big Four of Trash, qui désigne les 4 groupes les plus influents du trash metal, à savoir Metallica, Megadeth, Slayer et Anthrax. Au programme, de la version française Ultra Vomit, Mass Hysteria, Tagada Jones et No One is Innocent pour une soirée riche en décibels.','https://cdn.pixabay.com/photo/2020/01/15/17/35/concert-4768496_960_720.jpg',17,'46 rue de du j en peux plus','Calvados',false,false,'2022-06-17','https://en.wikipedia.org/wiki/List_of_individual_dogs','mariage','soul'),
 ('Horse Field Festival','On prend un peu de hauteur, direction les Monts d’Or pour un petit festival, mais avec une programmation là encore carrément canon. Le samedi soir, vous pourrez notamment écouter le bluesman Lyonnais à la voix sombre Théo Charaf, ou encore le drômois H-Burns qui viendra présenter son magnifique dernier album hommage à Leonard Cohen, Burns On The Wire.','https://cdn.pixabay.com/photo/2018/03/27/00/33/music-3264716_960_720.jpg',16,'4 rue des tulipes','Calvados',true,false,'2022-12-01','https://musclewiki.com/','concert','jazz'),
-('Soirée Echangiste','Pratique sexuelle libertine consistant en un échange temporaire des partenaires réguliers, entre deux ou plusieurs couples.','https://cdn.pixabay.com/photo/2018/01/15/21/50/concert-3084876_960_720.jpg',22,'4 rue des tulipes','Calvados',false,false,'2022-12-01','https://musclewiki.com/','concert','latino');
 
 --Insertition canditature pour un event
 INSERT INTO "candidate_per_event" ("event_id","users_id","candidate_status_id")
 VALUES
-(1,22,1),
 (2,23,1),
 (3,24,1),
 (4,25,2),
@@ -141,7 +139,6 @@ VALUES
 (3,42,3),
 (8,42,1),
 (3,38,1),
-(17,35,1),
 (13,26,3),
 (11,29,1),
 (6,31,3),
@@ -155,13 +152,12 @@ VALUES
 (4,28,1),
 (2,23,3),
 (11,25,3),
-(19,45, 1),
+(19,45,1),
 (3,40,1);
 
 --Insertition genre musical pour un musicos
 INSERT INTO "musical_type_per_users"("musical_type_id","users_id")
 VALUES
-(1,22),
 (12,23),
 (11,24),
 (10,25),

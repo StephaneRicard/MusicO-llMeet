@@ -10,7 +10,7 @@ router
     .get(controllerHandler(controller.getAll));
 
 router
-    .route('/:id')
+    .route('/:id(\\d+)')
     .get(controllerHandler(controller.getOne));
 
 module.exports = router;
