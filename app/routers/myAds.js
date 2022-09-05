@@ -15,7 +15,7 @@ router
     .route('/:id(\\d+)')
     .get(controllerHandler(controller.getOne))
     .delete(controllerHandler(controller.delete))
-    .patch(validate('body', eventUpdateSchema), controllerHandler(controller.update));
+    .patch(controllerHandler(controller.update));
 
 router
     .route('/:id(\\d+)/:applicationId(\\d+)')
