@@ -10,13 +10,7 @@ module.exports = {
     async getAll(req, res) {
         const { county, city } = req.query;
         let sqlUsers = `SELECT
-        name,
-        city,
-        email,
-        password,
-        phone,
-        county,
-        role
+        *
         FROM users`;
         // MUSICOS - filter by county
         if (county) {

@@ -7,17 +7,11 @@ module.exports = {
 
     // récupérer la liste de tous les musicos
     async getAll(req, res) {
-        const { county, city, momerType } = req.query;
+        const { county, city, momerType, musical_type } = req.query;
         let sqlUsers = `SELECT
-        name,
-        city,
-        email,
-        password,
-        phone,
-        county,
-        role
+        *
         FROM users `;
-        // MOMERS - filter by county
+        // MUSICOS - filter by county
         if (county) {
             const countyFilter = county.join("','");
             sqlUsers += ` WHERE county = '${countyFilter}' AND role = 'musicos'`;
@@ -28,7 +22,7 @@ module.exports = {
             const result = await client.query(sqlUsers);
             return res.json(result.rows);
         }
-        // MOMERS - filter by city
+        // MUSICOS - filter by city
         if (city) {
             const cityFilter = city.join("','");
             sqlUsers += `WHERE city = '${cityFilter}' AND role = 'musicos'`;
