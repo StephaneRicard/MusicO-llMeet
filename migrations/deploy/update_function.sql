@@ -46,6 +46,7 @@ UPDATE event SET
     picture_url = COALESCE($2->>'picture_url', picture_url),
     owner_id = COALESCE(($2->>'owner_id')::int, owner_id),
     address = COALESCE($2->>'address', address),
+    city = COALESCE($2->>'city', city),
     county = COALESCE($2->>'county', county),
     is_published = COALESCE(($2->>'is_published')::boolean, is_published),
     is_archived = COALESCE(($2->>'is_archived')::boolean, is_archived),

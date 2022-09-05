@@ -44,6 +44,7 @@ CREATE TABLE "event"(
     "picture_url" TEXT DEFAULT 'https://res.cloudinary.com/dxmyypsrl/image/upload/v1662321133/profile_image/default_image.jpg',
     "owner_id" INT NOT NULL REFERENCES "users" ("id") ON DELETE CASCADE,
     "address" TEXT,
+    "city" TEXT,
     "county" VARCHAR(50) NOT NULL,
     "is_published" BOOLEAN NOT NULL DEFAULT false,
     "is_archived" BOOLEAN NOT NULL DEFAULT false,
