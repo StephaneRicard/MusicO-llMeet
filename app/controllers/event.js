@@ -30,7 +30,7 @@ module.exports = {
         if (eventType) {
             const eventTypeFilter = eventType.join("','");
 
-            sqlUsers += `WHERE event_type = '${eventTypeFilter}' AND is_published = 'true'`;
+            sqlUsers += `WHERE event_type = '${eventTypeFilter.toLowerCase()}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
@@ -56,7 +56,7 @@ module.exports = {
         if (typeOfMusic) {
             const typeFilter = typeOfMusic.join("','");
 
-            sqlUsers += `WHERE type_of_music_needed = '${typeFilter}' AND is_published = 'true'`;
+            sqlUsers += `WHERE type_of_music_needed = '${typeFilter.toLowerCase()}' AND is_published = 'true'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
