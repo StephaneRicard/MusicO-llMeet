@@ -1,11 +1,13 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-shadow */
 const {
-    musicosDatamapper
+    musicosDatamapper,
 } = require('../models');
 const {
-    transporter
+    transporter,
 } = require('../helpers/nodemailer');
 const {
-    ApiError
+    ApiError,
 } = require('../helpers/errorHandler');
 const client = require('../client/pg');
 
@@ -17,7 +19,7 @@ module.exports = {
             county,
             city,
             momerType,
-            musical_type
+            musicalType,
         } = req.query;
         let sqlUsers = `SELECT
         *
@@ -45,16 +47,21 @@ module.exports = {
             return res.json(result.rows);
         }
         // MUSICOS - filter by musical type
-        if (musical_type) {
-            const musical_typeFilter = musical_type.join("','");
-            let sqlUsers = `SELECT * FROM musical_type_per_users
-            FULL JOIN users ON "users"."id" = users_id`;
-            sqlUsers += ` WHERE musical_type_id = '${musical_typeFilter}' AND role = 'musicos'`;
+        // eslint-disable-next-line camelcase
+        if (musicalType) {
+            console.log(musicalType);
+            // const musicalTypeFilter = musicalType.join("','");
+            // console.log('music', musicalTypeFilter);
+            // eslint-disable-next-line quotes
+            let sqlUsers2 = `SELECT * FROM "musical_type_per_users"
+            FULL JOIN users ON "users"."id" = users_id
+            LEFT JOIN musicos_with_musical_type ON "users"."id" = "musicos_with_musical_type"."id"
+            `;
+            sqlUsers2 += ` WHERE musical_type_id = '${musicalType}' AND "users"."role" = 'musicos'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
-
-            const result = await client.query(sqlUsers);
+            const result = await client.query(sqlUsers2);
             return res.json(result.rows);
         }
         // MOMERS - filter by momer type (restaurant, pub, etc.)
@@ -73,7 +80,7 @@ module.exports = {
         }
 
         // getAll
-        if (!city && !county) {
+        if (!city && !county && !musicalType && !momerType) {
             const musicos = await musicosDatamapper.findAll();
             return res.json(musicos);
         }
@@ -86,7 +93,7 @@ module.exports = {
 
         if (!musicos) {
             throw new ApiError('musicos not found', {
-                statusCode: 404
+                statusCode: 404,
             });
         }
         return res.json(musicos);
@@ -99,7 +106,7 @@ module.exports = {
         const user = await musicosDatamapper.findUser(userId);
         if (!user) {
             throw new ApiError('User does not exists or can not be found', {
-                statusCode: 404
+                statusCode: 404,
             });
         }
 
@@ -108,7 +115,7 @@ module.exports = {
         const musicos = await musicosDatamapper.findUser(musicosId);
         if (!musicos) {
             throw new ApiError('Musicos does not exists or can not be found', {
-                statusCode: 404
+                statusCode: 404,
             });
         }
 
@@ -124,7 +131,7 @@ module.exports = {
 
         // On récupère ce qui a été rentré dans le body
         const {
-            textEmail
+            textEmail,
         } = req.body;
 
         const resultSendMail = await transporter.sendMail({

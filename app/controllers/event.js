@@ -8,11 +8,23 @@ module.exports = {
 
     async getAll(req, res) {
         const {
-            county, eventType, eventDate, typeOfMusic,
+            city, county, eventType, eventDate, typeOfMusic,
         } = req.query;
 
         let sqlUsers = 'SELECT * FROM event_with_candidate ';
 
+        // EVENTS - filter by county
+        if (city) {
+            const cityFilter = city.join("','");
+
+            sqlUsers += ` WHERE city = '${cityFilter}' AND is_published = 'true'`;
+            if (!sqlUsers) {
+                throw new Error('Issue with variable sqlUsers', sqlUsers);
+            }
+
+            const result = await client.query(sqlUsers);
+            return res.json(result.rows);
+        }
         // EVENTS - filter by county
         if (county) {
             const countyFilter = county.join("','");
@@ -153,7 +165,7 @@ module.exports = {
             }
 
             const result = await client.query(sqlUsers);
-            return res.json(result);
+            return res.json(result.rows);
         }
 
         // EVENTS - filter by date
