@@ -1,7 +1,7 @@
 const Joi = require('joi').extend(require('@joi/date'));
 
 module.exports = Joi.object({
-    name: Joi.string().required().max(100).required(),
+    name: Joi.string().required().max(100),
     description: Joi.string(),
     picture_url: Joi.string(),
     owner_id: Joi.number(),
