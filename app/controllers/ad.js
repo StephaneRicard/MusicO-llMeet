@@ -54,7 +54,7 @@ module.exports = {
         if (typeOfMusic) {
             const typeFilter = typeOfMusic.join("','");
 
-            sqlUsers += `WHERE type_of_music_needed = '${typeFilter}' AND is_published = 'false'`;
+            sqlUsers += `WHERE type_of_music_needed = '${typeFilter.toLowerCase()}' AND is_published = 'false'`;
             if (!sqlUsers) {
                 throw new Error('Issue with variable sqlUsers', sqlUsers);
             }
