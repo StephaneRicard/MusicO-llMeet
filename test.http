@@ -32,7 +32,7 @@ Authorization: token
 
 ### liste des musicos avec type of music 1
 GET {{endpoint}}api/musicos?musical_type[]=1
-Authorization: token 
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwibmFtZSI6ImJlcm5hcmQiLCJwaWN0dXJlX3VybCI6Imh0dHBzOi8vaS5waW5pbWcuY29tL29yaWdpbmFscy8zOC9hYS8xMy8zOGFhMTM4NmFlNTI3MTFiMzE2MzAzMWU4ZGMzZjhiMy5qcGciLCJjaXR5IjoicGFyaXMiLCJlbWFpbCI6ImJlcm5hcmRAbWFpbC5mciIsInBhc3N3b3JkIjoiJDJhJDEyJHMzRG1vWHlUM3dobnNhMGRJRmt1QXVkeTFyTi9DOTFTeVUuZjNTWWQyRlhqeDF2UXFzRFA2IiwicGhvbmUiOiIrMzM2ODgyODQyODAiLCJhZGRyZXNzIjoiNzggcnVlIGRlcyBtYXJpbGxvbnMiLCJjb3VudHkiOiJpbGUgZGUgZnJhbmNlIiwicm9sZSI6Im1vbWVyIiwiZGVzY3JpcHRpb24iOiJiYXIgZGFucyB1bmUgYW1iaWFuY2UgZGUgcHViIGF2ZWMgc29pcmVlIGpldXggZGUgc29jaWV0ZXMgbGVzIG1hcmRpIiwibXVzaWNpYW5zX251bWJlciI6bnVsbCwiZ3JvdXBfbGVhZGVyIjpudWxsLCJleHRlcm5hbF91cmwiOiJsaWVuIGV4dGVybmUyIG1vbWVyIiwibW9tZXJfdG9fY29udGFjdCI6ImJlcm5hcmQiLCJtb21lcl90eXBlX2lkIjoxLCJjcmVhdGVkX2F0IjoiMjAyMi0wOS0wMlQxMjowMTo0NS43NzlaIiwidXBkYXRlZF9hdCI6bnVsbCwiaWF0IjoxNjYyMzg1NDc2LCJleHAiOjE2NjI0MDA0NzZ9.8bqKHwvi4m3rAx97dGjV-ZAifEk4nFi_uf04Dkje_Zc
 
 ###################################################################################
 #### EVENT PUBLIE ####
