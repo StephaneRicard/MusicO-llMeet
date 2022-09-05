@@ -211,9 +211,9 @@ VALUES
 --Insertition genre musical pour un musicos
 INSERT INTO "musical_type_per_users"("musical_type_id","users_id")
 VALUES
-(12,23),
-(11,24),
-(10,25),
+(9,23),
+(9,24),
+(8,25),
 (9,26),
 (8,27),
 (7,28),
@@ -226,11 +226,13 @@ VALUES
 (1,35),
 (5,36),
 (6,37),
-(8,38),
+(1,38),
 (2,39),
 (3,40),
 (2,41),
-(3,43),
+(1,43),
+(2,44),
+(1,45),
 (5,42);
 
 COMMIT;
