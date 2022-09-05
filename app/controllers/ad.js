@@ -102,8 +102,14 @@ module.exports = {
         const applicationStatus1 = await adDatamapper.findIfCandidateAlreadyAppliedToThisAd1(adId, userId);
         // on verifie que le musicos n'a pas deja postulé a cette ad et qu'il a été refusé
         const applicationStatus2 = await adDatamapper.findIfCandidateAlreadyAppliedToThisAd2(adId, userId);
-        if (applicationStatus1 || applicationStatus2) {
+        // on verifie que le musicos n'a pas deja postulé a cette ad et qu'il est en attente
+        const applicationStatus3 = await adDatamapper.findIfCandidateAlreadyAppliedToThisAd3(adId, userId);
+        if (applicationStatus1) {
             throw new ApiError('You already applied to this ad', { statusCode: 406 });
+        } else if (applicationStatus2) {
+            throw new ApiError('You were refused to this ad before', { statusCode: 406 });
+        } else if (applicationStatus3) {
+            throw new ApiError('You were already accepted to this ad', { statusCode: 406 });
         }
 
         const applyToAd = await adDatamapper.insertApplication(userId, adId);
