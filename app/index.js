@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const logger = require('./helpers/logger');
 
 process.on('unhandledRejection', (err) => {
@@ -14,6 +15,8 @@ process.on('uncaughtException', (err) => {
 const router = require('./routers');
 
 const app = express();
+
+app.use(helmet());
 // On active le middleware pour parser le payload JSON
 app.use(express.json({ limit: '50mb' }));
 // On active le middleware pour parser le payload urlencoded
