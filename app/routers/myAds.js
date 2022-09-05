@@ -2,6 +2,8 @@ const express = require('express');
 
 const { myAdsController: controller } = require('../controllers');
 const controllerHandler = require('../helpers/controllerHandler');
+const validate = require('../validation/validator');
+const eventUpdateSchema = require('../validation/schemas/eventUpdateSchema');
 
 const router = express.Router();
 
@@ -10,18 +12,18 @@ router
     .get(controllerHandler(controller.getAll));
 
 router
-    .route('/:id')
+    .route('/:id(\\d+)')
     .get(controllerHandler(controller.getOne))
     .delete(controllerHandler(controller.delete))
-    .patch(controllerHandler(controller.update));
+    .patch(validate('body', eventUpdateSchema), controllerHandler(controller.update));
 
 router
-    .route('/:id/:applicationId')
+    .route('/:id(\\d+)/:applicationId(\\d+)')
     .get(controllerHandler(controller.getApplicationDetails))
     .patch(controllerHandler(controller.updateCandidateStatus));
 
 router
-    .route('/:id/:applicationId/contact')
+    .route('/:id(\\d+)/:applicationId(\\d+)/contact')
     .post(controllerHandler(controller.sendEmail));
 
 module.exports = router;

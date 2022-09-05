@@ -205,13 +205,12 @@ VALUES
 (4,28,1),
 (2,23,3),
 (11,25,3),
-(19,45, 1),
+(19,45,1),
 (3,40,1);
 
 --Insertition genre musical pour un musicos
 INSERT INTO "musical_type_per_users"("musical_type_id","users_id")
 VALUES
-(1,22),
 (12,23),
 (11,24),
 (10,25),

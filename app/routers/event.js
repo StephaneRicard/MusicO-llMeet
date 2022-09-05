@@ -10,10 +10,10 @@ router
     .get(controllerHandler(controller.getAll));
 
 router
-    .route('/:id')
+    .route('/:id(\\d+)')
     .get(controllerHandler(controller.getOne));
 
-router.route('/:id/upload')
+router.route('/:id(\\d+)/upload')
     .patch(controllerHandler(controller.uploadImage));
 
 module.exports = router;

@@ -1,11 +1,9 @@
-const debug = require('debug')('Validator:log');
 const { ApiError } = require('../helpers/errorHandler');
 
 module.exports = (prop, schema) => async (req, _, next) => {
     try {
         // la "value" on s'en fiche on la récupère pas
         // request['body'] == request.body
-        debug(req[prop]);
         await schema.validateAsync(req[prop]);
         next();
     } catch (error) {
