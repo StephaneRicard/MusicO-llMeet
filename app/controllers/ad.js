@@ -87,6 +87,12 @@ module.exports = {
         if (!event) {
             throw new ApiError('event not found', { statusCode: 404 });
         }
+
+        const ids = event.groups.map((group) => group.userId);
+        const filtered = event.groups.filter(({ userId }, index) => !ids.includes(userId, index + 1));
+        // eslint-disable-next-line no-param-reassign
+        event.groups = filtered;
+
         return res.json(event);
     },
 
