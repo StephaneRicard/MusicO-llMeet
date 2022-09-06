@@ -11,7 +11,7 @@ const router = express.Router();
 router
     .route('/')
     .get(controllerHandler(controller.getAll))
-    .post(accessMomer, validate('body', eventCreateSchema), controllerHandler(controller.createEvent));
+    .post(accessMomer, controllerHandler(controller.createEvent));
 
 router
     .route('/:id(\\d+)')

@@ -23,7 +23,7 @@ module.exports = {
         } = req.query;
         let sqlUsers = `SELECT
         *
-        FROM users `;
+        FROM musicos_with_musical_type`;
         // MUSICOS - filter by county
         if (county) {
             const countyFilter = county.join("','");
