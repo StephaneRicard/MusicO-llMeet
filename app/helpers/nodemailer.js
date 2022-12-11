@@ -1,3 +1,4 @@
+/*
 const nodemailer = require('nodemailer');
 const {
     google,
@@ -42,3 +43,4 @@ const transporter = nodemailer.createTransport({
 module.exports = {
     transporter,
 };
+*/
